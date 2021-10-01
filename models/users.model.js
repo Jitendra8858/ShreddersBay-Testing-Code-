@@ -201,4 +201,36 @@ User.removeAll = result => {
   });
 };
 
+
+User.getProducts = (result) => {
+  sql.query("SELECT * FROM products", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("products: ", res);
+    result(null, res);
+  });
+};
+
+User.findByPID = (P_Id, result) => {
+  sql.query(`SELECT * FROM products WHERE p_id = ${P_Id}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found product: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+
+    // not found User with the id
+    result({ kind: "not_found" }, null);
+  });
+};
 module.exports = User;

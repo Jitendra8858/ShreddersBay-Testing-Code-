@@ -1,0 +1,8 @@
+ion-tabs {
+  &.url-home-tournaments-main-play,
+  &.url-home-tournaments-main-play-score {
+      ion-tab-bar {
+          display: none;
+      }
+  }
+}

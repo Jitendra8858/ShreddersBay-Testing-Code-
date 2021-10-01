@@ -20,6 +20,7 @@ require('./src/app/routes/auth.routes')(app);
 require("./src/app/routes/user.routes")(app);
 require("./src/app/routes/cart.routes")(app);
 require("./src/app/routes/orders.routes")(app);
+require("./src/app/routes/address.routes")(app);
 // set port, listen for requests
 //localhost:3000/users
 app.listen(3000, () => {

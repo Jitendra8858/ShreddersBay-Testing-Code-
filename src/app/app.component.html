@@ -1,17 +1,16 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-router-outlet id="content"></ion-router-outlet>
 </ion-app>
 
 <ion-app>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+  <ion-split-pane contentId="content">
+    <ion-menu contentId="content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Home</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
-
+          <ion-list-header><img src="../assets/img/logo-mini.png"></ion-list-header>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
@@ -21,6 +20,36 @@
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
-
-
 </ion-app>
+
+
+<ion-app>
+  <ion-tabs slot="bottom">
+   <ion-tab-bar>
+     <ion-tab-button tab="{{t.url}}" *ngFor="let t of tabs;">
+       <ion-icon name="{{t.icon}}"></ion-icon>
+       <ion-label>{{t.title}}</ion-label>
+     </ion-tab-button>
+   </ion-tab-bar>
+ </ion-tabs>
+</ion-app>
+<!--
+<ion-app>
+  <ion-menu slot="start">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Cart</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item lines ="none" routerLink="/home">
+            <ion-icon name="home" slot="start"></ion-icon>
+            <ion-label>Cart</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+</ion-app> -->

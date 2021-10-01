@@ -27,7 +27,7 @@ export class ForgetPasswordPage implements OnInit {
 
 
   ngOnInit() {
-    this.userData=JSON.parse(sessionStorage.getItem('userDetails'));
+    this.userData=JSON.parse(localStorage.getItem('userDetails'));
     this.id=this.userData.id;
     this.pass=this.userData.password;
     alert(this.userData);

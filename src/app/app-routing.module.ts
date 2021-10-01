@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { CustomerPage } from './customer/customer/customer.page';
 
 const routes: Routes = [
   {
@@ -25,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'customer',
-    loadChildren: () => import('./customer/customer.module').then( m => m.CustomerPageModule)
+    loadChildren: () => import('./customer/customer/customer.module').then( m => m.CustomerPageModule)
   },
   {
     path: 'my-cart',
@@ -52,7 +53,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './customer/customer/CustomerPage.module#CustomerPageModule'
+            loadChildren: () =>import('./customer/customer/customer.module').then( m => m.CustomerPageModule)
           }
         ]
       },
@@ -90,8 +91,27 @@ const routes: Routes = [
   {
     path: 'booking-details',
     loadChildren: () => import('./customer/booking-details/booking-details.module').then( m => m.BookingDetailsPageModule)
+  },
+  {
+    path: 'logout',
+    loadChildren: () => import('./customer/logout/logout.module').then( m => m.LogoutPageModule)
+  },
+  {
+    path: 'my-profile',
+    loadChildren: () => import('./customer/my-profile/my-profile.module').then( m => m.MyProfilePageModule)
+  },
+  {
+    path: 'my-addr',
+    loadChildren: () => import('./customer/my-addr/my-addr.module').then( m => m.MyAddrPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./customer/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'change-pass',
+    loadChildren: () => import('./customer/change-pass/change-pass.module').then( m => m.ChangePassPageModule)
   }
-
 
 ];
 

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 
-const baseUrl = 'http://localhost:3000/users';
+const baseUrl = 'http://localhost:3000';
 const customerUrl = 'http://localhost:3000/customers';
 const dealerUrl = 'http://localhost:3000/dealers';
 @Injectable({
@@ -23,18 +23,18 @@ export class APIService {
   }
 
   getbyEmail(email: any): Observable<any> {
-    return this.http.get(`${baseUrl}/email/${email}`);
+    return this.http.get(`${baseUrl}/users/email/${email}`);
   }
   create(data: any): Observable<any> {
     return this.http.post(baseUrl, data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.patch(`${baseUrl}/${id}`, data);
+    return this.http.patch(`${baseUrl}/users/${id}`, data);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+    return this.http.delete(`${baseUrl}/users/${id}`);
   }
   getCustomers(): Observable<any> {
     return this.http.get(`${customerUrl}`);
@@ -43,7 +43,7 @@ export class APIService {
     return this.http.get(`${dealerUrl}`);
   }
   inActivateUser(id,status): Observable<any> {
-    return this.http.patch(`${baseUrl}/inactivate/${id}`,status);
+    return this.http.patch(`${baseUrl}/users/inactivate/${id}`,status);
   }
   async exportToExcel(data, filename) {
     {
@@ -56,34 +56,38 @@ export class APIService {
     filterItems(data,searchTerm) {
       return data.data.filter(item => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
     }
-	
+
 	getProducts(){
     return this.http.get(`${baseUrl}/products`);
 	}
-	
+
 	 getProductByPID(id: any){
     return this.http.get(`${baseUrl}/getOneProduct/${id}`);
 	}
-	
+
 	createCart(data: any){
     //console.log(data);
      return this.http.post(`${baseUrl}/createCart`, data);
    }
-   
+
    getCartById(id: any){
      return this.http.get(`${baseUrl}/getCartById/${id}`);
    }
-   
+
    deleteItem(id: any){
     return this.http.delete(`${baseUrl}/removeItem/${id}`);
   }
-  
+
   createOrder(data: any){
     //console.log(data);
      return this.http.post(`${baseUrl}/createOrder`, data);
    }
-   
+
    getOrders(id: any){
     return this.http.get(`${baseUrl}/getOrders/${id}`);
+  }
+
+  getAddress(){
+    return this.http.get(`${baseUrl}/getAddress`);
   }
 }

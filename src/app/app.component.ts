@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +7,26 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Dasboard', url: '/dashboard/', icon: 'home' },
-    { title: 'Location Management', url: '/frontend/', icon: 'star' },
-    { title: 'Add Recipe', url: 'recipes', icon: 'add' },
-    { title: 'Filter', url: '/folder/Filter', icon: 'filter' },
-    { title: 'Logout', url: 'logout', icon: 'power' },
+    { title: 'Home', url: 'dealer', icon: 'home' },
+    { title: 'My Booking', url: 'all-favorite', icon: 'book' },
+    { title: 'My Dues', url: 'recipes', icon: 'bookmark' },
+    { title: 'Dues Payment Report', url: 'orders', icon: 'bookmark' },
+    { title: 'My Account', url: 'logout', icon: 'person' },
+    { title: 'Notifications', url: 'content', icon: 'mail' },
+    { title: 'FAQ', url: 'all-favorite', icon: 'bookmarks' },
+    { title: 'Terms & Conditions', url: 'recipes', icon: 'settings' },
+    { title: 'Contact Us', url: '/folder/Filter', icon: 'power' },
+    { title: 'Logout', url: '/folder/Filter', icon: 'power' }
   ];
+
+  public tabs = [
+    { title: 'Home', url: 'customer', icon: 'home' },
+    { title: 'Scrap Items', url: 'scrap-items', icon: 'mail' },
+    { title: 'My Bookings', url: 'my-booking', icon: 'book' },
+    { title: 'My Cart', url: 'my-cart', icon: 'cart' },
+    { title: 'My Account', url: 'my-account', icon: 'person' },
+  ];
+
   constructor(
-    private router: Router,
   ) {}
 }

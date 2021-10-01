@@ -18,7 +18,7 @@ export class MyAccountPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userData=JSON.parse(sessionStorage.getItem('userDetails'));
+    this.userData=JSON.parse(localStorage.getItem('userDetails'));
     this.id=this.userData.id;
     this.name=this.userData.name;
     this.email=this.userData.email;
@@ -33,6 +33,11 @@ export class MyAccountPage implements OnInit {
 
   settings(){
     this.router.navigate(['settings']);
+  }
+
+
+  logout(){
+    this.router.navigate(['logout']);
   }
 
   changePass(){

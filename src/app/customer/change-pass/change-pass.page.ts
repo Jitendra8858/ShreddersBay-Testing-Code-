@@ -20,7 +20,7 @@ export class ChangePassPage implements OnInit {
 
 
   ngOnInit() {
-    this.userData=JSON.parse(sessionStorage.getItem('userDetails'));
+    this.userData=JSON.parse(localStorage.getItem('userDetails'));
     this.id=this.userData.id;
     this.pass=this.userData.password;
     //alert(this.userData);
@@ -38,11 +38,11 @@ export class ChangePassPage implements OnInit {
     } else {
       console.log(this.passForm.value.password);
       if(this.passForm.value.oldPass===this.pass){
-      this.apiService.updatePass(this.id,this.passForm.value.password).subscribe(res => {
-        console.log(res);
-        this.passForm.reset();
-        this.router.navigate(['']);
-      });
+      // this.apiService.updatePass(this.id,this.passForm.value.password).subscribe(res => {
+      //   console.log(res);
+      //   this.passForm.reset();
+      //   this.router.navigate(['']);
+      // });
     }
   }
   }

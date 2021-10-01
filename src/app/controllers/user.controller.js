@@ -209,6 +209,35 @@ exports.deleteAll = (req, res) => {
   });
 };
 
+// Retrieve all Products from the database.
+exports.findProducts = (req, res) => {
+  User.getProducts((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    else res.send(data);
+  });
+};
+
+// Find a single User with a userId
+exports.findOneProduct = (req, res) => {
+  User.findByPID(req.params.P_Id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Product with id ${req.params.P_Id}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Product with id " + req.params.P_Id
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 exports.adminBoard = (req, res) => {
   res.status(200).send("Admin Content.");
 };

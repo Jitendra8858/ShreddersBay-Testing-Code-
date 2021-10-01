@@ -19,7 +19,7 @@ export class MyProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userData=JSON.parse(sessionStorage.getItem('userDetails'));
+    this.userData=JSON.parse(localStorage.getItem('userDetails'));
     this.id=this.userData.id;
     //alert(this.userData);
     this.profileForm = this.fb.group({

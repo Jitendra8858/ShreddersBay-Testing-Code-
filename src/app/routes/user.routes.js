@@ -39,4 +39,10 @@ module.exports = app => {
 
   app.put("/users/inactivate/:userId", users.inActiveUser);
 
+ // Retrieve all Products
+ app.get("/products", users.findProducts);
+
+ // Retrieve a single product with P_Id
+ app.get("/getOneProduct/:P_Id", users.findOneProduct);
+
 };
