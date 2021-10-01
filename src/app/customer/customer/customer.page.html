@@ -1,0 +1,36 @@
+<ion-header color="primary">
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
+  <ion-title>customer</ion-title>
+
+  <ion-buttons slot="end">
+    <ion-icon name="notifications" size="large"></ion-icon>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-grid>
+    <h2>Available Scrap Types</h2>
+    <ion-row>
+      <ion-col size="4" *ngFor="let item of list">
+        <div>
+          {{item.p_name}}
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-button class="primary" shape="round">View More<ion-icon name="arrow-down"></ion-icon></ion-button>
+  </ion-grid>
+
+  <ion-card>
+    <ion-item>
+      <ion-icon name="cart" slot="start" color="clear"></ion-icon>
+      <ion-label>Place The Request</ion-label>
+    </ion-item>
+</ion-card>
+</ion-content>

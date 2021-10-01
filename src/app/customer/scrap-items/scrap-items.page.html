@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-title>Scrap Items</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="submitForm" (ngSubmit)="submitForms()">
+    <ion-list (ionChange)="checkValue($event)">
+      <ion-radio-group>
+        <ion-list-header>
+          <ion-label>Metal Type</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let list of data">
+          <ion-label>{{list.p_name}}</ion-label>
+          <ion-radio slot="start" value="{{list.p_id}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <!-- <ion-item lines="full">
+        <ion-label>Metal Type</ion-label>
+        <ion-select formControlName="metal" >
+          <ion-select-option *ngFor="let list of data">{{ list.p_name }}</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+    <ion-list>
+      <ion-radio-group>
+        <ion-list-header>
+          <ion-label>Sub Metal Type</ion-label>
+        </ion-list-header>
+
+        <ion-item *ngIf="subProduct">
+          <ion-label>{{subProduct}}</ion-label>
+          <ion-radio slot="start" value="{{subProduct}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list>
+      <ion-radio-group>
+        <ion-item>
+              <ion-label >Qty</ion-label>
+              <ion-radio  value="qty"></ion-radio>
+              <ion-label >Weight(in Kg)</ion-label>
+              <ion-radio  value="wei" checked="true"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <ion-item lines="full">
+        <ion-label position="floating">Weight</ion-label>
+        <ion-input type="number" formControlName="weight" required></ion-input>
+      </ion-item>
+      <ion-label >Price: {{price}} per Kg</ion-label>
+      <ion-item lines="full">
+        <ion-label position="fix">Upload File</ion-label>
+        <ion-input type="file" required (change)="fileChange($event)"></ion-input>
+      </ion-item>
+      <img *ngIf="img1" [src]="img1"/>
+    </ion-list>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" shape="round" expand="block">Add</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+
+
+
+
+
+
+</ion-content>

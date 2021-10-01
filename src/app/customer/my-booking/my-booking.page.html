@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" (click)="openMenu()"></ion-menu-button>
+    </ion-buttons>
+    <ion-title align="center">My Booking</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="notifications" size="large"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Segment -->
+  <ion-segment (ionChange)="segmentChanged($event)" color="secondary">
+    <ion-segment-button value="Current">
+      <ion-label color="primary">Current</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Complete">
+      <ion-label color="success">Complete</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Cancel">
+      <ion-label color="danger">Cancel</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'Current'">
+
+      <ion-card *ngFor="let item of data" (click)="showBookingDetails()">
+        <ion-item>
+          <ion-label>
+            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <ion-label>{{item.p_name}}</ion-label>
+            <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
+            <p color="medium">Schedule Date: {{item.sub_products}}</p>
+            <p>Weight: {{item.total_weight}} x {{item.weight}} Kg</p>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <div *ngSwitchCase="'Complete'">
+      Complete content here
+      <!-- <ion-card *ngFor="let item of data">
+        <ion-item>
+          <ion-label color="primary">Booking Id: {{item.booking_id}}</ion-label>
+          <ion-label>{{item.p_name}}</ion-label>
+            <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
+            <p color="medium">Schedule Date: {{item.sub_products}}</p>
+            <p>Weight: {{item.total_weight}} x {{item.weight}} Kg</p>
+        </ion-item>
+      </ion-card> -->
+    </div>
+
+    <div *ngSwitchCase="'Cancel'">
+      Cancel content here
+      <!-- <ion-card *ngFor="let item of data">
+        <ion-item>
+          <ion-label color="primary">Booking Id: {{item.booking_id}}</ion-label>
+          <ion-label>{{item.p_name}}</ion-label>
+            <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
+            <p color="medium">Schedule Date: {{item.sub_products}}</p>
+            <p>Weight: {{item.total_weight}} x {{item.weight}} Kg</p>
+        </ion-item>
+      </ion-card> -->
+    </div>
+  </div>
+
+</ion-content>

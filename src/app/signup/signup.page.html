@@ -1,0 +1,48 @@
+<ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+<ion-content>
+  <div class="ion-text-center"><img alt="logo" height="150" style="margin-top: 2%;"  src="../../assets/img/logo.webp" >
+  </div>
+  <br/><br/><ion-title class="ion-text-center">SignUp</ion-title>
+
+  <form [formGroup]="signupForm" (ngSubmit) = "submitForm()">
+
+    <ion-item lines="full" >
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Mobile</ion-label>
+      <ion-input type="number" formControlName="mobile" placeholder="Enter mobile Number" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">
+          Email
+      </ion-label>
+      <ion-input type="text" formControlName="email" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Confirm Password</ion-label>
+      <ion-input type="password" formControlName="confPass" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-input type="password" formControlName="userRole" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" expand="block">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

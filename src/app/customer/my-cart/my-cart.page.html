@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" (click)="openMenu()"></ion-menu-button>
+    </ion-buttons>
+    <ion-title align="center">My Cart</ion-title>
+    <!-- <ion-buttons slot="end" (click)="plus()">
+      <ion-icon name="add" size="large"></ion-icon>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="data">
+    <ion-card *ngFor="let item of data">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../../assets/img/{{item.file}}" height="80px" width="80px">
+        </ion-avatar>
+        <ion-label>
+          <ion-title>{{item.p_name}}</ion-title>
+          <ion-title slot="end">{{item.total_price | currency:'INR':true}}</ion-title>
+          <p color="medium">{{item.sub_products}}</p>
+          <p>Weight {{item.total_weight}} Kg</p>
+          <ion-buttons color="medium" (click)="removeCart(item.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-buttons>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+  <ion-item *ngIf="!data">
+    <ion-title>Your Cart Is Empty</ion-title>
+  </ion-item>
+</ion-content>
+<ion-footer *ngIf="data">
+  <ion-item>
+    <ion-label style="border-bottom: 1px solid black;">Schedule Date</ion-label>
+    <ion-input type="datetime-local" format="DD.MM.YYYY" [(ngModel)]="dateTime"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Approx Price</ion-label>
+    <ion-title>{{approxPrice | currency:'INR':true}}</ion-title>
+  </ion-item>
+  <ion-item class="item-text-wrap" style="color:blue;">*This is the approximate priceas per your input, payable amount
+    will be as per the dealer's input
+  </ion-item>
+  <ion-button type="submit" color="primary" shape="round" expand="block" (click)="placeRequest()">Place Request
+  </ion-button>
+</ion-footer>

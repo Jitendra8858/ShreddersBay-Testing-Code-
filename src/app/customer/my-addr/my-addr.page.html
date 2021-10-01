@@ -1,0 +1,34 @@
+<ion-header color="primary">
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+  <ion-title>My Address</ion-title>
+
+  <ion-buttons slot="end" (click)="notifications()">
+    <ion-icon name="notifications" size="large"></ion-icon>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-radio-group>
+    <ion-item *ngFor="let item of data">
+      <ion-label>
+        HOME<br/>{{ name }} <br/> {{ item.address }}
+      </ion-label>
+      <ion-radio (change)="address()"></ion-radio>
+      <ion-buttons slot="end">
+        <ion-icon name="pencil"></ion-icon>
+      <ion-icon name="trash"></ion-icon>
+        </ion-buttons>
+    </ion-item>
+  </ion-radio-group>
+    </ion-list>
+  </ion-content>
+  <ion-button expand="block" class="logins" slot="bottom"><ion-icon name="add" size="large"></ion-icon>Add Address</ion-button>
+
+
+
