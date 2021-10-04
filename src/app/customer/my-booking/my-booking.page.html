@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button autoHide="false" (click)="openMenu()"></ion-menu-button>
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title align="center">My Booking</ion-title>
     <ion-buttons slot="end">
@@ -33,8 +33,10 @@
           <ion-label>
             <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
             <ion-label>{{item.p_name}}</ion-label>
+            <p>{{item.sub_products}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
-            <p color="medium">Schedule Date: {{item.sub_products}}</p>
+            <p color="medium">Booking Date: {{item.booking_date}}</p>
+            <p color="medium">Schedule Date: {{item.schedule_date}}</p>
             <p>Weight: {{item.total_weight}} x {{item.weight}} Kg</p>
           </ion-label>
         </ion-item>

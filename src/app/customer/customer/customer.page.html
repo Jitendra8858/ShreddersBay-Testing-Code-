@@ -2,11 +2,10 @@
   <ion-toolbar color="primary">
       <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
-    <ion-back-button></ion-back-button>
   </ion-buttons>
   <ion-title>customer</ion-title>
 
-  <ion-buttons slot="end">
+  <ion-buttons slot="end" (click)="notifications()">
     <ion-icon name="notifications" size="large"></ion-icon>
   </ion-buttons>
   </ion-toolbar>
@@ -27,7 +26,7 @@
     <ion-button class="primary" shape="round">View More<ion-icon name="arrow-down"></ion-icon></ion-button>
   </ion-grid>
 
-  <ion-card>
+  <ion-card (click)="addCart()">
     <ion-item>
       <ion-icon name="cart" slot="start" color="clear"></ion-icon>
       <ion-label>Place The Request</ion-label>

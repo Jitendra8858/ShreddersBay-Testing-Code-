@@ -111,6 +111,10 @@ const routes: Routes = [
   {
     path: 'change-pass',
     loadChildren: () => import('./customer/change-pass/change-pass.module').then( m => m.ChangePassPageModule)
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./customer/notifications/notifications.module').then( m => m.NotificationsPageModule)
   }
 
 ];

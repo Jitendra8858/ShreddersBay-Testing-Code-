@@ -27,13 +27,22 @@ export class CustomerPage implements OnInit {
   getProducts(){
 
     this.apiService.getProducts().toPromise().then((res) => {
-      console.log(res);
+      //console.log(res);
       this.data=res;
       this.list=this.data.slice(0,9);
     }).catch((err)=> {
       console.log('Error' + err);
     });
 
+  }
+
+  addCart()
+  {
+    this.router.navigate(['scrap-items']);
+  }
+
+  notifications(){
+    this.router.navigate(['notifications']);
   }
 
 }

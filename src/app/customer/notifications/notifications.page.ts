@@ -14,17 +14,17 @@ export class NotificationsPage implements OnInit {
     private router: Router,
     private activateRoute: ActivatedRoute) { }
   ngOnInit() {
-    this.getNotifications();
+    // this.getNotifications();
 
   }
-  getNotifications() {
+  // getNotifications() {
 
-    this.apiService.getNotifications().toPromise().then((res) => {
-      console.log(res);
-      this.data = res;
-    }).catch((err) => {
-      console.log('Error' + err);
-    });
+  //   this.apiService.getNotifications().toPromise().then((res) => {
+  //     console.log(res);
+  //     this.data = res;
+  //   }).catch((err) => {
+  //     console.log('Error' + err);
+  //   });
 
-  }
+  // }
 }

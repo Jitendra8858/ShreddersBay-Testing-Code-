@@ -37,10 +37,10 @@ export class SignupPage implements OnInit {
       return false;
     } else {
       this.apiService.create(this.signupForm.value).subscribe(res => {
-        alert(res);
-        console.log(res);
+        //alert(res);
+        //console.log(res);
         this.signupForm.reset();
-        this.router.navigate(['']);
+        this.router.navigate(['login']);
       });
     }
   }

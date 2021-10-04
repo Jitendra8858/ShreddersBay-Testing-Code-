@@ -1,23 +1,22 @@
-<ion-header color="primary">
+<ion-header >
   <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-    <ion-back-button></ion-back-button>
-  </ion-buttons>
-  <ion-title>My Profile</ion-title>
-
-  <ion-buttons slot="end">
-    <ion-icon name="notifications" size="large"></ion-icon>
-  </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="notifications" size="large"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="ion-text-center"><img alt="logo" height="150" style="margin-top: 2%;"  src="../../assets/img/logo.webp" >
+  <div class="ion-text-center"><img alt="logo" height="150" style="margin-top: 2%;" src="../../assets/img/logo.webp">
   </div>
   <!-- <br/><br/><ion-title class="ion-text-center">SignUp</ion-title> -->
 
-  <form [formGroup]="profileForm" (ngSubmit) = "submitForm()">
+  <form [formGroup]="profileForm" (ngSubmit)="submitForm()">
 
-    <ion-item lines="full" >
+    <ion-item lines="full">
       <ion-label position="floating">Full Name</ion-label>
       <ion-input type="text" formControlName="name" required></ion-input>
     </ion-item>
@@ -29,7 +28,7 @@
 
     <ion-item lines="full">
       <ion-label position="floating">
-          Email
+        Email
       </ion-label>
       <ion-input type="text" formControlName="email" required></ion-input>
     </ion-item>
