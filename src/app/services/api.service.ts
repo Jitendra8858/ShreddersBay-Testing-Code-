@@ -90,4 +90,17 @@ export class APIService {
   getAddress(){
     return this.http.get(`${baseUrl}/getAddress`);
   }
+
+  getOrdersById(id: any){
+    return this.http.get(`${baseUrl}/getOrdersById/${id}`);
+  }
+
+  getCancelOrders(id){
+    return this.http.get(`${baseUrl}/getCancelOrders/${id}`);
+  }
+
+  cancelBooking(id, status): Observable<any> {
+    return this.http.put(`${baseUrl}/cancelBooking/${id}`, status);
+  }
+
 }

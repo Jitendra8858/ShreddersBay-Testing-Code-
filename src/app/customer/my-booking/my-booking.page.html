@@ -13,7 +13,7 @@
 <ion-content>
 
   <!-- Segment -->
-  <ion-segment (ionChange)="segmentChanged($event)" color="secondary">
+  <ion-segment (ionChange)="segmentChanged($event)" color="secondary" [(ngModel)]="segment">
     <ion-segment-button value="Current">
       <ion-label color="primary">Current</ion-label>
     </ion-segment-button>
@@ -27,8 +27,7 @@
 
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'Current'">
-
-      <ion-card *ngFor="let item of data" (click)="showBookingDetails()">
+      <ion-card *ngFor="let item of currentOrder" (click)="showBookingDetails(item.booking_id)">
         <ion-item>
           <ion-label>
             <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
@@ -57,16 +56,19 @@
     </div>
 
     <div *ngSwitchCase="'Cancel'">
-      Cancel content here
-      <!-- <ion-card *ngFor="let item of data">
+      <ion-card *ngFor="let item of cancelOrder">
         <ion-item>
-          <ion-label color="primary">Booking Id: {{item.booking_id}}</ion-label>
-          <ion-label>{{item.p_name}}</ion-label>
+          <ion-label>
+            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <ion-label>{{item.p_name}}</ion-label>
+            <p>{{item.sub_products}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
-            <p color="medium">Schedule Date: {{item.sub_products}}</p>
+            <p color="medium">Booking Date: {{item.booking_date}}</p>
+            <p color="medium">Schedule Date: {{item.schedule_date}}</p>
             <p>Weight: {{item.total_weight}} x {{item.weight}} Kg</p>
+          </ion-label>
         </ion-item>
-      </ion-card> -->
+      </ion-card>
     </div>
   </div>
 

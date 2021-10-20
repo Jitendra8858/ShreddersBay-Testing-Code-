@@ -29,7 +29,8 @@ export class CustomerPage implements OnInit {
     this.apiService.getProducts().toPromise().then((res) => {
       //console.log(res);
       this.data=res;
-      this.list=this.data.slice(0,9);
+      // this.list=this.data.slice(0,9);
+      this.list=this.data;
     }).catch((err)=> {
       console.log('Error' + err);
     });

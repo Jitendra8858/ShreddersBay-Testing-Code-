@@ -17,7 +17,8 @@ export class MyBookingPage implements OnInit {
   prodId: any;
   weight: any;
   segment: any;
-
+  currentOrder: any;
+  cancelOrder: any;
   constructor(
     private apiService: APIService,
     public fb: FormBuilder,
@@ -25,13 +26,24 @@ export class MyBookingPage implements OnInit {
     private menu: MenuController) { }
 
   ngOnInit() {
+    this.segment= 'Current';
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.userId = this.userDetails.id;
+    this.getCurrentOrders();
   }
 
   getCurrentOrders() {
     this.apiService.getOrders(this.userId).toPromise().then((res) => {
-      this.data = res;
+      this.currentOrder = res;
+      //console.log(this.data);
+    }).catch((err) => {
+      console.log('Error' + err);
+    });
+  }
+
+  getCancelOrders() {
+    this.apiService.getCancelOrders(this.userId).toPromise().then((res) => {
+      this.cancelOrder = res;
       //console.log(this.data);
     }).catch((err) => {
       console.log('Error' + err);
@@ -49,10 +61,13 @@ export class MyBookingPage implements OnInit {
     }
     if (this.segment === 'Cancel') {
       //alert('Cancel');
+      this.getCancelOrders();
+
     }
   }
 
-  showBookingDetails(){
-    alert('show details');
+  showBookingDetails(bookingId){
+    //alert('show details');
+    this.router.navigate(['booking-details',{bookingId}]);
   }
 }

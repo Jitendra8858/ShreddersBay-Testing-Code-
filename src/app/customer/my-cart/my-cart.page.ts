@@ -42,7 +42,7 @@ export class MyCartPage implements OnInit {
   removeCart(id) {
     this.apiService.deleteItem(id).toPromise().then((res) => {
       this.message = res;
-      alert(this.message.message);
+      //alert(this.message.message);
       location.reload();
     }).catch((err) => {
       console.log('Error' + err);
@@ -57,10 +57,10 @@ export class MyCartPage implements OnInit {
         this.prodId = value.prod_id;
         this.weight = value.total_weight;
         this.cartId = value.id;
-        alert(this.cartId);
+       // alert(this.cartId);
       });
     }).catch((err) => {
-      console.log('Error' + err);
+      console.log('Your Cart Is Empty');
     });
 
   }
@@ -94,10 +94,6 @@ export class MyCartPage implements OnInit {
     this.router.navigate(['scrap-items']);
   }
 
-  openMenu() {
-    this.menu.enable(true, 'custom');
-    this.menu.open('custom');
-    console.log('Method Call');
-  }
+
 
 }

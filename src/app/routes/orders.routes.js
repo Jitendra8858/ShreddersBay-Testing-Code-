@@ -5,4 +5,14 @@ module.exports = app => {
 
     // Retrieve all Order Items with UserId
     app.get("/getOrders/:userId", order.getOrders);
+
+     // Retrieve  Order Items with UserId
+  app.get("/getOrdersById/:userId", order.getOrdersById);
+
+  // Update a Order with customerId
+  app.put("/cancelBooking/:userId", order.cancelBooking);
+
+  // Update a Order with customerId
+  app.get("/getCancelOrders/:userId", order.getCancelOrders);
+
 }

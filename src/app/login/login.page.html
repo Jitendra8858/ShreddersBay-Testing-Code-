@@ -1,11 +1,15 @@
-<ion-buttons slot="start">
-  <ion-back-button></ion-back-button>
-</ion-buttons>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <div style="color:red; padding-top: 0.2rem" *ngIf="errorMsg">{{errorMsg}}</div>
   <div style="color:green; padding-top: 0.2rem" *ngIf="successMsg">{{successMsg}}</div>
-  <div class="ion-text-center"><img alt="logo" height="150" style="margin-top: 2%;"  src="../../assets/img/logo.webp" >
-</div>
+  <div class="ion-text-center"><img alt="logo" height="150" style="margin-top: 2%;" src="../../assets/img/logo.webp">
+  </div>
   <ion-title class="ion-text-center">login</ion-title>
   <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
     <ion-item lines="full">

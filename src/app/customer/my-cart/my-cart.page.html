@@ -1,12 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button autoHide="false" (click)="openMenu()"></ion-menu-button>
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title align="center">My Cart</ion-title>
-    <!-- <ion-buttons slot="end" (click)="plus()">
-      <ion-icon name="add" size="large"></ion-icon>
-    </ion-buttons> -->
+
   </ion-toolbar>
 </ion-header>
 
@@ -14,9 +12,9 @@
   <ion-list *ngIf="data">
     <ion-card *ngFor="let item of data">
       <ion-item>
-        <ion-avatar slot="start">
-          <img src="../../../assets/img/{{item.file}}" height="80px" width="80px">
-        </ion-avatar>
+        <ion-thumbnail slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-thumbnail>
         <ion-label>
           <ion-title>{{item.p_name}}</ion-title>
           <ion-title slot="end">{{item.total_price | currency:'INR':true}}</ion-title>
