@@ -22,6 +22,7 @@
     "@angular/router": "~12.1.1",
     "@auth0/angular-jwt": "^5.0.2",
     "@ionic-native/camera": "^5.36.0",
+    "@ionic-native/facebook": "^5.36.0",
     "@ionic-native/google-plus": "^5.36.0",
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^3.0.6",
@@ -55,6 +56,7 @@
     "@angular/compiler-cli": "~12.1.1",
     "@angular/language-service": "~12.0.1",
     "@ionic/angular-toolkit": "^4.0.0",
+    "@ionic/lab": "3.2.10",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -63,6 +65,7 @@
     "cordova-browser": "^6.0.0",
     "cordova-plugin-camera": "^6.0.0",
     "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-facebook4": "^6.4.0",
     "cordova-plugin-googleplus": "^8.5.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^4.0.0",
@@ -102,7 +105,13 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-camera": {}
+      "cordova-plugin-camera": {},
+      "cordova-plugin-facebook4": {
+        "APP_ID": "1016524399163696",
+        "APP_NAME": "Shreddersbay",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false",
+        "FACEBOOK_ANDROID_SDK_VERSION": "5.13.0"
+      }
     },
     "platforms": [
       "android",

@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { CustomerPage } from './customer/customer/customer.page';
-
 const routes: Routes = [
   {
     path: '',
@@ -45,50 +43,6 @@ const routes: Routes = [
     loadChildren: () => import('./customer/scrap-items/scrap-items.module').then( m => m.ScrapItemsPageModule)
   },
   {
-  path: 'customer',
-    component: CustomerPage,
-    children: [
-      {
-        path: 'customer',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>import('./customer/customer/customer.module').then( m => m.CustomerPageModule)
-          }
-        ]
-      },
-      {
-        path: '',
-        redirectTo: 'customer',
-        pathMatch: 'full'
-      }
-      ,
-      {
-        path: 'my-booking',
-        redirectTo: 'my-booking',
-        pathMatch: 'full'
-      }
-      ,
-      {
-        path: 'my-cart',
-        redirectTo: 'my-cart',
-        pathMatch: 'full'
-      }
-      ,
-      {
-        path: 'my-account',
-        redirectTo: 'my-account',
-        pathMatch: 'full'
-      }
-      ,
-      {
-        path: 'scrap-items',
-        redirectTo: 'scrap-items',
-        pathMatch: 'full'
-      }
-  ]
-},
-  {
     path: 'booking-details',
     loadChildren: () => import('./customer/booking-details/booking-details.module').then( m => m.BookingDetailsPageModule)
   },
@@ -116,6 +70,24 @@ const routes: Routes = [
     path: 'notifications',
     loadChildren: () => import('./customer/notifications/notifications.module').then( m => m.NotificationsPageModule)
   },
+  {
+    path: 'terms-conditions',
+    loadChildren: () => import('./customer/terms-conditions/terms-conditions.module').then( m => m.TermsConditionsPageModule)
+  },
+  {
+    path: 'customer-home',
+    loadChildren: () => import('./customer/customer-home/customer-home.module').then( m => m.CustomerHomePageModule)
+  },
+  {
+    path: 'dealer-home',
+    loadChildren: () => import('./dealer/dealer-home/dealer-home.module').then( m => m.DealerHomePageModule)
+  },
+  {
+    path: 'dealer',
+    loadChildren: () => import('./dealer/dealer/dealer.module').then( m => m.DealerPageModule)
+  },
+
+
 
 
 

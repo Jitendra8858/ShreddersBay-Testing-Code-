@@ -19,12 +19,12 @@ export class TermsConditionsPage implements OnInit {
   }
   getTermsConditions() {
 
-    this.apiService.getTermsConditions().toPromise().then((res) => {
-      console.log(res);
-      this.data = res[0].description;
-    }).catch((err) => {
-      console.log('Error' + err);
-    });
+    // this.apiService.getTermsConditions().toPromise().then((res) => {
+    //   console.log(res);
+    //   this.data = res[0].description;
+    // }).catch((err) => {
+    //   console.log('Error' + err);
+    // });
 
   }
 

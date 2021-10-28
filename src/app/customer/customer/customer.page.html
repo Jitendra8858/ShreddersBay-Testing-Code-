@@ -1,25 +1,42 @@
 <ion-header color="primary">
   <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button autoHide="false" ></ion-menu-button>
-  </ion-buttons>
-  <img src="../../../assets/img/logo-mini.png"  height="50px">
-  <ion-buttons slot="end" (click)="notifications()">
-    <ion-icon name="notifications" size="large"></ion-icon>
-  </ion-buttons>
+    <ion-buttons slot="start">
+    </ion-buttons>
+    <img src="../../../assets/img/logo-mini.png" height="50px" />
+    <ion-buttons slot="end" (click)="notifications()">
+      <ion-icon name="notifications" size="large"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-
+  <ion-split-pane contentId="content" >
+    <ion-menu contentId="content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header><img src="../assets/img/logo-mini.png"></ion-list-header>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="content"></ion-router-outlet>
+  </ion-split-pane>
   <ion-grid>
     <h2>Available Scrap Types</h2>
     <ion-row>
       <ion-col size="6" *ngFor="let item of list">
         <div>
-            <img src="../../../assets/img/{{item.picture}}" height="200px" width="100%">
-
+          <img
+            src="../../../assets/img/{{item.picture}}"
+            height="200px"
+            width="100%"
+          />
         </div>
         <ion-title>{{item.p_name}}</ion-title>
       </ion-col>
@@ -32,5 +49,7 @@
       <ion-icon name="cart" slot="start" color="clear"></ion-icon>
       <ion-label>Place The Request</ion-label>
     </ion-item>
-</ion-card>
+  </ion-card>
 </ion-content>
+
+

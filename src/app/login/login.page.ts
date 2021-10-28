@@ -16,12 +16,12 @@ export class LoginPage implements OnInit {
   errorMsg: string;
   successMsg: string;
 
-
   constructor(
     private apiService: APIService,
     private router: Router,
     public fb: FormBuilder,
-    private activateRoute: ActivatedRoute) { }
+    private activateRoute: ActivatedRoute,
+    ) { }
 
   ngOnInit() {
     this.role = this.activateRoute.snapshot.params.role;
@@ -39,19 +39,21 @@ export class LoginPage implements OnInit {
           this.data=res;
             if(this.data.password===this.loginForm.value.password)
             {
-              if(this.role === 1 && this.data.userRole === 1){
+              if(this.role === 1 || this.data.userRole === 1){
+                alert('Login Successfully');
                 this.successMsg='Login Successfully';
                 this.errorMsg = '';
                 this.loginForm.reset();
                 localStorage.setItem('userDetails', JSON.stringify(this.data));
-                this.router.navigate(['dealer']);
+                this.router.navigate(['dealer-home']);
               }
               if(this.role === 0 || this.data.userRole === 0){
+                alert('Login Successfully');
                 this.successMsg='Login Successfully';
                 this.errorMsg = '';
                 this.loginForm.reset();
                 localStorage.setItem('userDetails', JSON.stringify(this.data));
-                this.router.navigate(['customer']);
+                this.router.navigate(['customer-home/customer-home/customer']);
               }
             }
             else{
@@ -68,4 +70,7 @@ export class LoginPage implements OnInit {
         });
       }
   }
+
+
 }
+

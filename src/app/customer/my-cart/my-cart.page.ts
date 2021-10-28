@@ -82,7 +82,7 @@ export class MyCartPage implements OnInit {
       this.successMsg = 'Request Placed Successfully';
 
       this.removeCart(this.cartId);
-      this.router.navigate(['my-booking']);
+      this.router.navigate(['customer-home/customer-home/my-booking']);
     }).catch((err) => {
       alert('Error' + err);
       console.log('Error' + err.error);
@@ -91,7 +91,7 @@ export class MyCartPage implements OnInit {
   }
 
   plus(){
-    this.router.navigate(['scrap-items']);
+    this.router.navigate(['customer/scrap-items']);
   }
 
 

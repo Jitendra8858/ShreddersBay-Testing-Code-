@@ -109,7 +109,7 @@ export class ScrapItemsPage implements OnInit {
       this.apiService.createCart(this.submitForm.value).toPromise().then((res) => {
         alert('Item Added Successfully');
         this.successMsg='Item Added Successfully';
-        this.router.navigate(['my-cart']);
+        this.router.navigate(['customer-home/customer-home/my-cart']);
       }).catch((err)=> {
         alert('Error'+ err);
         console.log('Error' + err);
