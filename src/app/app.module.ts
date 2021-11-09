@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

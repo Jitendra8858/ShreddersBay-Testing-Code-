@@ -80,6 +80,23 @@ exports.getCancelOrders = (req, res) => {
   });
 };
 
+// Find  orders data with a userId
+exports.getAllOrders = (req, res) => {
+  Order.getAllOrders((err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Order Item}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Order Item with id "
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 // Update a Order identified by the userId in the request
 exports.cancelBooking = (req, res) => {
   // Validate Request

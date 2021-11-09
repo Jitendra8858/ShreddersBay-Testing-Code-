@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from '../../services/api.service';
+import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-my-addr',
   templateUrl: './my-addr.page.html',

@@ -1,4 +1,4 @@
 var authJwt = require("./authJwt");
 
-module.exports = { authJwt };
+module.exports = authJwt ;
 

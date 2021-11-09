@@ -18,7 +18,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../../customer/customer/customer.module').then( m => m.CustomerPageModule)
+            loadChildren: () => import('../../customer/customer/customer.module').then(m => m.CustomerPageModule)
           }
         ]
       },
@@ -27,7 +27,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../../customer/scrap-items/scrap-items.module').then( m => m.ScrapItemsPageModule)
+            loadChildren: () => import('../../customer/scrap-items/scrap-items.module').then(m => m.ScrapItemsPageModule)
           }
         ]
       },
@@ -36,7 +36,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../../customer/my-booking/my-booking.module').then( m => m.MyBookingPageModule)
+            loadChildren: () => import('../../customer/my-booking/my-booking.module').then(m => m.MyBookingPageModule)
           }
         ]
       },
@@ -45,7 +45,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../../customer/my-cart/my-cart.module').then( m => m.MyCartPageModule)
+            loadChildren: () => import('../../customer/my-cart/my-cart.module').then(m => m.MyCartPageModule)
           }
         ]
       },
@@ -54,7 +54,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../../customer/my-account/my-account.module').then( m => m.MyAccountPageModule)
+            loadChildren: () => import('../../my-account/my-account.module').then(m => m.MyAccountPageModule)
           }
         ]
       },
@@ -63,7 +63,7 @@ const routes: Routes = [
         redirectTo: 'customer-home/customer',
         pathMatch: 'full'
       }
-  ]
+    ]
   },
 ];
 
@@ -71,4 +71,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CustomerHomePageRoutingModule {}
+export class CustomerHomePageRoutingModule { }

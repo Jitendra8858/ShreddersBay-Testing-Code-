@@ -3,8 +3,8 @@ var config = require("../config/auth.config");
 var db = require("../models/users.model");
 var User = db.user;
 
-verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
+verifyToken = function (req, res, next) {
+  token = req.headers["x-access-token"];
 
   if (!token) {
     return res.status(403).send({
@@ -12,7 +12,7 @@ verifyToken = (req, res, next) => {
     });
   }
 
-  jwt.verify(token, config.secret, (err, decoded) => {
+  jwt.verify(token, config.secret, function (err, decoded) {
     if (err) {
       return res.status(401).send({
         message: "Unauthorized!"
@@ -23,10 +23,10 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isAdmin = (req, res, next) => {
-  User.findById(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
+isAdmin = function (req, res, next) {
+  User.findById(req.userId).then(function (user) {
+    user.getRoles().then( function (roles) {
+      for (i = 0; i < roles.length; i++) {
         if (roles[i].name === "admin") {
           next();
           return;
@@ -41,10 +41,10 @@ isAdmin = (req, res, next) => {
   });
 };
 
-isDealer = (req, res, next) => {
-  User.findById(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
+isDealer = function (req, res, next) {
+  User.findById(req.userId).then(function (user) {
+    user.getRoles().then(function (roles) {
+      for (i = 0; i < roles.length; i++) {
         if (roles[i].name === "dealer") {
           next();
           return;
@@ -58,10 +58,10 @@ isDealer = (req, res, next) => {
   });
 };
 
-isCustomer = (req, res, next) => {
-  User.findById(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
+isCustomer = function (req, res, next) {
+  User.findById(req.userId).then(function (user) {
+    user.getRoles().then(function (roles) {
+      for (i = 0; i < roles.length; i++) {
         if (roles[i].name === "moderator") {
           next();
           return;
@@ -80,7 +80,7 @@ isCustomer = (req, res, next) => {
   });
 };
 
-const authJwt = {
+authJwt = {
   verifyToken: verifyToken,
   isAdmin: isAdmin,
   isDealer: isDealer,

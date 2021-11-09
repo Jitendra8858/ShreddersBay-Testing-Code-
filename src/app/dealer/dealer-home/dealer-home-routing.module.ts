@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { DealerHomePage } from './dealer-home.page';
 
 const routes: Routes = [
@@ -18,35 +17,17 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../dealer/dealer.module').then( m => m.DealerPageModule)
+            loadChildren: () => import('../dealer/dealer.module').then(m => m.DealerPageModule)
           }
         ]
       },
       {
-        path: 'scrap-items',
+        path: 'dealer-booking',
         children: [
           {
             path: '',
-            loadChildren: () => import('../../customer/scrap-items/scrap-items.module').then( m => m.ScrapItemsPageModule)
-          }
-        ]
-      },
-      {
-        path: 'my-booking',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../../customer/my-booking/my-booking.module').then( m => m.MyBookingPageModule)
-          }
-        ]
-      },
-      {
-        path: 'my-cart',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../../customer/my-cart/my-cart.module').then( m => m.MyCartPageModule)
-          }
+            loadChildren: () => import('../dealer-booking/dealer-booking.module').then(m => m.DealerBookingPageModule)
+          },
         ]
       },
       {
@@ -54,16 +35,61 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../../customer/my-account/my-account.module').then( m => m.MyAccountPageModule)
-          }
+            loadChildren: () => import('../../my-account/my-account.module').then(m => m.MyAccountPageModule)
+          },
+        ]
+      },
+      {
+        path: 'notifications',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../../notifications/notifications.module').then(m => m.NotificationsPageModule)
+          },
+        ]
+      },
+      {
+        path: 'faqs',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../../faqs/faqs.module').then(m => m.FaqsPageModule)
+          },
+        ]
+      },
+      {
+        path: 'terms-conditions',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../../terms-conditions/terms-conditions.module').then(m => m.TermsConditionsPageModule)
+          },
+        ]
+      },
+      {
+        path: 'contact-us',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../../contact-us/contact-us.module').then(m => m.ContactUsPageModule)
+          },
+        ]
+      },
+      {
+        path: 'logout',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../../logout/logout.module').then(m => m.LogoutPageModule)
+          },
         ]
       },
       {
         path: '',
-        redirectTo: 'customer-home/customer',
+        redirectTo: 'dealer-home/dealer',
         pathMatch: 'full'
       }
-  ]
+    ]
   },
 ];
 
@@ -71,4 +97,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DealerHomePageRoutingModule {}
+export class DealerHomePageRoutingModule { }

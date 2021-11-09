@@ -6,11 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dealer-home.page.scss'],
 })
 export class DealerHomePage implements OnInit {
-  public tabs = [
-    { url: 'dealer', icon: 'home' },
-    { url: 'my-dues', icon: 'calculator' },
-    { url: 'my-account', icon: 'person' },
+
+  sideNav = [
+    {title : 'Home', url : '/dealer-home/dealer-home/dealer', icon: 'home'},
+    {title : 'My Booking', url : '/dealer-home/dealer-home/dealer-booking', icon: 'book'},
+    {title : 'My Account', url : '/dealer-home/dealer-home/my-account', icon: 'person'},
+    {title : 'Notification', url : '/dealer-home/dealer-home/notifications', icon: 'notifications'},
+    {title : 'FAQ', url : '/dealer-home/dealer-home/faqs', icon: 'power'},
+    {title : 'Terms & Conditions', url : '/dealer-home/dealer-home/terms-conditions', icon: 'power'},
+    {title : 'Contact Us', url : '/dealer-home/dealer-home/contact-us', icon: 'mail'},
+    {title : 'Logout', url : '/dealer-home/dealer-home/logout', icon: 'power'},
   ];
+
+
 
   constructor() { }
 

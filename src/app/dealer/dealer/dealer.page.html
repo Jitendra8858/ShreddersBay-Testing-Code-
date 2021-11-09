@@ -1,7 +1,7 @@
 <ion-header color="primary">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button autoHide="false"></ion-menu-button>
+      <ion-menu-button autoHide="true"></ion-menu-button>
     </ion-buttons>
     <img src="../../../assets/img/logo-mini.png" height="50px" />
     <ion-buttons slot="end">
@@ -27,7 +27,32 @@
     </ion-row>
     <!-- <ion-button class="primary" shape="round">View More<ion-icon name="arrow-down"></ion-icon></ion-button> -->
   </ion-grid>
-  <h2>Available Booking</h2>
+  <ion-list>
+    <ion-list-header>
+      Available Booking
+    </ion-list-header>
+<ion-card *ngFor="let order of orders">
+  <ion-card-title color="primary">Booking Id : {{order.booking_id}}</ion-card-title>
+    <ion-item >
+      <ion-avatar slot="start">
+        <img src="./avatar-finn.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{order.name}}</h2>
+        <ion-icon name="pin"></ion-icon><span style="color: grey;">L-111/1, Smriti Vihar, Sector L, Ashiyana, Lucknow, Uttar Pradesh 226012</span>
+      </ion-label>
+    </ion-item>
+    <ion-button  color="light" (click) ="ignore()"><ion-icon name="close-circle-outline" color="danger" size="large"></ion-icon>Ignore</ion-button>
+    <ion-button  color="light"  (click) ="accept()"><ion-icon name="checkmark-circle-outline" color="success" size="large"></ion-icon>Accept</ion-button>  </ion-card>
+</ion-list>
 </ion-content>
 
-
+<!-- Bottom Navigation -->
+<!-- <ion-tabs slot="bottom">
+  <ion-tab-bar>
+    <ion-tab-button tab="{{t.url}}" *ngFor="let t of tabs;">
+      <ion-icon name="{{t.icon}}" size="large"></ion-icon>
+      <ion-label>{{t.title}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs> -->

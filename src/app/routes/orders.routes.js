@@ -15,4 +15,8 @@ module.exports = app => {
   // Update a Order with customerId
   app.get("/getCancelOrders/:userId", order.getCancelOrders);
 
+  // Update a Order with customerId
+  app.get("/getAllOrders", order.getAllOrders);
+
+
 }

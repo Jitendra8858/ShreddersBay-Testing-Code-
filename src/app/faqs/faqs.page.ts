@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavParams } from '@ionic/angular';
-import { APIService } from '../../services/api.service';
+import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-faqs',
   templateUrl: './faqs.page.html',
@@ -24,12 +24,12 @@ export class FaqsPage implements OnInit {
 
   getFaqs(){
 
-    this.apiService.getFaqs().toPromise().then((res) => {
-      console.log(res);
-      this.data=res;
-    }).catch((err)=> {
-      console.log('Error' + err);
-    });
+    // this.apiService.getFaqs().toPromise().then((res) => {
+    //   console.log(res);
+    //   this.data=res;
+    // }).catch((err)=> {
+    //   console.log('Error' + err);
+    // });
 
   }
 

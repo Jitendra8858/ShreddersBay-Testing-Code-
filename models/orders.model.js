@@ -49,18 +49,12 @@ Order.getOrdersById = (userId, result) => {
   sql.query(`SELECT * FROM orders as o LEFT JOIN products as p on p.p_id = o.prod_id LEFT JOIN users as u on u.id=o.user_id WHERE o.booking_id = ${userId} and o.status = 1`, (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(err, null);
+      result(null, err);
       return;
     }
 
-    if (res.length) {
-      console.log("found orders: ", res);
-      result(null, res);
-      return;
-    }
-
-    // not found User with the id
-    result({ kind: "not_found" }, null);
+    console.log("users: ", res);
+    result(null, res);
   });
 };
 
@@ -77,14 +71,8 @@ Order.cancelBooking = (id, status, result) => {
         return;
       }
 
-      if (res.affectedRows == 0) {
-        // not found User with the id
-        result({ kind: "not_found" }, null);
-        return;
-      }
-
-      console.log("updated order: ", { id: id, ...status });
-      result(null, { id: id, ...status });
+      console.log("users: ", res);
+      result(null, res);
     }
   );
 };
@@ -94,18 +82,26 @@ Order.getCancelOrders = (userId, result) => {
   sql.query(`SELECT * FROM orders as o LEFT JOIN products as p on p.p_id = o.prod_id LEFT JOIN users as u on u.id=o.user_id WHERE o.user_id = ${userId} and o.status = 0`, (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(err, null);
+      result(null, err);
       return;
     }
 
-    if (res.length) {
-      console.log("found orders: ", res);
-      result(null, res);
+    console.log("users: ", res);
+    result(null, res);
+  });
+};
+
+//get all order item by user id
+Order.getAllOrders = (result) => {
+  sql.query(`SELECT * FROM orders as o LEFT JOIN products as p on p.p_id = o.prod_id LEFT JOIN users as u on u.id=o.user_id WHERE o.status = 1`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
       return;
     }
 
-    // not found User with the id
-    result({ kind: "not_found" }, null);
+    console.log("users: ", res);
+    result(null, res);
   });
 };
 

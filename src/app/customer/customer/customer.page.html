@@ -1,6 +1,7 @@
 <ion-header color="primary">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <img src="../../../assets/img/logo-mini.png" height="50px" />
     <ion-buttons slot="end" (click)="notifications()">
@@ -10,23 +11,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-split-pane contentId="content" >
-    <ion-menu contentId="content" type="overlay">
-      <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header><img src="../assets/img/logo-mini.png"></ion-list-header>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
-              routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="content"></ion-router-outlet>
-  </ion-split-pane>
   <ion-grid>
     <h2>Available Scrap Types</h2>
     <ion-row>
@@ -51,5 +35,3 @@
     </ion-item>
   </ion-card>
 </ion-content>
-
-

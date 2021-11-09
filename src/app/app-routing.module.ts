@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'my-account',
-    loadChildren: () => import('./customer/my-account/my-account.module').then( m => m.MyAccountPageModule)
+    loadChildren: () => import('./my-account/my-account.module').then( m => m.MyAccountPageModule)
   },
   {
     path: 'scrap-items',
@@ -48,15 +48,15 @@ const routes: Routes = [
   },
   {
     path: 'logout',
-    loadChildren: () => import('./customer/logout/logout.module').then( m => m.LogoutPageModule)
+    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
   },
   {
     path: 'my-profile',
-    loadChildren: () => import('./customer/my-profile/my-profile.module').then( m => m.MyProfilePageModule)
+    loadChildren: () => import('./my-profile/my-profile.module').then( m => m.MyProfilePageModule)
   },
   {
     path: 'my-addr',
-    loadChildren: () => import('./customer/my-addr/my-addr.module').then( m => m.MyAddrPageModule)
+    loadChildren: () => import('./my-addr/my-addr.module').then( m => m.MyAddrPageModule)
   },
   {
     path: 'settings',
@@ -64,15 +64,15 @@ const routes: Routes = [
   },
   {
     path: 'change-pass',
-    loadChildren: () => import('./customer/change-pass/change-pass.module').then( m => m.ChangePassPageModule)
+    loadChildren: () => import('./change-pass/change-pass.module').then( m => m.ChangePassPageModule)
   },
   {
     path: 'notifications',
-    loadChildren: () => import('./customer/notifications/notifications.module').then( m => m.NotificationsPageModule)
+    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
   },
   {
     path: 'terms-conditions',
-    loadChildren: () => import('./customer/terms-conditions/terms-conditions.module').then( m => m.TermsConditionsPageModule)
+    loadChildren: () => import('./terms-conditions/terms-conditions.module').then( m => m.TermsConditionsPageModule)
   },
   {
     path: 'customer-home',
@@ -86,6 +86,12 @@ const routes: Routes = [
     path: 'dealer',
     loadChildren: () => import('./dealer/dealer/dealer.module').then( m => m.DealerPageModule)
   },
+  {
+    path: 'dealer-booking',
+    loadChildren: () => import('./dealer/dealer-booking/dealer-booking.module').then( m => m.DealerBookingPageModule)
+  },
+
+
 
 
 

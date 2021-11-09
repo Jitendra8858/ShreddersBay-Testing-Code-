@@ -11,8 +11,7 @@ const dealerUrl = 'http://localhost:3000/dealers';
 })
 export class APIService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
     return this.http.get(baseUrl);
@@ -91,7 +90,7 @@ export class APIService {
     return this.http.get(`${baseUrl}/getAddress`);
   }
 
-  getOrdersById(id: any){
+  getOrdersById(id){
     return this.http.get(`${baseUrl}/getOrdersById/${id}`);
   }
 
@@ -101,6 +100,10 @@ export class APIService {
 
   cancelBooking(id, status): Observable<any> {
     return this.http.put(`${baseUrl}/cancelBooking/${id}`, status);
+  }
+
+  getAllOrders(){
+    return this.http.get(`${baseUrl}/getAllOrders`);
   }
 
 }

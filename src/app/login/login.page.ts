@@ -37,9 +37,10 @@ export class LoginPage implements OnInit {
     } else {
       this.apiService.getbyEmail(this.loginForm.value.email).toPromise().then((res) => {
           this.data=res;
-            if(this.data.password===this.loginForm.value.password)
+          console.log(this.data);
+            if(this.data[0].password===this.loginForm.value.password)
             {
-              if(this.role === 1 || this.data.userRole === 1){
+              if(this.role === 1 || this.data[0].userRole === 1){
                 alert('Login Successfully');
                 this.successMsg='Login Successfully';
                 this.errorMsg = '';
@@ -47,7 +48,7 @@ export class LoginPage implements OnInit {
                 localStorage.setItem('userDetails', JSON.stringify(this.data));
                 this.router.navigate(['dealer-home']);
               }
-              if(this.role === 0 || this.data.userRole === 0){
+              if(this.role === 0 || this.data[0].userRole === 0){
                 alert('Login Successfully');
                 this.successMsg='Login Successfully';
                 this.errorMsg = '';

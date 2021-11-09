@@ -42,11 +42,11 @@ export class HomePage implements OnInit {
     this.role = this.activateRoute.snapshot.params.role;
   }
   login(role){
-    alert(role);
+    //alert(role);
     this.router.navigate(['login', {role}]);
  }
  signup(role){
-  alert(role);
+  //alert(role);
   this.router.navigate(['signup', {role}]);
 }
 

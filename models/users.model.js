@@ -10,8 +10,8 @@ var User = function(user) {
   this.userRole = user.userRole;
 };
 
-User.create = (newUser, result) => {
-  sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
+User.create = function (newUser, result) {
+  sql.query("INSERT INTO users SET ?", newUser,function (err, res)  {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -40,37 +40,45 @@ User.findById = (userId, result) => {
   sql.query(`SELECT * FROM users WHERE id = ${userId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(err, null);
+      result(null, err);
       return;
     }
 
-    if (res.length) {
-      console.log("found user: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-
-    // not found User with the id
-    result({ kind: "not_found" }, null);
+    console.log("users: ", res);
+    result(null, res);
   });
 };
+
+
+// User.findByEmail = (userEmail, result) => {
+//   sql.query(`SELECT * FROM users WHERE email = '${userEmail}'`, (err, res) => {
+//     if (err) {
+//       console.log("error: ", err);
+//       result(err, null);
+//       return;
+//     }
+
+//     if (res.length) {
+//       console.log("found user: ", res[0]);
+//       result(null, res[0]);
+//       return;
+//     }
+
+//     // not found User with the id
+//     result({ kind: "not_found" }, null);
+//   });
+// };
 
 User.findByEmail = (userEmail, result) => {
   sql.query(`SELECT * FROM users WHERE email = '${userEmail}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(err, null);
+      result(null, err);
       return;
     }
 
-    if (res.length) {
-      console.log("found user: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-
-    // not found User with the id
-    result({ kind: "not_found" }, null);
+    console.log("users: ", res);
+    result(null, res);
   });
 };
 
@@ -219,18 +227,12 @@ User.findByPID = (P_Id, result) => {
   sql.query(`SELECT * FROM products WHERE p_id = ${P_Id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(err, null);
+      result(null, err);
       return;
     }
 
-    if (res.length) {
-      console.log("found product: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-
-    // not found User with the id
-    result({ kind: "not_found" }, null);
+    console.log("users: ", res);
+    result(null, res);
   });
 };
 module.exports = User;

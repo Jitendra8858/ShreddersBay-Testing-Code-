@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { APIService } from '../../services/api.service';
+import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-terms-conditions',
   templateUrl: './terms-conditions.page.html',

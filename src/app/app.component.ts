@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
+  appPages = [
     { title: 'Home', url: 'customer-home/customer-home/customer', icon: 'home' },
     { title: 'Scrap Items', url: 'customer-home/customer-home/scrap-items', icon: 'mail' },
     { title: 'My Cart', url: 'customer-home/customer-home/my-cart', icon: 'cart' },
@@ -20,6 +19,5 @@ export class AppComponent {
     { title: 'Logout', url: 'logout', icon: 'power' }
   ];
 
-  constructor(
-  ) {}
+  constructor() { }
 }

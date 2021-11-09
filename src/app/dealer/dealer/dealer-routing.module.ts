@@ -6,12 +6,13 @@ import { DealerPage } from './dealer.page';
 const routes: Routes = [
   {
     path: '',
-    component: DealerPage
-  }
-];
+    component: DealerPage,
+  },
+ ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DealerPageRoutingModule {}
+export class DealerPageRoutingModule { }
