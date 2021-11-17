@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     } else {
       this.apiService.getbyEmail(this.loginForm.value.email).toPromise().then((res) => {
           this.data=res;
-          console.log(this.data);
+          //console.log(this.data);
             if(this.data[0].password===this.loginForm.value.password)
             {
               if(this.role === 1 || this.data[0].userRole === 1){

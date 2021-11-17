@@ -35,7 +35,7 @@ export class MyCartPage implements OnInit {
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-    this.userId = this.userDetails.id;
+    this.userId = this.userDetails[0].id;
     this.getCartById();
   }
 

@@ -9,7 +9,7 @@
   </div>
   <br/><br/><ion-title class="ion-text-center">SignUp</ion-title>
 
-  <form [formGroup]="signupForm" (ngSubmit) = "submitForm()">
+  <form [formGroup]="signupForm" method="post" (ngSubmit) = "insertUser()">
 
     <ion-item lines="full" >
       <ion-label position="floating">Name</ion-label>

@@ -46,8 +46,8 @@ export class ScrapItemsPage implements OnInit {
     this.file='';
     this.price='';
     this.userDetails =JSON.parse(localStorage.getItem('userDetails'));
-    this.userId=this.userDetails.id;
-
+    this.userId=this.userDetails[0].id;
+    console.log(this.userDetails[0]);
     this.submitForm = this.fb.group({
       userId: [this.userId],
       prodId: [this.pId],
@@ -73,7 +73,8 @@ export class ScrapItemsPage implements OnInit {
    console.log(value.detail.value);
     this.id=JSON.stringify(value.detail.value);
     this.apiService.getProductByPID(this.id).toPromise().then((res) => {
-      this.list=res;
+      this.list=res[0];
+      console.log(res[0]);
       this.pId=this.list.p_id;
       this.subProduct=this.list.sub_products;
       this.weight=this.list.weight;

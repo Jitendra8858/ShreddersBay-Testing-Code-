@@ -28,7 +28,7 @@ export class MyBookingPage implements OnInit {
   ngOnInit() {
     this.segment= 'Current';
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-    this.userId = this.userDetails.id;
+    this.userId = this.userDetails[0].id;
     this.getCurrentOrders();
   }
 
