@@ -89,7 +89,11 @@ const routes: Routes = [
   {
     path: 'dealer-booking',
     loadChildren: () => import('./dealer/dealer-booking/dealer-booking.module').then( m => m.DealerBookingPageModule)
+  },  {
+    path: 'order-details',
+    loadChildren: () => import('./dealer/order-details/order-details.module').then( m => m.OrderDetailsPageModule)
   },
+
 
 
 

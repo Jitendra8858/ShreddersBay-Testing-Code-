@@ -17,7 +17,7 @@
       <ion-col size="6" *ngFor="let item of list">
         <div>
           <img
-            src="../../../assets/img/{{item.picture}}"
+            src="../../../assets/img/{{item.file}}"
             height="200px"
             width="100%"
           />
@@ -42,9 +42,11 @@
         <ion-icon name="pin"></ion-icon><span style="color: grey;">L-111/1, Smriti Vihar, Sector L, Ashiyana, Lucknow, Uttar Pradesh 226012</span>
       </ion-label>
     </ion-item>
-    <ion-button  color="light" (click) ="ignore()"><ion-icon name="close-circle-outline" color="danger" size="large"></ion-icon>Ignore</ion-button>
-    <ion-button  color="light"  (click) ="accept()"><ion-icon name="checkmark-circle-outline" color="success" size="large"></ion-icon>Accept</ion-button>  </ion-card>
-</ion-list>
+    <ion-button  color="light" (click) ="ignore(order.booking_id)"><ion-icon name="close-circle-outline" color="danger" size="large"></ion-icon>Ignore</ion-button>
+    <ion-button  color="light"  (click) ="accept(order.booking_id)"><ion-icon name="checkmark-circle-outline" color="success" size="large"></ion-icon>Accept</ion-button>
+  </ion-card>
+
+  </ion-list>
 </ion-content>
 
 <!-- Bottom Navigation -->

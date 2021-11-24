@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { APIService } from '../services/api.service';
 import * as bcrypt from 'bcryptjs';
+import { UserApiService } from '../services/user-api.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginPage implements OnInit {
   successMsg: string;
 
   constructor(
-    private apiService: APIService,
+    private userService: UserApiService,
     private router: Router,
     public fb: FormBuilder,
     private activateRoute: ActivatedRoute,
@@ -35,12 +36,19 @@ export class LoginPage implements OnInit {
     if (!this.loginForm.valid) {
       return false;
     } else {
-      this.apiService.getbyEmail(this.loginForm.value.email).toPromise().then((res) => {
+       // Initialize Params Object
+    var myFormData = new FormData();
+    // Begin assigning parameters
+    myFormData.append('role',this.role);
+    myFormData.append('email', this.loginForm.value.email);
+    myFormData.append('password', this.loginForm.value.password);
+      this.userService.getByUserInfo(myFormData).toPromise().then((res) => {
           this.data=res;
-          //console.log(this.data);
+          //console.log(this.data[0]);
             if(this.data[0].password===this.loginForm.value.password)
             {
-              if(this.role === 1 || this.data[0].userRole === 1){
+
+              if(this.role == 1 && this.data[0].user_role == 1){
                 alert('Login Successfully');
                 this.successMsg='Login Successfully';
                 this.errorMsg = '';
@@ -48,7 +56,7 @@ export class LoginPage implements OnInit {
                 localStorage.setItem('userDetails', JSON.stringify(this.data));
                 this.router.navigate(['dealer-home']);
               }
-              if(this.role === 0 || this.data[0].userRole === 0){
+              if(this.role == 0 && this.data[0].user_role == 0){
                 alert('Login Successfully');
                 this.successMsg='Login Successfully';
                 this.errorMsg = '';

@@ -5,6 +5,7 @@ import { APIService } from 'src/app/services/api.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
   selector: 'app-scrap-items',
@@ -24,62 +25,63 @@ export class ScrapItemsPage implements OnInit {
   img1: string | ArrayBuffer;
   userDetails: any;
   userName: any;
-  pId: any;
+  prod_id: any;
   file: any;
-  totalPrice: number;
+  totalPrice: any;
   successMsg: string;
   errorMsg: string;
   //image to be displayed in template
   image;
   imageData;
+  filename: string;
 
   constructor(
-    private apiService: APIService,
+    private userService: UserApiService,
     public fb: FormBuilder,
     private router: Router,
     private camera: Camera,
     private http: HttpClient
-    ) { }
+  ) { }
 
   ngOnInit() {
-    this.pId='';
-    this.file='';
-    this.price='';
-    this.userDetails =JSON.parse(localStorage.getItem('userDetails'));
-    this.userId=this.userDetails[0].id;
-    console.log(this.userDetails[0]);
+    this.prod_id = '';
+    this.file = '';
+    this.price = '';
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    this.userId = this.userDetails[0].id;
+    // console.log(this.userDetails[0]);
     this.submitForm = this.fb.group({
-      userId: [this.userId],
-      prodId: [this.pId],
+      user_id: [this.userId],
+      prod_id: [this.prod_id],
       weight: [''],
-      totalPrice: [''],
+      price: [''],
       file: [''],
     });
 
     this.getProducts();
   }
 
-  getProducts(){
-    this.apiService.getProducts().toPromise().then((res) => {
+  getProducts() {
+    this.userService.getProducts().toPromise().then((res) => {
       //console.log(res);
-      this.data=res;
-    }).catch((err)=> {
+      this.data = res;
+    }).catch((err) => {
       console.log('Error' + err);
     });
 
   }
 
- checkValue(value){
-   console.log(value.detail.value);
-    this.id=JSON.stringify(value.detail.value);
-    this.apiService.getProductByPID(this.id).toPromise().then((res) => {
-      this.list=res[0];
-      console.log(res[0]);
-      this.pId=this.list.p_id;
-      this.subProduct=this.list.sub_products;
-      this.weight=this.list.weight;
-      this.price=this.list.price;
-    }).catch((err)=> {
+  checkValue(value) {
+    console.log(value.detail.value);
+    this.id = value.detail.value;
+    this.userService.getProdById(this.id).toPromise().then((res) => {
+      this.list = res;
+      console.log(this.list[0]);
+      this.prod_id = this.list[0].p_id;
+      this.subProduct = this.list[0].sub_name;
+      this.weight = this.list[0].weight;
+      this.price = this.list[0].price;
+    }).catch((err) => {
       console.log('Error' + err);
     });
   }
@@ -93,64 +95,71 @@ export class ScrapItemsPage implements OnInit {
       reader.readAsDataURL(event.target.files[0]);  // to trigger onload
     }
     const fileList: FileList = event.target.files;
-    this.file = fileList[0].name;
+    this.filename = fileList[0].name;
+
+     this.file = fileList[0];
     console.log(this.file);
+
   }
 
   submitForms() {
     if (!this.submitForm.valid) {
       return false;
     } else {
+      // Initialize Params Object
+      var myFormData = new FormData();
+      // Begin assigning parameters
+      myFormData.append('user_id', this.userId);
+      myFormData.append('prod_id', this.prod_id);
+      myFormData.append('file', this.file, this.filename);
+      myFormData.append('price', this.price);
+      myFormData.append('weight', this.submitForm.value.weight);
 
-      this.submitForm.value.prodId=this.pId;
-      this.submitForm.value.file=this.file;
-      this.totalPrice=this.submitForm.value.weight*this.price;
-      this.submitForm.value.totalPrice=this.totalPrice;
-      console.log(this.submitForm.value);
-      this.apiService.createCart(this.submitForm.value).toPromise().then((res) => {
+      console.log(myFormData);
+      this.userService.createCart(myFormData).toPromise().then((res) => {
         alert('Item Added Successfully');
-        this.successMsg='Item Added Successfully';
+        this.successMsg = 'Item Added Successfully';
         this.router.navigate(['customer-home/customer-home/my-cart']);
-      }).catch((err)=> {
-        alert('Error'+ err);
+      }).catch((err) => {
+        alert('Error' + err);
         console.log('Error' + err);
-        this.errorMsg='Error'+ err;
+        this.errorMsg = 'Error' + err;
       });
     }
 
   }
 
-  openCamera(){
+  openCamera() {
     const options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-   };
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    };
 
     this.camera.getPicture(options).then((imageData) => {
-    this.imageData = imageData;
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    this.image=(<any>window).Ionic.WebView.convertFileSrc(imageData);
+      this.imageData = imageData;
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      this.image = (<any>window).Ionic.WebView.convertFileSrc(imageData);
     }, (err) => {
-       // Handle error
-       alert('error '+JSON.stringify(err));
-  });
-}
-  upload(){
-    const  url = 'your REST API url';
+      // Handle error
+      alert('error ' + JSON.stringify(err));
+    });
+  }
+  upload() {
+    const url = 'your REST API url';
     const date = new Date().valueOf();
 
     // Replace extension according to your media type
-    const imageName = date+ '.jpeg';
+    const imageName = date + '.jpeg';
     // call method that creates a blob from dataUri
     const imageBlob = this.dataURItoBlob(this.imageData);
     const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
 
-    const  postData = new FormData();
+    const postData = new FormData();
     postData.append('file', imageFile);
 
-    const data: Observable<any> = this.http.post(url,postData);
+    const data: Observable<any> = this.http.post(url, postData);
     data.subscribe((result) => {
       console.log(result);
     });
@@ -158,13 +167,13 @@ export class ScrapItemsPage implements OnInit {
 
   dataURItoBlob(dataURI) {
     const byteString = window.atob(dataURI);
-   const arrayBuffer = new ArrayBuffer(byteString.length);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
     const int8Array = new Uint8Array(arrayBuffer);
     for (let i = 0; i < byteString.length; i++) {
       int8Array[i] = byteString.charCodeAt(i);
-     }
+    }
     const blob = new Blob([int8Array], { type: 'image/jpeg' });
-   return blob;
+    return blob;
   }
 
 }

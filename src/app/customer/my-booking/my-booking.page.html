@@ -32,7 +32,7 @@
           <ion-label>
             <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
             <ion-label>{{item.p_name}}</ion-label>
-            <p>{{item.sub_products}}</p>
+            <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
             <p color="medium">Booking Date: {{item.booking_date}}</p>
             <p color="medium">Schedule Date: {{item.schedule_date}}</p>
@@ -43,16 +43,19 @@
     </div>
 
     <div *ngSwitchCase="'Complete'">
-      Complete content here
-      <!-- <ion-card *ngFor="let item of data">
+      <ion-card *ngFor="let item of currentOrder" (click)="showBookingDetails(item.booking_id)">
         <ion-item>
-          <ion-label color="primary">Booking Id: {{item.booking_id}}</ion-label>
-          <ion-label>{{item.p_name}}</ion-label>
+          <ion-label>
+            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <ion-label>{{item.p_name}}</ion-label>
+            <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
-            <p color="medium">Schedule Date: {{item.sub_products}}</p>
+            <p color="medium">Booking Date: {{item.booking_date}}</p>
+            <p color="medium">Schedule Date: {{item.schedule_date}}</p>
             <p>Weight: {{item.total_weight}} x {{item.weight}} Kg</p>
+          </ion-label>
         </ion-item>
-      </ion-card> -->
+      </ion-card>
     </div>
 
     <div *ngSwitchCase="'Cancel'">
@@ -61,7 +64,7 @@
           <ion-label>
             <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
             <ion-label>{{item.p_name}}</ion-label>
-            <p>{{item.sub_products}}</p>
+            <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
             <p color="medium">Booking Date: {{item.booking_date}}</p>
             <p color="medium">Schedule Date: {{item.schedule_date}}</p>

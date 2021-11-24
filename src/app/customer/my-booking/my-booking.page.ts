@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
+import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
   selector: 'app-my-booking',
@@ -20,7 +21,7 @@ export class MyBookingPage implements OnInit {
   currentOrder: any;
   cancelOrder: any;
   constructor(
-    private apiService: APIService,
+    private userService: UserApiService,
     public fb: FormBuilder,
     private router: Router,
     private menu: MenuController) { }
@@ -33,16 +34,23 @@ export class MyBookingPage implements OnInit {
   }
 
   getCurrentOrders() {
-    this.apiService.getOrders(this.userId).toPromise().then((res) => {
+    this.userService.getCurrentOrders(this.userId).toPromise().then((res) => {
       this.currentOrder = res;
-      //console.log(this.data);
+    }).catch((err) => {
+      console.log('Error' + err);
+    });
+  }
+
+  getCompleteOrders() {
+    this.userService.getCompleteOrders(this.userId).toPromise().then((res) => {
+      this.currentOrder = res;
     }).catch((err) => {
       console.log('Error' + err);
     });
   }
 
   getCancelOrders() {
-    this.apiService.getCancelOrders(this.userId).toPromise().then((res) => {
+    this.userService.getCancelOrders(this.userId).toPromise().then((res) => {
       this.cancelOrder = res;
       //console.log(this.data);
     }).catch((err) => {
@@ -57,7 +65,7 @@ export class MyBookingPage implements OnInit {
       this.getCurrentOrders();
     }
     if (this.segment === 'Complete') {
-      //alert('Complete');
+      this.getCompleteOrders();
     }
     if (this.segment === 'Cancel') {
       //alert('Cancel');

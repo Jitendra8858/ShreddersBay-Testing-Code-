@@ -12,7 +12,7 @@ import { UserApiService } from '../services/user-api.service';
 })
 export class SignupPage implements OnInit {
   signupForm: FormGroup;
-  user_role: any;
+  role: any;
 
 
 
@@ -26,9 +26,9 @@ export class SignupPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.user_role = this.activateRoute.snapshot.params.role;
+    this.role = this.activateRoute.snapshot.params.role;
     this.signupForm = this.fb.group({
-     role: [this.user_role],
+     role: [this.role],
       name: [''],
       email: [''],
       password: [''],
@@ -65,11 +65,12 @@ export class SignupPage implements OnInit {
     myFormData.append('name', this.signupForm.value.name);
     myFormData.append('email', this.signupForm.value.email);
     myFormData.append('mobile', this.signupForm.value.mobile);
-    myFormData.append('password', this.signupForm.value.confpass);
+    myFormData.append('password', this.signupForm.value.password);
     console.log(myFormData);
     this.userService.create(myFormData).subscribe((res: Response) => {
-      this.router.navigateByUrl('login');
-console.log('data inserted');
+      console.log('data inserted');
+
+      this.router.navigate(['login', {role: this.role}]);
 
     });
     }

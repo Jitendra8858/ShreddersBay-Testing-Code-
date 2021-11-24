@@ -20,14 +20,7 @@ export class LogoutPage implements OnInit {
     sessionStorage.removeItem('userDetails');
     sessionStorage.clear();
     this.router.navigate(['']);
-    this.logout();
 
   }
-  logout() {
-    sessionStorage.removeItem('userDetails');
-    sessionStorage.clear();
-    this.router.navigate(['']);
 
-
-  }
 }

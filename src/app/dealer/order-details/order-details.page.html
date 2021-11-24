@@ -34,19 +34,7 @@
     </ion-item>
   </ion-card>
   <h2>Dealer Details</h2>
-  <ion-card *ngIf="dealer_id">
-    <ion-title color="success">Accepted By :</ion-title>
-    <ion-item *ngFor="let record of dealer_record">
-      <ion-thumbnail slot="start">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-thumbnail>
-      <ion-label>
-        <ion-title >{{ record.name }}</ion-title>
-        <ion-title >{{ record.mobile }}</ion-title>
-      </ion-label>
-    </ion-item>
-  </ion-card>
-  <ion-card *ngIf="!dealer_id">
+  <ion-card *ngFor="let item of data">
     <ion-item>
       <ion-label>
         <ion-title>Your Request is under Review</ion-title>
@@ -72,5 +60,6 @@
   </ion-card>
 </ion-content>
 <ion-footer>
-  <ion-button  color="primary" shape="round" expand="block" (click)="cancelBooking()">Cancel Booking</ion-button>
+  <ion-button  color="success" shape="round" expand="block" (click)="delivered()">Delivered</ion-button>
+  <ion-button  color="primary" shape="round" expand="block" (click)="cancel()">Cancel Booking</ion-button>
 </ion-footer>

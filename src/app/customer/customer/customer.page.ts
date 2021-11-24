@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavParams } from '@ionic/angular';
-import { APIService } from '../../services/api.service';
+import { UserApiService } from 'src/app/services/user-api.service';
+
+
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.page.html',
@@ -17,7 +19,7 @@ export class CustomerPage implements OnInit {
 
 
   constructor(
-    private apiService: APIService,
+    private userService: UserApiService,
     private router: Router,
     private activateRoute: ActivatedRoute) { }
 
@@ -26,9 +28,8 @@ export class CustomerPage implements OnInit {
 
   }
   getProducts(){
-
-    this.apiService.getProducts().toPromise().then((res) => {
-      //console.log(res);
+    this.userService.getProducts().toPromise().then((res) => {
+      console.log(res);
       this.data=res;
       // this.list=this.data.slice(0,9);
       this.list=this.data;

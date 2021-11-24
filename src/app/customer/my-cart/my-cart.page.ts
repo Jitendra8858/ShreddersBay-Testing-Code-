@@ -2,9 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { APIService } from 'src/app/services/api.service';
 import { MenuController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
+import { UserApiService } from 'src/app/services/user-api.service';
 @Component({
   selector: 'app-my-cart',
   templateUrl: './my-cart.page.html',
@@ -20,7 +20,6 @@ export class MyCartPage implements OnInit {
   dateTime: any;
   successMsg: string;
   errorMsg: string;
-  orderDetails = { userId: '', prodId: '', weight: '', approxPrice: '', bookingDate: '', scheduleDate: '' };
   prodId: any;
   price: any;
   bookingDate: any;
@@ -28,7 +27,7 @@ export class MyCartPage implements OnInit {
   cartId: any;
 
   constructor(
-    private apiService: APIService,
+    private userService: UserApiService,
     public fb: FormBuilder,
     private router: Router,
     private menu: MenuController) { }
@@ -37,12 +36,13 @@ export class MyCartPage implements OnInit {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.userId = this.userDetails[0].id;
     this.getCartById();
+
   }
 
-  removeCart(id) {
-    this.apiService.deleteItem(id).toPromise().then((res) => {
+  removeCart(cart_id) {
+    this.userService.deleteItem(cart_id).toPromise().then((res) => {
       this.message = res;
-      //alert(this.message.message);
+      alert(this.message.message);
       location.reload();
     }).catch((err) => {
       console.log('Error' + err);
@@ -50,17 +50,17 @@ export class MyCartPage implements OnInit {
   }
 
   getCartById() {
-    this.apiService.getCartById(this.userId).toPromise().then((res) => {
+    this.userService.getCartById(this.userId).toPromise().then((res) => {
       this.data = res;
       this.data.forEach((value) => {
         this.approxPrice = value.total_price;
         this.prodId = value.prod_id;
         this.weight = value.total_weight;
-        this.cartId = value.id;
-       // alert(this.cartId);
+        this.cartId = value.cart_id;
+        // alert(this.cartId);
       });
     }).catch((err) => {
-      console.log('Your Cart Is Empty');
+      console.log('Your Cart Is Empty'+err);
     });
 
   }
@@ -70,18 +70,21 @@ export class MyCartPage implements OnInit {
     this.dateTime = this.dateTime;
     const dValue = new Date();
     this.bookingDate = formatDate(dValue, 'yyyy-MM-dd', 'en-US');
-    this.orderDetails.userId = this.userId;
-    this.orderDetails.prodId = this.prodId;
-    this.orderDetails.weight = this.weight;
-    this.orderDetails.bookingDate = this.bookingDate;
-    this.orderDetails.scheduleDate = this.dateTime;
-    this.orderDetails.approxPrice = this.approxPrice;
+     // Initialize Params Object
+     var myFormData = new FormData();
+     // Begin assigning parameters
+     myFormData.append('user_id',this.userId);
+     myFormData.append('prod_id', this.prodId);
+     myFormData.append('total_weight', this.weight);
+     myFormData.append('booking_date',this.bookingDate);
+     myFormData.append('schedule_date', this.dateTime);
+     myFormData.append('approx_price', this.approxPrice);
+
+
     //console.log( this.orderDetails);
-    this.apiService.createOrder(this.orderDetails).toPromise().then((res) => {
+    this.userService.createOrder(myFormData).toPromise().then((res) => {
       alert('Request Placed Successfully');
       this.successMsg = 'Request Placed Successfully';
-
-      this.removeCart(this.cartId);
       this.router.navigate(['customer-home/customer-home/my-booking']);
     }).catch((err) => {
       alert('Error' + err);
