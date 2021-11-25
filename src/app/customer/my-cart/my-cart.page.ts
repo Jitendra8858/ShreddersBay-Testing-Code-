@@ -25,6 +25,7 @@ export class MyCartPage implements OnInit {
   bookingDate: any;
   weight: any;
   cartId: any;
+  filename: string | Blob;
 
   constructor(
     private userService: UserApiService,
@@ -57,12 +58,12 @@ export class MyCartPage implements OnInit {
         this.prodId = value.prod_id;
         this.weight = value.total_weight;
         this.cartId = value.cart_id;
-        // alert(this.cartId);
+        this.filename = value.cart_id;
+         alert(this.filename);
       });
     }).catch((err) => {
       console.log('Your Cart Is Empty'+err);
     });
-
   }
 
 
@@ -75,11 +76,11 @@ export class MyCartPage implements OnInit {
      // Begin assigning parameters
      myFormData.append('user_id',this.userId);
      myFormData.append('prod_id', this.prodId);
-     myFormData.append('total_weight', this.weight);
+     myFormData.append('approx_weight', this.weight);
      myFormData.append('booking_date',this.bookingDate);
      myFormData.append('schedule_date', this.dateTime);
      myFormData.append('approx_price', this.approxPrice);
-
+     myFormData.append('filename', this.filename);
 
     //console.log( this.orderDetails);
     this.userService.createOrder(myFormData).toPromise().then((res) => {

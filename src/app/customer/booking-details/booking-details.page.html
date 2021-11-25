@@ -35,7 +35,7 @@
   </ion-card>
   <h2>Dealer Details</h2>
   <ion-card *ngIf="dealer_id">
-    <ion-title color="success">Accepted By :</ion-title>
+    <ion-title color="success" align="right">Accepted</ion-title>
     <ion-item *ngFor="let record of dealer_record">
       <ion-thumbnail slot="start">
         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
@@ -43,8 +43,11 @@
       <ion-label>
         <ion-title >{{ record.name }}</ion-title>
         <ion-title >{{ record.mobile }}</ion-title>
+
       </ion-label>
     </ion-item>
+    <p style="padding: 10px;"><ion-icon name="pin"></ion-icon>L111-LDA Colony,Near Bangla Bajaar,Ashiyana, Lucknow-226012</p>
+    <!-- <div id="chartdiv" style="width: 100%; height: 400px" ></div> -->
   </ion-card>
   <ion-card *ngIf="!dealer_id">
     <ion-item>
@@ -74,3 +77,4 @@
 <ion-footer>
   <ion-button  color="primary" shape="round" expand="block" (click)="cancelBooking()">Cancel Booking</ion-button>
 </ion-footer>
+

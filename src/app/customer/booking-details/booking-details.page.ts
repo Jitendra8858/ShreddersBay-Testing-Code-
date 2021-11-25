@@ -38,6 +38,7 @@ export class BookingDetailsPage implements OnInit {
     this.userService.getOrdersById(this.bId).toPromise().then((res) => {
       this.data = res;
       this.dealer_id=this.data[0].dealer_id;
+      // alert(this.dealer_id);
       this.getUserById(this.dealer_id);
       console.log(this.data);
     }).catch((err) => {
