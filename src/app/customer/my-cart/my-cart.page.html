@@ -13,7 +13,7 @@
     <ion-card *ngFor="let item of data">
       <ion-item>
         <ion-thumbnail slot="start">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          <img src="http://localhost:8000/ShreddersBay%20Project/admin/upload/{{item.filename}}">
         </ion-thumbnail>
         <ion-label>
           <ion-title>{{item.p_name}}</ion-title>
@@ -21,7 +21,7 @@
           <p color="medium">{{item.sub_name}}</p>
           <p>Weight {{item.total_weight}} Kg</p>
           <ion-buttons color="medium" (click)="removeCart(item.cart_id)">
-            <ion-icon name="trash"></ion-icon>
+            <ion-icon name="trash" color="danger"></ion-icon>
           </ion-buttons>
         </ion-label>
       </ion-item>
@@ -43,6 +43,6 @@
   <ion-item class="item-text-wrap" style="color:blue;">*This is the approximate priceas per your input, payable amount
     will be as per the dealer's input
   </ion-item>
-  <ion-button type="submit" color="primary" shape="round" expand="block" (click)="placeRequest()">Place Request
+  <ion-button type="submit" color="warning" shape="round" expand="block" (click)="addAddr()">Continue
   </ion-button>
 </ion-footer>

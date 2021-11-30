@@ -124,3 +124,9 @@ ion-item.selected {
   --color: var(--ion-color-primary);
 }
 
+// style for ion-icon
+ion-icon[ng-reflect-disabled="true"] {
+  color: #FAFBFC;
+  pointer-events: none;
+}
+

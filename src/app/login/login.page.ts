@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { APIService } from '../services/api.service';
-import * as bcrypt from 'bcryptjs';
 import { UserApiService } from '../services/user-api.service';
 
 @Component({
@@ -16,6 +14,7 @@ export class LoginPage implements OnInit {
   role: any;
   errorMsg: string;
   successMsg: string;
+  isSubmitted: boolean;
 
   constructor(
     private userService: UserApiService,
@@ -26,16 +25,25 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.role = this.activateRoute.snapshot.params.role;
+    this.isSubmitted = false;
     this.loginForm = this.fb.group({
-      email: [''],
-      password: [''],
+      email: ['',[Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      password: ['',[Validators.required]],
+
     });
   }
+
+  get errorControl() {
+    return this.loginForm.controls;
+  }
+
   submitForm()
   {
+    this.isSubmitted = true;
     if (!this.loginForm.valid) {
+      console.log('Please provide all the required values!')
       return false;
-    } else {
+    }else {
        // Initialize Params Object
     var myFormData = new FormData();
     // Begin assigning parameters

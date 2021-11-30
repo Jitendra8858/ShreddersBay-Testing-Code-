@@ -12,7 +12,7 @@ export class AppComponent {
     { title: 'My Booking', url: 'customer-home/customer-home/my-booking', icon: 'book' },
     { title: 'My Account', url: 'customer-home/customer-home/my-account', icon: 'person' },
     { title: 'Notifications', url: 'notifications', icon: 'mail' },
-    { title: 'Rate the App', url: '#', icon: 'star' },
+    { title: 'Rate the App', url: 'rate-the-app', icon: 'star' },
     { title: 'FAQ', url: 'faqs', icon: 'help' },
     { title: 'Terms & Conditions', url: 'terms-conditions', icon: 'create' },
     { title: 'Contact Us', url: 'contact-us', icon: 'call' },

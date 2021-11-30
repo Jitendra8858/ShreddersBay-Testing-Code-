@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { formatDate } from '@angular/common';
 import { UserApiService } from 'src/app/services/user-api.service';
 @Component({
   selector: 'app-my-cart',
@@ -16,7 +15,6 @@ export class MyCartPage implements OnInit {
   data: any;
   message: any;
   approxPrice: any;
-  tRec: any;
   dateTime: any;
   successMsg: string;
   errorMsg: string;
@@ -30,8 +28,7 @@ export class MyCartPage implements OnInit {
   constructor(
     private userService: UserApiService,
     public fb: FormBuilder,
-    private router: Router,
-    private menu: MenuController) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
@@ -58,8 +55,7 @@ export class MyCartPage implements OnInit {
         this.prodId = value.prod_id;
         this.weight = value.total_weight;
         this.cartId = value.cart_id;
-        this.filename = value.cart_id;
-         alert(this.filename);
+        this.filename = value.file;
       });
     }).catch((err) => {
       console.log('Your Cart Is Empty'+err);
@@ -67,35 +63,12 @@ export class MyCartPage implements OnInit {
   }
 
 
-  placeRequest() {
-    this.dateTime = this.dateTime;
-    const dValue = new Date();
-    this.bookingDate = formatDate(dValue, 'yyyy-MM-dd', 'en-US');
-     // Initialize Params Object
-     var myFormData = new FormData();
-     // Begin assigning parameters
-     myFormData.append('user_id',this.userId);
-     myFormData.append('prod_id', this.prodId);
-     myFormData.append('approx_weight', this.weight);
-     myFormData.append('booking_date',this.bookingDate);
-     myFormData.append('schedule_date', this.dateTime);
-     myFormData.append('approx_price', this.approxPrice);
-     myFormData.append('filename', this.filename);
-
-    //console.log( this.orderDetails);
-    this.userService.createOrder(myFormData).toPromise().then((res) => {
-      alert('Request Placed Successfully');
-      this.successMsg = 'Request Placed Successfully';
-      this.router.navigate(['customer-home/customer-home/my-booking']);
-    }).catch((err) => {
-      alert('Error' + err);
-      console.log('Error' + err.error);
-      this.errorMsg = 'Error' + err;
-    });
+  addAddr() {
+    this.router.navigate(['my-addr', {schedule_date: this.dateTime}]);
   }
 
   plus(){
-    this.router.navigate(['customer/scrap-items']);
+    this.router.navigate(['customer-home/customer-home/scrap-items']);
   }
 
 

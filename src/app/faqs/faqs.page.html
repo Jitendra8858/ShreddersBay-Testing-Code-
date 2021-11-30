@@ -14,12 +14,10 @@
 </ion-header>
 
 <ion-content>
-<ion-list>
-  <ion-item class="lst" *ngFor="let item of data" >
-    <ion-title> {{ item.question }}</ion-title>
-    <br/>
-    <h3> {{ item.answer }}</h3>
-  </ion-item>
-
+  <ion-list>
+    <ion-item ng-click="showOrDont($index)" *ngFor="let item of faqArr">
+      {{ item.question }}
+      <p ng-show="show == $index" class="item-icon-accordian inset">A: {{item.answer}}</p>
+    </ion-item>
   </ion-list>
 </ion-content>

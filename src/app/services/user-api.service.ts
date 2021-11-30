@@ -6,6 +6,7 @@ const userURL = 'http://localhost:8000/SHREDDERSBAY_API/API/user_api.php?action=
 const prodURL = 'http://localhost:8000/SHREDDERSBAY_API/API/product_api.php?action=';
 const cartURL = 'http://localhost:8000/SHREDDERSBAY_API/API/cart_api.php?action=';
 const orderURL = 'http://localhost:8000/SHREDDERSBAY_API/API/orders_api.php?action=';
+const addrURL = 'http://localhost:8000/SHREDDERSBAY_API/API/address_api.php?action=';
 
 @Injectable({
   providedIn: 'root'
@@ -105,4 +106,10 @@ export class UserApiService {
   getAllOrders(): Observable<any> {
     return this.http.get(`${orderURL}select`);
   }
+
+  //select Address By user Id
+  getAddress(id: number): Observable<any> {
+    return this.http.get(`${addrURL}AddrByUserId&user_id=${id}`);
+  }
+
 }

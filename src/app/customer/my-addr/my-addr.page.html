@@ -1,0 +1,34 @@
+<ion-header color="primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Address</ion-title>
+    <ion-buttons slot="end" (click)="plus()">
+      <ion-button expand="block" class="logins" slot="bottom"></ion-button>
+      <ion-icon name="add" size="large"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-radio-group (ionChange)="address($event)">
+      <ion-item *ngFor="let item of data">
+        <ion-label>HOME<br />{{ name }} <br />
+          {{ item.address }}
+        </ion-label>
+        <ion-radio  value="{{item.addr_id}}"></ion-radio>
+        <ion-buttons slot="end">
+          <ion-icon name="pencil" color="primary"></ion-icon>
+          <ion-icon name="trash" color="danger"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+<ion-button expand="block" shape="round" class="login" slot="bottom" (click)="placeRequest()">Place Request
+</ion-button>
+
+
+

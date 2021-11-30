@@ -8,6 +8,7 @@ import { APIService } from '../services/api.service';
   styleUrls: ['./my-profile.page.scss'],
 })
 export class MyProfilePage implements OnInit {
+  [x: string]: any;
   profileForm: FormGroup;
   id: any;
   userData: any;
@@ -20,10 +21,13 @@ export class MyProfilePage implements OnInit {
 
   ngOnInit() {
     this.userData=JSON.parse(localStorage.getItem('userDetails'));
-    this.id=this.userData.id;
+    this.id=this.userData[0].id;
+    this.name=this.userData[0].name;
+    this.mobile=this.userData[0].mobile;
+    this.email=this.userData[0].email;
     //alert(this.userData);
     this.profileForm = this.fb.group({
-      name: [''],
+      name: [this.name],
       mobile: [''],
       email: ['']
     });

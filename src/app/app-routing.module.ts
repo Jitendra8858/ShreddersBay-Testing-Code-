@@ -56,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: 'my-addr',
-    loadChildren: () => import('./my-addr/my-addr.module').then( m => m.MyAddrPageModule)
+    loadChildren: () => import('./customer/my-addr/my-addr.module').then( m => m.MyAddrPageModule)
   },
   {
     path: 'settings',
@@ -89,18 +89,27 @@ const routes: Routes = [
   {
     path: 'dealer-booking',
     loadChildren: () => import('./dealer/dealer-booking/dealer-booking.module').then( m => m.DealerBookingPageModule)
-  },  {
+  },
+  {
     path: 'order-details',
     loadChildren: () => import('./dealer/order-details/order-details.module').then( m => m.OrderDetailsPageModule)
   },
-
-
-
-
-
-
-
-
+  {
+    path: 'rate-the-app',
+    loadChildren: () => import('./customer/rate-the-app/rate-the-app.module').then( m => m.RateTheAppPageModule)
+  },
+  {
+    path: 'faqs',
+    loadChildren: () => import('./faqs/faqs.module').then( m => m.FaqsPageModule)
+  },
+  {
+    path: 'contact-us',
+    loadChildren: () => import('./contact-us/contact-us.module').then( m => m.ContactUsPageModule)
+  },
+  {
+    path: 'terms-conditions',
+    loadChildren: () => import('./terms-conditions/terms-conditions.module').then( m => m.TermsConditionsPageModule)
+  },
 ];
 
 @NgModule({

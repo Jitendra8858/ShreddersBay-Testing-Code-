@@ -118,6 +118,7 @@ export class ScrapItemsPage implements OnInit {
       console.log(myFormData);
       this.userService.createCart(myFormData).toPromise().then((res) => {
         alert('Item Added Successfully');
+
         this.successMsg = 'Item Added Successfully';
         this.router.navigate(['customer-home/customer-home/my-cart']);
       }).catch((err) => {

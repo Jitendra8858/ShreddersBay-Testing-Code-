@@ -29,6 +29,9 @@
     <div *ngSwitchCase="'Current'">
       <ion-card *ngFor="let item of currentOrder" (click)="showBookingDetails(item.booking_id)">
         <ion-item>
+          <ion-buttons *ngIf="item.dealer_id>0" slot="end">
+            <ion-icon name="checkmark"  color="success" size="large"></ion-icon>
+          </ion-buttons>
           <ion-label>
             <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
             <ion-label>{{item.p_name}}</ion-label>

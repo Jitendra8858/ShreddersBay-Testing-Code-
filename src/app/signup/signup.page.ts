@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from '../services/api.service';
 import { UserApiService } from '../services/user-api.service';
@@ -13,6 +13,7 @@ import { UserApiService } from '../services/user-api.service';
 export class SignupPage implements OnInit {
   signupForm: FormGroup;
   role: any;
+  isSubmitted: boolean;
 
 
 
@@ -27,17 +28,23 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
     this.role = this.activateRoute.snapshot.params.role;
+    this.isSubmitted = false;
     this.signupForm = this.fb.group({
      role: [this.role],
-      name: [''],
-      email: [''],
-      password: [''],
-      confPass: [''],
-      mobile: [''],
+      name: ['',[Validators.required, Validators.minLength(2)]],
+      email: ['',[Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      password: ['',[Validators.required, Validators.minLength(8), Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]],
+      confPass: ['',[Validators.required, Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]],
+      mobile: ['',[Validators.required, Validators.pattern('^[0-9].{9,11}$')]],
     });
 
     this.getAll();
   }
+  get errorControl() {
+    return this.signupForm.controls;
+  }
+
+
 
   // submitForm() {
   //   //console.log(this.signupForm.value);
@@ -54,7 +61,9 @@ export class SignupPage implements OnInit {
   // }
 
   insertUser(){
+    this.isSubmitted = true;
     if (!this.signupForm.valid) {
+      console.log('Please provide all the required values!')
       return false;
     } else {
 

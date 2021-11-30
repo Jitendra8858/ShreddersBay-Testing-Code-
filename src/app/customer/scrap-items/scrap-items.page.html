@@ -2,7 +2,8 @@
   <ion-toolbar color="primary">
     <ion-buttons>
       <ion-menu-button slot="start"></ion-menu-button>
-      <ion-title align="center">Scrap Items</ion-title>
+      <ion-title>Scrap Items</ion-title>
+      <ion-icon name="notifications" class="padding-right" slot="start"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -26,16 +27,18 @@
 
     <ion-list>
       <ion-radio-group>
-        <ion-item>
-          <ion-label>Qty</ion-label>
-          <ion-radio value="qty"></ion-radio>
-          <ion-label>Weight(in Kg)</ion-label>
-          <ion-radio value="wei" checked></ion-radio>
+        <ion-item *ngIf="!subProduct">
+          <ion-label>Weight</ion-label>
+          <ion-radio slot="start" value="female" ></ion-radio>
+        </ion-item>
+
+        <ion-item *ngIf="subProduct">
+          <ion-label>Weight</ion-label>
+          <ion-radio slot="start" value="female" class="radio-checked"></ion-radio>
         </ion-item>
       </ion-radio-group>
       <ion-item lines="full">
-        <ion-label position="floating">Weight</ion-label>
-        <ion-input type="number" formControlName="weight" required></ion-input>
+        <ion-input type="number" formControlName="weight" placeholder="Enter Weight In Kg" required></ion-input>
       </ion-item>
       <ion-label>Price: {{price}} per Kg</ion-label>
       <ion-item lines="full">
