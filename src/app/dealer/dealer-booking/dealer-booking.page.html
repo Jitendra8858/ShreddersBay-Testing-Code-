@@ -30,7 +30,9 @@
       <ion-card *ngFor="let item of currentOrder" (click)="showBookingDetails(item.booking_id)">
         <ion-item>
           <ion-label>
-            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <p style="color:rgba(0,94,120,1);  font-size: 16px;  font-weight: bold;  ">
+              Booking Id : {{item.booking_id}}
+            </p>
             <ion-label>{{item.p_name}}</ion-label>
             <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
@@ -46,7 +48,9 @@
       <ion-card *ngFor="let item of compOrder">
         <ion-item>
           <ion-label>
-            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <p style="color:rgba(0,94,120,1);  font-size: 16px;  font-weight: bold;  ">
+              Booking Id : {{item.booking_id}}
+            </p>
             <ion-label>{{item.p_name}}</ion-label>
             <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
@@ -62,7 +66,10 @@
       <ion-card *ngFor="let item of cancelOrder">
         <ion-item>
           <ion-label>
-            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <p style="color:rgba(0,94,120,1);  font-size: 16px;  font-weight: bold;  ">
+              Booking Id : {{item.booking_id}}
+            </p>
+
             <ion-label>{{item.p_name}}</ion-label>
             <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>

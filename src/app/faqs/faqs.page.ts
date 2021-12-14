@@ -15,6 +15,8 @@ export class FaqsPage implements OnInit {
   list: any;
   faqArr: any;
   show: any;
+  user_id: any;
+  userDetails: any;
   constructor(
     private userService: UserApiService,
     private router: Router,
@@ -22,6 +24,10 @@ export class FaqsPage implements OnInit {
 
 
   ngOnInit() {
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userDetails ==null){
+      this.router.navigate(['frontend']);
+    }
 
     this.faqArr = [
       {

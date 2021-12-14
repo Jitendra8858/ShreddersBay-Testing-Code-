@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { APIService } from 'src/app/services/api.service';
 import { UserApiService } from 'src/app/services/user-api.service';
 
@@ -19,17 +19,22 @@ export class BookingDetailsPage implements OnInit {
   role: any;
   dealer_id: any;
   dealer_record: any;
+  confirm: any;
   constructor(
     private userService: UserApiService,
     private apiService: APIService,
     public fb: FormBuilder,
     private activateRouter: ActivatedRoute,
     private router: Router,
-    private menu: MenuController
+    private menu: MenuController,
+    private alertController: AlertController
   ) { }
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-     this.userId = this.userDetails[0].id;
+    if(this.userDetails ==null){
+      this.router.navigate(['frontend']);
+    }
+    this.userId = this.userDetails[0].id;
     // alert(this.role);
     this.bId = this.activateRouter.snapshot.params.bookingId;
     this.getOrdersById();
@@ -45,6 +50,9 @@ export class BookingDetailsPage implements OnInit {
       console.log('Error' + err);
     });
   }
+
+
+
 
   getUserById(dealer_id: number) {
     this.userService.getUserById(dealer_id).toPromise().then((res) => {
@@ -65,14 +73,21 @@ export class BookingDetailsPage implements OnInit {
   }
 
   cancelBooking() {
-    if (confirm('Are You Sure You Want To Cancel Booking?')) {
-      this.userService.cancelBooking(this.bId).toPromise().then((res) => {
-        this.data = res;
-        // console.log(this.data);
-        this.router.navigate(['customer-home/customer-home/my-booking']);
-      }).catch((err) => {
-        console.log('Error' + err.error);
-      });
-    }
+    this.userService.Confirm().then((res)=>{
+      this.confirm=res;
+      if( this.confirm ) {
+          this.userService.cancelBooking(this.bId).toPromise().then((res) => {
+            this.data = res;
+            // console.log(this.data);
+            this.router.navigate(['customer-home/customer-home/my-booking']);
+          }).catch((err) => {
+            console.log('Error' + err.error);
+          });
+        }
+    }).catch((err)=>
+    {
+      console.log(err);
+    })
+
   }
 }

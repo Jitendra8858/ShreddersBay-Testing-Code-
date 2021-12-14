@@ -11,6 +11,7 @@ export class MyAccountPage implements OnInit {
   userData: any;
   name: any;
   email: any;
+  filename: any;
   constructor(
     private apiService: APIService,
     private router: Router,
@@ -18,11 +19,15 @@ export class MyAccountPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userData=JSON.parse(localStorage.getItem('userDetails'));
-    this.id=this.userData.id;
-    this.name=this.userData.name;
-    this.email=this.userData.email;
-    //alert(this.userData);
+    this.userData = JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userData ==null){
+      this.router.navigate(['frontend']);
+    }
+    this.id=this.userData[0].id;
+    this.name=this.userData[0].name;
+    this.email=this.userData[0].email;
+    this.filename=this.userData[0].profile;
+   // alert(this.filename);
   }
   myProfile(){
     this.router.navigate(['my-profile']);

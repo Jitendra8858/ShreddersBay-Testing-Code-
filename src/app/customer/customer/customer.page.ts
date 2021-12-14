@@ -16,6 +16,8 @@ export class CustomerPage implements OnInit {
   role: any;
   data: any;
   list: any;
+  userDetails: any;
+  userId: any;
 
 
   constructor(
@@ -24,6 +26,11 @@ export class CustomerPage implements OnInit {
     private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userDetails ==null){
+      this.router.navigate(['frontend']);
+    }
+    this.userId = this.userDetails[0].id;
     this.getProducts();
 
   }

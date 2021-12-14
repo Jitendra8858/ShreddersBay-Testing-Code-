@@ -13,6 +13,7 @@ export class OrderDetailsPage implements OnInit {
   userDetails: any;
   bId: any;
   data: any;
+  user_id: any;
 
   constructor(
     private userService: UserApiService,
@@ -23,8 +24,13 @@ export class OrderDetailsPage implements OnInit {
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userDetails ==null){
+      this.router.navigate(['frontend']);
+    }
+    this.user_id = this.userDetails[0].id;
     // this.role = this.userDetails[0].user_role;
     // alert(this.role);
+
     this.bId = this.activateRouter.snapshot.params.bookingId;
     this.getOrdersById();
   }

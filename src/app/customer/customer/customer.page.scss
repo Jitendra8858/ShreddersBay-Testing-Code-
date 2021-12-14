@@ -1,20 +1,18 @@
 ion-col {
-    border: solid 1px grey;
-    // border-bottom-style: none;
-    // border-right-style: none;
     padding: 1.5ch;
+
   }
 
-  ion-col:last-child {
-    border-right: solid 1px grey;
-  }
 
-  row:last-child .col {
-    border-bottom: solid 1px grey;
-  }
   ion-item{
-    --background: rgb(87, 191, 233);
+    --background: rgba(0,94,120,1);
     line-height: 7ch;
     color: white;
     font-size:3ch;
+  }
+
+  .img1{
+    border-radius: 20%;
+    height:150px;
+    width: 100%;
   }

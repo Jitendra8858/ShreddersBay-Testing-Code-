@@ -14,17 +14,24 @@ export class DealerPage implements OnInit {
   orders: any;
   userDetails: any;
   user_id: any;
-
-  constructor(
-    private userService: UserApiService,
-    private router: Router,
-    private activateRoute: ActivatedRoute) { }
+  slider: any;
+  slideOptsOne: any;
+  constructor(private userService: UserApiService,
+    private router: Router) { }
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userDetails ==null){
+      this.router.navigate(['frontend']);
+    }
     this.user_id = this.userDetails[0].id;
     this.getProducts();
     this.availableBooking();
+    this.slideOptsOne = {
+      initialSlide: 0,
+      slidesPerView: 1,
+      autoplay:true
+     };
   }
 
   getProducts() {
@@ -32,7 +39,7 @@ export class DealerPage implements OnInit {
     this.userService.getProducts().toPromise().then((res) => {
       //console.log(res);
       this.data = res;
-      this.list = this.data.slice(0, 4);
+      //this.list = this.data.slice(0, 4);
     }).catch((err) => {
       console.log('Error' + err);
     });
@@ -44,7 +51,7 @@ export class DealerPage implements OnInit {
       console.log(res);
       this.orders = res;
       //this.orders = this.orders;
-      this.orders=this.orders.slice(0,4);
+      this.orders=this.orders.slice(0,3);
     }).catch((err) => {
       console.log('Error' + err);
     });

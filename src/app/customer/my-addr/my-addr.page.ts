@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { APIService } from '../../services/api.service';
 import { UserApiService } from '../../services/user-api.service';
 @Component({
@@ -29,10 +30,15 @@ export class MyAddrPage implements OnInit {
     public userService: UserApiService,
     private router: Router,
     private activateRoute: ActivatedRoute,
+    private toastCtrl: ToastController
   ) { }
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('userDetails'));
+     this.dateTime = this.activateRoute.snapshot.params.schedule_date;
+    if(this.userData ==null){
+      this.router.navigate(['frontend']);
+    }
     this.user_id = this.userData[0].id;
     this.name = this.userData[0].name;
     this.email = this.userData[0].email;
@@ -40,6 +46,15 @@ export class MyAddrPage implements OnInit {
   }
   notifications() {
     this.router.navigate(['notifications']);
+  }
+
+  async openToast(message) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      cssClass: 'toast-custom-class',
+    });
+    toast.present();
   }
 
   getAddress() {
@@ -56,7 +71,7 @@ export class MyAddrPage implements OnInit {
   }
 
   placeRequest() {
-    this.dateTime = this.activateRoute.snapshot.params.schedule_date;
+
     const dValue = new Date();
     this.bookingDate = formatDate(dValue, 'yyyy-MM-dd', 'en-US');
     // Initialize Params Object
@@ -81,11 +96,11 @@ export class MyAddrPage implements OnInit {
       myFormData.append('addr_id', this.addr_id);
       // console.log( this.orderDetails);
       this.userService.createOrder(myFormData).toPromise().then((res) => {
-        alert('Request Placed Successfully');
-        this.successMsg = 'Request Placed Successfully';
+        this.openToast('Request Placed Successfully');
+       // this.successMsg = 'Request Placed Successfully';
         this.router.navigate(['customer-home/customer-home/my-booking']);
       }).catch((err) => {
-        alert('Error' + err);
+        this.openToast(err);
         console.log('Error' + err.error);
         this.errorMsg = 'Error' + err;
       });

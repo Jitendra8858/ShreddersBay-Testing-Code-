@@ -6,6 +6,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserApiService } from 'src/app/services/user-api.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-scrap-items',
@@ -40,7 +41,8 @@ export class ScrapItemsPage implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private camera: Camera,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastCtrl: ToastController
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,9 @@ export class ScrapItemsPage implements OnInit {
     this.file = '';
     this.price = '';
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userDetails ==null){
+      this.router.navigate(['frontend']);
+    }
     this.userId = this.userDetails[0].id;
     // console.log(this.userDetails[0]);
     this.submitForm = this.fb.group({
@@ -70,6 +75,16 @@ export class ScrapItemsPage implements OnInit {
     });
 
   }
+
+  async openToast(message) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      cssClass: 'toast-custom-class',
+    });
+    toast.present();
+  }
+
 
   checkValue(value) {
     console.log(value.detail.value);
@@ -117,10 +132,9 @@ export class ScrapItemsPage implements OnInit {
 
       console.log(myFormData);
       this.userService.createCart(myFormData).toPromise().then((res) => {
-        alert('Item Added Successfully');
-
         this.successMsg = 'Item Added Successfully';
         this.router.navigate(['customer-home/customer-home/my-cart']);
+        this.openToast(this.successMsg);
       }).catch((err) => {
         alert('Error' + err);
         console.log('Error' + err);

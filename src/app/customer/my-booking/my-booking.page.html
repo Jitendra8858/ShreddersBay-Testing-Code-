@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
@@ -7,23 +7,24 @@
     <ion-buttons slot="end">
       <ion-icon name="notifications" size="large"></ion-icon>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
+<!-- Segment -->
+<ion-segment (ionChange)="segmentChanged($event)" color="secondary" [(ngModel)]="segment">
+  <ion-segment-button value="Current">
+    <ion-label color="primary">Current</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="Complete">
+    <ion-label color="success">Complete</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="Cancel">
+    <ion-label color="danger">Cancel</ion-label>
+  </ion-segment-button>
+</ion-segment>
+<ion-content >
 
-<ion-content>
 
-  <!-- Segment -->
-  <ion-segment (ionChange)="segmentChanged($event)" color="secondary" [(ngModel)]="segment">
-    <ion-segment-button value="Current">
-      <ion-label color="primary">Current</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Complete">
-      <ion-label color="success">Complete</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Cancel">
-      <ion-label color="danger">Cancel</ion-label>
-    </ion-segment-button>
-  </ion-segment>
 
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'Current'">
@@ -33,7 +34,7 @@
             <ion-icon name="checkmark"  color="success" size="large"></ion-icon>
           </ion-buttons>
           <ion-label>
-            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <h2><b>Booking Id: {{item.booking_id}}</b></h2>
             <ion-label>{{item.p_name}}</ion-label>
             <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
@@ -49,7 +50,7 @@
       <ion-card *ngFor="let item of currentOrder" (click)="showBookingDetails(item.booking_id)">
         <ion-item>
           <ion-label>
-            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <h2><b>Booking Id: {{item.booking_id}}</b></h2>
             <ion-label>{{item.p_name}}</ion-label>
             <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>
@@ -65,7 +66,7 @@
       <ion-card *ngFor="let item of cancelOrder">
         <ion-item>
           <ion-label>
-            <ion-title color="primary">Booking Id: {{item.booking_id}}</ion-title>
+            <h2><b>Booking Id: {{item.booking_id}}</b></h2>
             <ion-label>{{item.p_name}}</ion-label>
             <p>{{item.sub_name}}</p>
             <p slot="end">Approx Price: {{item.approx_price | currency:'INR':true}}</p>

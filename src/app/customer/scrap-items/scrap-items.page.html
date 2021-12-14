@@ -3,13 +3,14 @@
     <ion-buttons>
       <ion-menu-button slot="start"></ion-menu-button>
       <ion-title>Scrap Items</ion-title>
-      <ion-icon name="notifications" class="padding-right" slot="start"></ion-icon>
+      <ion-icon name="notifications" [routerLink]="['/notifications']"  class="padding-right" slot="start"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="submitForm" (ngSubmit)="submitForms()">
+<ion-content >
+  <img src="../../../assets/img/cart.jpg" height="150px;" width="100%"/>
+  <form [formGroup]="submitForm" (ngSubmit)="submitForms()" class="ion-padding ion-text-center">
     <ion-item lines="full" (ionChange)="checkValue($event)">
       <ion-label>Metal Type</ion-label>
       <ion-select>

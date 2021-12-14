@@ -21,8 +21,11 @@ export class ChangePassPage implements OnInit {
 
   ngOnInit() {
     this.userData=JSON.parse(localStorage.getItem('userDetails'));
-    this.id=this.userData.id;
-    this.pass=this.userData.password;
+    if(this.userData ==null){
+      this.router.navigate(['frontend']);
+    }
+    this.id=this.userData[0].id;
+    this.pass=this.userData[0].password;
     //alert(this.userData);
     this.passForm = this.fb.group({
       oldPass: [''],

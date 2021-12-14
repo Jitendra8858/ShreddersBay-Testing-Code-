@@ -1,26 +1,21 @@
-  <!-- <ion-header class="ion-no-border">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref=""></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header> -->
 
-  <ion-content class="background" >
-    <div class="ion-text-center" style="margin-top: 30%;">
-      <img alt="logo" height="150"  src="../../assets/img/logo.webp" />
-    </div>
-    <h2 class="ion-text-center" style="margin-top: 20%;">User Role Selection</h2>
+<ion-header> </ion-header>
 
-    <div class="ion-padding">
-      <ion-button expand="block" shape="round" color="light" (click)="home(1)"><b>Dealer</b></ion-button>
+<ion-content class="ion-padding ion-text-center">
+  <div class="container">
+    <div class="page-header">
+      <h1>Welcome to Shredders Bay</h1>
+      <h3>Explore Us</h3>
     </div>
-    <div class="ion-padding">
-      <ion-button expand="block" shape="round" color="light" (click)="home(0)"><b>Customer</b></ion-button>
+    <img src="assets/welcome.png" />
+
+    <div class="button-container">
+      <ion-button expand="block" shape="round" class="main-button" (click)="home(1)"
+        >Dealer</ion-button
+      >
+      <ion-button expand="block" shape="round" class="main-button" (click)="home(0)"
+        >Customer</ion-button
+      >
     </div>
-  </ion-content>
-  <!-- <ion-footer>
-    <div class="ion-text-center">
-      Loading <ion-spinner name="dots"></ion-spinner>
-    </div>
-  </ion-footer> -->
+  </div>
+</ion-content>

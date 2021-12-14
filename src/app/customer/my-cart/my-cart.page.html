@@ -3,35 +3,41 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title align="center">My Cart</ion-title>
+    <ion-title>My Cart</ion-title>
 
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
   <ion-list *ngIf="data">
     <ion-card *ngFor="let item of data">
       <ion-item>
+        <ion-icon name="close" slot="end" (click)="removeCart(item.cart_id)" color="danger"></ion-icon>
         <ion-thumbnail slot="start">
           <img src="http://localhost:8000/ShreddersBay%20Project/admin/upload/{{item.filename}}">
         </ion-thumbnail>
         <ion-label>
-          <ion-title>{{item.p_name}}</ion-title>
-          <ion-title slot="end">{{item.total_price | currency:'INR':true}}</ion-title>
+          {{item.p_name}} &nbsp;&nbsp;&nbsp;<span slot="end" style="font-size: 18px;"><b>{{item.total_price | currency:'INR':true}}</b></span><br/>
           <p color="medium">{{item.sub_name}}</p>
-          <p>Weight {{item.total_weight}} Kg</p>
-          <ion-buttons color="medium" (click)="removeCart(item.cart_id)">
-            <ion-icon name="trash" color="danger"></ion-icon>
-          </ion-buttons>
+         <p>Weight {{item.total_weight}} Kg</p>
         </ion-label>
       </ion-item>
     </ion-card>
-  </ion-list>
-  <ion-item *ngIf="!approxPrice">
-    <ion-title>Your Cart Is Empty</ion-title>
+
+  <ion-item *ngIf="!approxPrice" class="ion-padding ion-text-center" >
+    <div style="margin-top: 25%;">
+      <img src="../../../assets/img/cartimg.png" />
+      <div class="page header">
+        <h1>Your Cart Is Empty</h1>
+        <ion-button  type="submit" color="warning" shape="round" expand="block" (click)="plus()">Please Add Scrap Item</ion-button>
+        </div>
+
+    </div>
   </ion-item>
+
+</ion-list>
 </ion-content>
-<ion-footer *ngIf="approxPrice">
+<ion-footer *ngIf="approxPrice" class="ion-padding">
   <ion-item>
     <ion-label style="border-bottom: 1px solid black;">Schedule Date</ion-label>
     <ion-input type="datetime-local" format="DD.MM.YYYY" [(ngModel)]="dateTime"></ion-input>
@@ -40,9 +46,9 @@
     <ion-label>Approx Price</ion-label>
     <ion-title>{{approxPrice | currency:'INR':true}}</ion-title>
   </ion-item>
-  <ion-item class="item-text-wrap" style="color:blue;">*This is the approximate priceas per your input, payable amount
+  <ion-text>*This is the approximate priceas per your input, payable amount
     will be as per the dealer's input
-  </ion-item>
-  <ion-button type="submit" color="warning" shape="round" expand="block" (click)="addAddr()">Continue
+  </ion-text>
+  <ion-button type="submit"  shape="round" expand="block" (click)="addAddr()">Continue
   </ion-button>
 </ion-footer>

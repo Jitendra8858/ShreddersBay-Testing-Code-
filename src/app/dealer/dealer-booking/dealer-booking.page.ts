@@ -23,6 +23,9 @@ export class DealerBookingPage implements OnInit {
   ngOnInit() {
     this.segment= 'Current';
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userDetails ==null){
+      this.router.navigate(['frontend']);
+    }
     this.userId = this.userDetails[0].id;
     //alert(this.userId);
     this.getCurrentOrders();

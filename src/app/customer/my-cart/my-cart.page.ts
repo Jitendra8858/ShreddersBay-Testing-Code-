@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { UserApiService } from 'src/app/services/user-api.service';
 @Component({
   selector: 'app-my-cart',
@@ -28,20 +28,37 @@ export class MyCartPage implements OnInit {
   constructor(
     private userService: UserApiService,
     public fb: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private toastCtrl: ToastController
+    ) { }
 
   ngOnInit() {
-    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-    this.userId = this.userDetails[0].id;
-    this.getCartById();
 
+
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userDetails ==null){
+      this.router.navigate(['frontend']);
+    }
+    this.userId = this.userDetails[0].id;
+   // alert(this.userDetails);
+   this.getCartById();
+  }
+
+  async openToast(message) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      cssClass: 'toast-custom-class',
+    });
+    toast.present();
   }
 
   removeCart(cart_id) {
     this.userService.deleteItem(cart_id).toPromise().then((res) => {
       this.message = res;
-      alert(this.message.message);
+      this.openToast(this.message.message);
       location.reload();
+
     }).catch((err) => {
       console.log('Error' + err);
     });

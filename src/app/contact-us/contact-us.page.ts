@@ -7,6 +7,8 @@ import { APIService } from '../services/api.service';
   styleUrls: ['./contact-us.page.scss'],
 })
 export class ContactUsPage implements OnInit {
+  userData: any;
+  id: any;
 
   constructor(
     public apiService: APIService,
@@ -15,6 +17,11 @@ export class ContactUsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userData=JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userData ==null){
+      this.router.navigate(['frontend']);
+    }
+    this.id=this.userData[0].id;
   }
   notifications(){
     this.router.navigate(['notifications']);

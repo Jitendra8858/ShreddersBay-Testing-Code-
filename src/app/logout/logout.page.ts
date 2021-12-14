@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-logout',
@@ -13,14 +14,24 @@ export class LogoutPage implements OnInit {
     private apiService: APIService,
     private router: Router,
     public fb: FormBuilder,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private toastCtrl: ToastController,
   ) { }
 
   ngOnInit() {
-    sessionStorage.removeItem('userDetails');
-    sessionStorage.clear();
-    this.router.navigate(['']);
+    localStorage.removeItem('userDetails');
+    localStorage.clear();
+    this.openToast();
+    this.router.navigate(['/frontend']);
+  }
 
+  async openToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Logout SuccessFully...',
+      duration: 2000,
+      cssClass: 'toast-custom-class',
+    });
+    toast.present();
   }
 
 }

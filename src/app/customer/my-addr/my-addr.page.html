@@ -4,9 +4,8 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>My Address</ion-title>
-    <ion-buttons slot="end" (click)="plus()">
-      <ion-button expand="block" class="logins" slot="bottom"></ion-button>
-      <ion-icon name="add" size="large"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-icon name="add" [routerLink]="['/add-address']" size="large"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -27,7 +26,7 @@
     </ion-radio-group>
   </ion-list>
 </ion-content>
-<ion-button expand="block" shape="round" class="login" slot="bottom" (click)="placeRequest()">Place Request
+<ion-button expand="block" *ngIf="dateTime" shape="round" class="login" slot="bottom" (click)="placeRequest()">Place Request
 </ion-button>
 
 

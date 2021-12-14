@@ -85,6 +85,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'available-booking',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../available-booking/available-booking.module').then(m => m.AvailableBookingPageModule)
+          },
+        ]
+      },
+      {
         path: '',
         redirectTo: 'dealer-home/dealer',
         pathMatch: 'full'

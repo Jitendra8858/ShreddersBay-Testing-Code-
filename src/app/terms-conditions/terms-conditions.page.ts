@@ -9,11 +9,18 @@ import { APIService } from '../services/api.service';
 export class TermsConditionsPage implements OnInit {
   role: any;
   data: any;
+  userData: any;
+  id: any;
   constructor(
     private apiService: APIService,
     private router: Router,
     private activateRoute: ActivatedRoute) { }
   ngOnInit() {
+    this.userData=JSON.parse(localStorage.getItem('userDetails'));
+    if(this.userData ==null){
+      this.router.navigate(['frontend']);
+    }
+    this.id=this.userData[0].id;
     this.getTermsConditions();
 
   }

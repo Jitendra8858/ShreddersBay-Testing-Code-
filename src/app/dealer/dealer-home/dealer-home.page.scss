@@ -50,7 +50,7 @@ ion-menu.md ion-item {
 }
 
 ion-menu.md ion-item.selected {
-  --background: #0d0df3;
+  --background: rgba(0,94,120,1);;
   color:#fff;
 }
 
@@ -61,7 +61,7 @@ ion-menu.md ion-item.selected ion-icon {
 }
 
 ion-menu.md ion-item ion-icon {
-  color: blue;
+  color: rgba(0,94,120,1);
 }
 
 ion-menu.md ion-item ion-label {
@@ -105,10 +105,7 @@ ion-menu.ios ion-note {
   padding-left: 16px;
   padding-right: 16px;
 }
-ion-header{
-    background-color: blue;
 
-}
 ion-menu.ios ion-note {
   margin-bottom: 8px;
 }
@@ -123,4 +120,6 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+
 

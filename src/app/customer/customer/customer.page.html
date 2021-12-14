@@ -4,8 +4,8 @@
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <img src="../../../assets/img/logo-mini.png" height="50px" />
-    <ion-buttons slot="end" (click)="notifications()">
-      <ion-icon name="notifications" size="large"></ion-icon>
+    <ion-buttons slot="end" >
+      <ion-icon name="notifications" [routerLink]="['/notifications']"  class="padding-right" slot="start"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,15 +14,12 @@
   <ion-grid>
     <h2>Available Scrap Types</h2>
     <ion-row>
-      <ion-col size="6" *ngFor="let item of list">
+      <ion-col size="6" *ngFor="let item of list" (click)="addCart()">
         <div>
           <img
-            src="../../../assets/img/{{item.file}}"
-            height="200px"
-            width="100%"
-          />
+            src="../../../assets/img/{{item.file}}" class="img1"/>
         </div>
-        <ion-title>{{item.p_name}}</ion-title>
+        <ion-title >{{item.p_name}}</ion-title>
       </ion-col>
     </ion-row>
     <!-- <ion-button class="primary" shape="round">View More<ion-icon name="arrow-down"></ion-icon></ion-button> -->

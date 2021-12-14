@@ -18,6 +18,23 @@ export class AppComponent {
     { title: 'Contact Us', url: 'contact-us', icon: 'call' },
     { title: 'Logout', url: 'logout', icon: 'power' }
   ];
+  userData: any;
+  dateTime: any;
+  activateRoute: any;
+  router: any;
+  user_id: any;
+  name: any;
+  email: any;
+  profile: any;
 
   constructor() { }
+
+  ngOnInit() {
+    this.userData = JSON.parse(localStorage.getItem('userDetails'));
+    this.user_id = this.userData[0].id;
+    this.name = this.userData[0].name;
+    this.email = this.userData[0].email;
+    this.profile = this.userData[0].profile;
+    alert(this.profile);
+  }
 }

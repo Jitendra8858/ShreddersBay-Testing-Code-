@@ -109,7 +109,15 @@ const routes: Routes = [
   {
     path: 'terms-conditions',
     loadChildren: () => import('./terms-conditions/terms-conditions.module').then( m => m.TermsConditionsPageModule)
+  },  {
+    path: 'available-booking',
+    loadChildren: () => import('./dealer/available-booking/available-booking.module').then( m => m.AvailableBookingPageModule)
   },
+  {
+    path: 'add-address',
+    loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
+  },
+
 ];
 
 @NgModule({
