@@ -62,9 +62,10 @@ export class LoginPage implements OnInit {
       myFormData.append('password', this.loginForm.value.password);
       this.userService.getByUserInfo(myFormData).toPromise().then((res) => {
         this.data = res;
-        //console.log(this.data[0]);
-        if (this.data[0].password === this.loginForm.value.password) {
-
+        console.log(this.data[0]);
+        if (this.data.message) {
+          this.openToast(this.data.message);
+        }else{
           if (this.role == 1 && this.data[0].user_role == 1) {
             this.loginForm.reset();
             localStorage.setItem('userDetails', JSON.stringify(this.data));
@@ -80,11 +81,6 @@ export class LoginPage implements OnInit {
             this.openToast(this.message);
 
           }
-        }
-        else {
-          this.errorMsg = 'Invalid Id Or Password';
-          this.successMsg = '';
-          this.loginForm.reset();
         }
       }).catch(err => {
         // this.errorMsg = error.message;

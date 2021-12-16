@@ -21,7 +21,7 @@ export class MyProfilePage implements OnInit {
 
   ngOnInit() {
     this.userData=JSON.parse(localStorage.getItem('userDetails'));
-    if(this.userDetails ==null){
+    if(this.userData ==null){
       this.router.navigate(['frontend']);
     }
     this.id=this.userData[0].id;

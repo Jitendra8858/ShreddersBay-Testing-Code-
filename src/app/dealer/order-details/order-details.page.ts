@@ -14,6 +14,7 @@ export class OrderDetailsPage implements OnInit {
   bId: any;
   data: any;
   user_id: any;
+  confirm: any;
 
   constructor(
     private userService: UserApiService,
@@ -56,7 +57,9 @@ export class OrderDetailsPage implements OnInit {
 
   delivered()
   {
-      this.userService.completed(this.bId).toPromise().then((res) => {
+    var formData = new FormData();
+    formData.append('booking_id',this.bId);
+      this.userService.completed(formData).toPromise().then((res) => {
         this.data = res;
         this.router.navigate(['dealer-home/dealer-home/dealer-booking']);
       }).catch((err) => {
@@ -65,14 +68,19 @@ export class OrderDetailsPage implements OnInit {
   }
 
 cancel(){
-  if(confirm('Are You Sure You Want To Cancel Booking?')){
-  this.userService.cancel(this.bId).toPromise().then((res) => {
+  var formData = new FormData();
+  formData.append('booking_id', this.bId);
+  this.userService.Confirm().then((res)=>{
+    this.confirm=res;
+    if( this.confirm ) {
+  this.userService.cancel(formData).toPromise().then((res) => {
     this.data = res;
     this.router.navigate(['dealer-home/dealer-home/dealer-booking']);
   }).catch((err) => {
     console.log('Error' + err.error);
   });
-}
-}
+    }
 
+});
+}
 }

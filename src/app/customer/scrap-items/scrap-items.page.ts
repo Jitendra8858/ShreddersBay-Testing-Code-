@@ -54,6 +54,7 @@ export class ScrapItemsPage implements OnInit {
       this.router.navigate(['frontend']);
     }
     this.userId = this.userDetails[0].id;
+
     // console.log(this.userDetails[0]);
     this.submitForm = this.fb.group({
       user_id: [this.userId],

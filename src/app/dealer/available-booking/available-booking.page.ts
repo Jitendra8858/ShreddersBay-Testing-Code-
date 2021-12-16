@@ -50,11 +50,11 @@ export class AvailableBookingPage implements OnInit {
     // Initialize Params Object
  var myFormData = new FormData();
  // Begin assigning parameters
- myFormData.append('status','2');
+ myFormData.append('user_id',this.user_id);
  myFormData.append('booking_id',book_id);
-    this.userService.updateStatus(this.user_id, myFormData).toPromise().then((res) => {
+    this.userService.updateStatus(myFormData).toPromise().then((res) => {
       this.orders = res;
-      location.reload();
+      this.router.navigate(['dealer-home/dealer-home/dealer-booking']);
     }).catch((err) => {
       console.log('Error' + err);
     });

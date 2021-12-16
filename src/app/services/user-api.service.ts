@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
-const userURL = 'http://localhost:8000/SHREDDERSBAY_API/API/user_api.php?action=';
-const prodURL = 'http://localhost:8000/SHREDDERSBAY_API/API/product_api.php?action=';
-const cartURL = 'http://localhost:8000/SHREDDERSBAY_API/API/cart_api.php?action=';
-const orderURL = 'http://localhost:8000/SHREDDERSBAY_API/API/orders_api.php?action=';
-const addrURL = 'http://localhost:8000/SHREDDERSBAY_API/API/address_api.php?action=';
-const countryURL = 'http://localhost:8000/SHREDDERSBAY_API/API/country_api.php?action=';
-const stateURL = 'http://localhost:8000/SHREDDERSBAY_API/API/state_api.php?action=';
-const cityURL = 'http://localhost:8000/SHREDDERSBAY_API/API/city_api.php?action=';
-const areaURL = 'http://localhost:8000/SHREDDERSBAY_API/API/area_api.php?action=';
-const addressURL = 'http://localhost:8000/SHREDDERSBAY_API/API/address_api.php?action=';
+const userURL = 'https://infodeltasys.com/shreddersbayapi/API/user_api.php?action=';
+const prodURL = 'https://infodeltasys.com/shreddersbayapi/API/product_api.php?action=';
+const cartURL = 'https://infodeltasys.com/shreddersbayapi/API/cart_api.php?action=';
+const orderURL = 'https://infodeltasys.com/shreddersbayapi/API/orders_api.php?action=';
+const addrURL = 'https://infodeltasys.com/shreddersbayapi/API/address_api.php?action=';
+const countryURL = 'https://infodeltasys.com/shreddersbayapi/API/country_api.php?action=';
+const stateURL = 'https://infodeltasys.com/shreddersbayapi/API/state_api.php?action=';
+const cityURL = 'https://infodeltasys.com/shreddersbayapi/API/city_api.php?action=';
+const areaURL = 'https://infodeltasys.com/shreddersbayapi/API/area_api.php?action=';
+const addressURL = 'https://infodeltasys.com/shreddersbayapi/API/address_api.php?action=';
 
 @Injectable({
   providedIn: 'root'
@@ -93,20 +93,20 @@ export class UserApiService {
     return this.http.get(`${orderURL}select_id&book_id=${id}`)
   }
 
-  updateStatus(id, myFormData): Observable<any> {
-    return this.http.post(`${orderURL}accept&user_id=${id}`, myFormData)
+  updateStatus(myFormData): Observable<any> {
+    return this.http.post(`${orderURL}accept`,myFormData)
   }
 
-  cancel(id: number): Observable<any> {
-    return this.http.get(`${orderURL}cancel&booking_id=${id}`)
+  cancel(formData): Observable<any> {
+    return this.http.post(`${orderURL}cancel`, formData)
   }
 
-  completed(id){
-    return this.http.get(`${orderURL}complete&booking_id=${id}`)
+  completed(formData){
+    return this.http.post(`${orderURL}complete`, formData)
   }
 
-  cancelBooking(id: number): Observable<any> {
-    return this.http.get(`${orderURL}customer_cancel&booking_id=${id}`)
+  cancelBooking(formData): Observable<any> {
+    return this.http.post(`${orderURL}customer_cancel`,formData)
   }
 
   getAllOrders(): Observable<any> {
@@ -131,8 +131,8 @@ export class UserApiService {
   getArea(id): Observable<any> {
     return this.http.get(`${areaURL}select&city_id=${id}`);
   }
-  addAddress(id, myFormData): Observable<any> {
-    return this.http.post(`${addressURL}insert&user_id=${id}`, myFormData)
+  addAddress(myFormData): Observable<any> {
+    return this.http.post(`${addressURL}insert`, myFormData)
   }
 
   async Confirm() {
@@ -161,4 +161,25 @@ export class UserApiService {
       await confirm.present();
     });
   }
+
+  async Alert(message) {
+    return new Promise(async (resolve) => {
+      const alert = await this.alertController.create({
+        header: 'Alert',
+      subHeader: 'Beware lets Alert',
+      message: message,
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              return resolve(true);
+            },
+          },
+        ],
+      });
+
+      await alert.present();
+    });
+  }
+
 }

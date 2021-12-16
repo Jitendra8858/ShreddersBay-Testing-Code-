@@ -21,6 +21,7 @@ export class DealerHomePage implements OnInit {
   ];
   userDetails: any;
   userId: any;
+  name: any;
 
 
 
@@ -28,6 +29,7 @@ export class DealerHomePage implements OnInit {
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    this.name=this.userDetails[0].name;
     if(this.userDetails ==null){
       this.router.navigate(['frontend']);
     }

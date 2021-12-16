@@ -73,10 +73,12 @@ export class BookingDetailsPage implements OnInit {
   }
 
   cancelBooking() {
+    var formData= new FormData();
+    formData.append('booking_id', this.bId);
     this.userService.Confirm().then((res)=>{
       this.confirm=res;
       if( this.confirm ) {
-          this.userService.cancelBooking(this.bId).toPromise().then((res) => {
+          this.userService.cancelBooking(formData).toPromise().then((res) => {
             this.data = res;
             // console.log(this.data);
             this.router.navigate(['customer-home/customer-home/my-booking']);

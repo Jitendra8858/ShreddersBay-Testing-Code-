@@ -14,7 +14,7 @@
       <ion-item>
         <ion-icon name="close" slot="end" (click)="removeCart(item.cart_id)" color="danger"></ion-icon>
         <ion-thumbnail slot="start">
-          <img src="http://localhost:8000/ShreddersBay%20Project/admin/upload/{{item.filename}}">
+          <img src="https://infodeltasys.com/Shreddersbay/admin/upload/{{item.filename}}">
         </ion-thumbnail>
         <ion-label>
           {{item.p_name}} &nbsp;&nbsp;&nbsp;<span slot="end" style="font-size: 18px;"><b>{{item.total_price | currency:'INR':true}}</b></span><br/>
@@ -26,7 +26,7 @@
 
   <ion-item *ngIf="!approxPrice" class="ion-padding ion-text-center" >
     <div style="margin-top: 25%;">
-      <img src="../../../assets/img/cartimg.png" />
+      <img src="https://infodeltasys.com/Shreddersbay/admin/upload/cartimg.png" />
       <div class="page header">
         <h1>Your Cart Is Empty</h1>
         <ion-button  type="submit" color="warning" shape="round" expand="block" (click)="plus()">Please Add Scrap Item</ion-button>

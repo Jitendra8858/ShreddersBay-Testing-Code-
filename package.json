@@ -24,6 +24,7 @@
     "@angular/router": "~12.1.1",
     "@auth0/angular-jwt": "^5.0.2",
     "@ionic-native/camera": "^5.36.0",
+    "@ionic-native/core": "^5.36.0",
     "@ionic-native/facebook": "^5.36.0",
     "@ionic-native/google-plus": "^5.36.0",
     "@ionic/angular": "^5.5.2",
@@ -48,7 +49,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.1.1",
+    "@angular-devkit/build-angular": "^12.1.4",
     "@angular-eslint/builder": "~12.0.0",
     "@angular-eslint/eslint-plugin": "~12.0.0",
     "@angular-eslint/eslint-plugin-template": "~12.0.0",

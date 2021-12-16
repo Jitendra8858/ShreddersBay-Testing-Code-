@@ -96,10 +96,10 @@ export class AddAddressPage implements OnInit {
     if (!this.submitForm.valid) {
       return false;
     } else {
-      alert();
       // Initialize Params Object
       var myFormData = new FormData();
       //Begin assigning parameters
+      myFormData.append('user_id', this.userId);
       myFormData.append('country_id', this.country_id);
       myFormData.append('state_id', this.state_id);
       myFormData.append('city_id', this.city_id);
@@ -107,8 +107,9 @@ export class AddAddressPage implements OnInit {
       myFormData.append('address', this.submitForm.value.address);
       myFormData.append('landmark', this.submitForm.value.landmark);
       myFormData.append('pincode', this.submitForm.value.pincode);
+      alert(this.country_id);
      // console.log(myFormData);
-      this.userService.addAddress(this.userId,myFormData).toPromise().then((res) => {
+      this.userService.addAddress(myFormData).toPromise().then((res) => {
         alert(res);
         this.successMsg = 'Address Added Successfully';
        // this.router.navigate(['customer-home/customer-home/my-cart']);

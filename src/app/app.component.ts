@@ -35,6 +35,5 @@ export class AppComponent {
     this.name = this.userData[0].name;
     this.email = this.userData[0].email;
     this.profile = this.userData[0].profile;
-    alert(this.profile);
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 import { APIService } from '../services/api.service';
 import { UserApiService } from '../services/user-api.service';
 
@@ -14,6 +15,8 @@ export class SignupPage implements OnInit {
   signupForm: FormGroup;
   role: any;
   isSubmitted: boolean;
+  message: string;
+  data: any;
 
 
 
@@ -23,6 +26,7 @@ export class SignupPage implements OnInit {
     private userService: UserApiService,
     private router: Router,
     public fb: FormBuilder,
+    private toastCtrl: ToastController,
     private activateRoute: ActivatedRoute
     ) { }
 
@@ -77,14 +81,25 @@ export class SignupPage implements OnInit {
     myFormData.append('password', this.signupForm.value.password);
     console.log(myFormData);
     this.userService.create(myFormData).subscribe((res: Response) => {
-      console.log('data inserted');
-
-      this.router.navigate(['login', {role: this.role}]);
+      console.log(res);
+      this.data = res;
+      if(this.data.message){
+        this.openToast(this.data.message);
+      }
+      alert(this.data.message);
+     // this.router.navigate(['login', {role: this.role}]);
 
     });
     }
   }
-
+  async openToast(message) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      cssClass: 'toast-custom-class',
+    });
+    toast.present();
+  }
   getAll(){
     this.userService.getAll().toPromise().then((res)=>{
       console.log(res);

@@ -7,7 +7,10 @@
       <ion-content>
         <ion-list id="inbox-list" style="padding: 0px;">
           <ion-list-header>
-            <img src="../assets/img/logo-mini.png">
+            <ion-avatar>
+              <img src="../assets/img/a.png">
+            </ion-avatar>
+            <ion-title>{{name}}</ion-title>
           </ion-list-header>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of sideNav; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
