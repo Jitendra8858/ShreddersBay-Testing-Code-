@@ -36,14 +36,6 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async openToast(message) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 2000,
-      cssClass: 'toast-custom-class',
-    });
-    toast.present();
-  }
   get errorControl() {
     return this.loginForm.controls;
   }
@@ -64,21 +56,19 @@ export class LoginPage implements OnInit {
         this.data = res;
         console.log(this.data[0]);
         if (this.data.message) {
-          this.openToast(this.data.message);
+          this.userService.openToast(this.data.message);
         }else{
           if (this.role == 1 && this.data[0].user_role == 1) {
             this.loginForm.reset();
-            localStorage.setItem('userDetails', JSON.stringify(this.data));
             this.router.navigate(['dealer-home']);
             this.message='Login Successfully...';
-            this.openToast(this.message);
+            this.userService.openToast(this.message);
           }
           if (this.role == 0 && this.data[0].user_role == 0) {
             this.loginForm.reset();
-            localStorage.setItem('userDetails', JSON.stringify(this.data));
             this.router.navigate(['customer-home/customer-home/customer']);
             this.message='Login Successfully...';
-            this.openToast(this.message);
+            this.userService.openToast(this.message);
 
           }
         }
@@ -91,7 +81,5 @@ export class LoginPage implements OnInit {
       });
     }
   }
-
-
 }
 

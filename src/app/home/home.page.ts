@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavParams } from '@ionic/angular';
-import { Facebook,  } from '@ionic-native/facebook/ngx';
-import { APIService } from '../services/api.service';
+import { Facebook, FacebookLoginResponse,  } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { UserApiService } from '../services/user-api.service';
 
 @Component({
   selector: 'app-home',
@@ -15,15 +15,26 @@ export class HomePage implements OnInit {
 
   role: any;
   isLoggedIn = false;
-  users = { id: '', name: '', givenName:'', email: '', picture: { data: { url: '' } } };
+  users: any;
+  name: any;
+  email: any;
+  givenName: any;
+  id: any;
+  picture: any;
+  token: any;
+  displayName: any;
+  familyName: any;
+  userId: any;
+  imageUrl: any;
+  data: any;
 
   constructor(
-    public apiService: APIService,
     public navParams: NavParams,
     private router: Router,
     private activateRoute: ActivatedRoute,
     private facebook: Facebook,
-    private googleplus: GooglePlus
+    private googleplus: GooglePlus,
+    private userService: UserApiService
 
     ) {
     facebook.getLoginStatus()
@@ -52,15 +63,18 @@ export class HomePage implements OnInit {
 
 fbLogin() {
   this.facebook.login(['public_profile', 'user_friends', 'email'])
-    .then(res => {
-      if (res.status === 'connected') {
-        this.isLoggedIn = true;
-        this.getUserDetail(res.authResponse.userID);
-      } else {
-        this.isLoggedIn = false;
-      }
-    })
-    .catch(e => console.log('Error logging into Facebook', e));
+  .then((res: FacebookLoginResponse) => alert('Logged into Facebook!=='+ JSON.stringify(res)))
+  .catch(e => console.log('Error logging into Facebook', e));
+  // this.facebook.login(['public_profile', 'user_friends', 'email'])
+  //   .then(res => {
+  //     if (res.status === 'connected') {
+  //       this.isLoggedIn = true;
+  //       this.getUserDetail(res.authResponse.userID);
+  //     } else {
+  //       this.isLoggedIn = false;
+  //     }
+  //   })
+  //   .catch(e => console.log('Error logging into Facebook', e));
 }
 
 getUserDetail(userid: any) {
@@ -68,47 +82,68 @@ getUserDetail(userid: any) {
     .then(res => {
       console.log(res);
       this.users = res;
-    })
-    .catch(e => {
+      alert(this.users);
+      this.name = this.users[0].name;
+      this.email = this.users[0].email;
+      this.givenName = this.users[0].givenName;
+      this.id = this.users[0].userId;
+      this.picture = this.users[0].imageUrl;
+      this.token = this.users[0].token;
+      const formData = new FormData();
+      formData.append('facebook_id',this.id);
+      formData.append('name',this.name);
+      formData.append('email',this.id);
+      formData.append('givenName',this.givenName);
+      formData.append('profile_pic', this.picture);
+      formData.append('token',this.token);
+      this.userService.create(this.users).toPromise().then((response)=>{
+        console.log(response);
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }).catch(e => {
       console.log(e);
     });
 }
 
-logout() {
-  this.facebook.logout()
-    .then( res => this.isLoggedIn = false)
-    .catch(e => console.log('Error logout from Facebook', e));
-}
 
-glogin() {
-  this.googleplus.login({})
-    .then(res => {
-      console.log(res);
-      this.users.name = res.displayName;
-      this.users.email = res.email;
-      this.users.givenName = res.givenName;
-      this.users.id = res.userId;
-      this.users.picture = res.imageUrl;
+googleSignIn() {
+  this.googleplus.login({}).then(res => {
+    this.users=res;
+      this.name = this.users.displayName;
+      this.email = this.users.email;
+      //this.givenName = this.users.givenName;
+      this.id = this.users.userId;
+      this.picture = this.users.imageUrl;
+      this.token = this.users.accessToken;
+      const formData = new FormData();
+      formData.append('role',this.role);
+      formData.append('google_id',this.id);
+      formData.append('name',this.name);
+      formData.append('email',this.email);
+      //formData.append('givenName',this.givenName);
+      formData.append('profile_pic', this.picture);
+      formData.append('token',this.token);
+      this.userService.create(formData).toPromise().then((response)=>{
+        this.data=response;
+        if(response){
+          if (this.role == 1) {
+            localStorage.setItem('userDetails', JSON.stringify(this.data));
+            this.router.navigate(['dealer-home']);
+            this.userService.openToast('Login Successfully...');
+          }
+          if (this.role == 0) {
+            localStorage.setItem('userDetails', JSON.stringify(this.data));
+            this.router.navigate(['customer-home/customer-home/customer']);
+            this.userService.openToast('Login Successfully...');
 
-      this.isLoggedIn = true;
+          }
+        }
+      }).catch((err)=>{
+        alert(JSON.stringify(err));
+      });
     })
-    .catch(e => console.log('Error logging into Google', e));
-}
-
-
-glogout() {
-  this.googleplus.logout()
-    .then(res => {
-      console.log(res);
-      this.users.id = '';
-      this.users.name = '';
-      this.users.email = '';
-      this.users.givenName = '';
-      this.users.picture = { data: { url: '' } };
-
-      this.isLoggedIn = false;
-    })
-    .catch(err => console.error(err));
+    .catch(e => alert('Error logging into Google'+ e));
 }
 
 }

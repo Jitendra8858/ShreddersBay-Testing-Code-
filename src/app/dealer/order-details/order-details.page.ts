@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from 'src/app/services/api.service';
 import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class OrderDetailsPage implements OnInit {
 
   constructor(
     private userService: UserApiService,
-    private apiService: APIService,
     public fb: FormBuilder,
     private activateRouter: ActivatedRoute,
     private router: Router,) { }

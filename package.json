@@ -15,6 +15,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.22",
     "@amcharts/amcharts4-geodata": "^4.1.22",
+    "@angular-devkit/schematics": "^12.2.14",
     "@angular/common": "~12.1.1",
     "@angular/compiler": "~12.1.1",
     "@angular/core": "~12.1.1",
@@ -99,7 +100,7 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "AIzaSyANjIFKuVLPNlcpVFNyulJNUFeDpcnwUzA"
+        "REVERSED_CLIENT_ID": "133914420678-e618lfmvdtv5m8bh7ucomoafggejden7.apps.googleusercontent.com"
       },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},

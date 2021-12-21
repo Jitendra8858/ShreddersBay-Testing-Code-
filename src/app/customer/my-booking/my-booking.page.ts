@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { APIService } from 'src/app/services/api.service';
 import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({

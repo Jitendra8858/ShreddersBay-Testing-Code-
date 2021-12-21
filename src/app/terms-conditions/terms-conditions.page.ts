@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-terms-conditions',
   templateUrl: './terms-conditions.page.html',
@@ -12,7 +11,6 @@ export class TermsConditionsPage implements OnInit {
   userData: any;
   id: any;
   constructor(
-    private apiService: APIService,
     private router: Router,
     private activateRoute: ActivatedRoute) { }
   ngOnInit() {

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavParams } from '@ionic/angular';
-import { APIService } from '../services/api.service';
 import { UserApiService } from '../services/user-api.service';
 @Component({
   selector: 'app-faqs',

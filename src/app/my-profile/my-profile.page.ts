@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.page.html',
@@ -13,7 +12,6 @@ export class MyProfilePage implements OnInit {
   id: any;
   userData: any;
   constructor(
-    private apiService: APIService,
     private router: Router,
     public fb: FormBuilder,
     private activateRoute: ActivatedRoute
@@ -36,18 +34,31 @@ export class MyProfilePage implements OnInit {
     });
   }
 
-  submitForm() {
-    console.log(this.profileForm.value);
-    if (!this.profileForm.valid) {
-      return false;
-    } else {
-      this.apiService.update(this.id,this.profileForm.value).subscribe(res => {
-        alert(res);
-        console.log(res);
-        this.profileForm.reset();
-        this.router.navigate(['']);
-      });
-    }
-  }
 
-}
+
+  submitForm() {
+    //  console.log(this.profileForm.value);
+      if (!this.profileForm.valid) {
+        return false;
+      } else {
+        var myFormData = new FormData();
+        //Begin assigning parameters
+        myFormData.append('id', this.id);
+        myFormData.append('name', this.profileForm.value.name);
+        myFormData.append('email', this.profileForm.value.email);
+        myFormData.append('mobile', this.profileForm.value.mobile);
+        this.userService.create(myFormData).toPromise().then((res) => {
+          this.successMsg = 'Profile Updated Successfully';
+           this.userService.getUserById(this.id).toPromise().then((response) => {
+             this.myUserData=(response);
+           localStorage.setItem('userDetails', JSON.stringify(this.myUserData));
+
+       location.reload();
+      });
+
+
+        });
+      }
+    }
+
+  }

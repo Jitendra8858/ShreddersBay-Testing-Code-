@@ -9,12 +9,23 @@
 </ion-header>
 
 <ion-content >
+  <!-- Custom Refresher Content -->
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-list *ngIf="data">
     <ion-card *ngFor="let item of data">
       <ion-item>
         <ion-icon name="close" slot="end" (click)="removeCart(item.cart_id)" color="danger"></ion-icon>
         <ion-thumbnail slot="start">
-          <img src="https://infodeltasys.com/Shreddersbay/admin/upload/{{item.filename}}">
+          <img src="https://infodeltasys.com/shreddersbay/admin/upload/{{item.filename}}">
         </ion-thumbnail>
         <ion-label>
           {{item.p_name}} &nbsp;&nbsp;&nbsp;<span slot="end" style="font-size: 18px;"><b>{{item.total_price | currency:'INR':true}}</b></span><br/>
@@ -26,12 +37,12 @@
 
   <ion-item *ngIf="!approxPrice" class="ion-padding ion-text-center" >
     <div style="margin-top: 25%;">
-      <img src="https://infodeltasys.com/Shreddersbay/admin/upload/cartimg.png" />
-      <div class="page header">
-        <h1>Your Cart Is Empty</h1>
+      <img src="../../../assets/img/cartimg.png" />
+
+      <div class="page-header">
+        <h1 >Your Cart Is Empty</h1>
         <ion-button  type="submit" color="warning" shape="round" expand="block" (click)="plus()">Please Add Scrap Item</ion-button>
         </div>
-
     </div>
   </ion-item>
 

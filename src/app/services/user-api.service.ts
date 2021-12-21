@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
 const userURL = 'https://infodeltasys.com/shreddersbayapi/API/user_api.php?action=';
@@ -19,7 +19,7 @@ const addressURL = 'https://infodeltasys.com/shreddersbayapi/API/address_api.php
 })
 export class UserApiService {
   httpHeaders: { headers: HttpHeaders; };
-  constructor(private http: HttpClient, private alertController: AlertController) {
+  constructor(private http: HttpClient, private alertController: AlertController, private toastCtrl: ToastController) {
     this.httpHeaders = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -40,6 +40,15 @@ export class UserApiService {
   //select user
   getByUserInfo(myFormData): Observable<any> {
     return this.http.post(`${userURL}user_info`, myFormData)
+  }
+
+    //select Address By user Id
+    getAddressById(id): Observable<any> {
+      return this.http.get(`${addrURL}select_id&addr_id=${id}`);
+    }
+      //select Address By user Id
+  delAddressById(formData): Observable<any> {
+    return this.http.post(`${addrURL}delete&addr_id`,formData);
   }
 
   //select product
@@ -181,5 +190,17 @@ export class UserApiService {
       await alert.present();
     });
   }
+
+
+  async openToast(message) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      cssClass: 'toast-custom-class',
+    });
+    toast.present();
+  }
+
+
 
 }

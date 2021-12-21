@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-import { APIService } from '../services/api.service';
 import { UserApiService } from '../services/user-api.service';
 
 @Component({
@@ -22,11 +21,9 @@ export class SignupPage implements OnInit {
 
   constructor(
     private http : HttpClient,
-    private apiService: APIService,
     private userService: UserApiService,
     private router: Router,
     public fb: FormBuilder,
-    private toastCtrl: ToastController,
     private activateRoute: ActivatedRoute
     ) { }
 
@@ -84,22 +81,14 @@ export class SignupPage implements OnInit {
       console.log(res);
       this.data = res;
       if(this.data.message){
-        this.openToast(this.data.message);
+        this.userService.openToast(this.data.message);
       }
       alert(this.data.message);
-     // this.router.navigate(['login', {role: this.role}]);
-
+      this.router.navigate(['login', {role: this.role}]);
     });
     }
   }
-  async openToast(message) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 3000,
-      cssClass: 'toast-custom-class',
-    });
-    toast.present();
-  }
+
   getAll(){
     this.userService.getAll().toPromise().then((res)=>{
       console.log(res);

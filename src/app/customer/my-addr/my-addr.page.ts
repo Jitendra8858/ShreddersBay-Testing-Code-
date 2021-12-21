@@ -2,7 +2,6 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { APIService } from '../../services/api.service';
 import { UserApiService } from '../../services/user-api.service';
 @Component({
   selector: 'app-my-addr',
@@ -30,7 +29,6 @@ export class MyAddrPage implements OnInit {
     public userService: UserApiService,
     private router: Router,
     private activateRoute: ActivatedRoute,
-    private toastCtrl: ToastController
   ) { }
 
   ngOnInit() {
@@ -48,14 +46,7 @@ export class MyAddrPage implements OnInit {
     this.router.navigate(['notifications']);
   }
 
-  async openToast(message) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 2000,
-      cssClass: 'toast-custom-class',
-    });
-    toast.present();
-  }
+
 
   getAddress() {
     this.userService.getAddress(this.user_id).toPromise().then((res) => {
@@ -66,7 +57,7 @@ export class MyAddrPage implements OnInit {
     });
   }
   address($event) {
-    alert($event.detail.value);
+    //alert($event.detail.value);
     this.addr_id = $event.detail.value;
   }
 
@@ -96,13 +87,11 @@ export class MyAddrPage implements OnInit {
       myFormData.append('addr_id', this.addr_id);
       // console.log( this.orderDetails);
       this.userService.createOrder(myFormData).toPromise().then((res) => {
-        this.openToast('Request Placed Successfully');
+        this.userService.openToast('Request Placed Successfully');
        // this.successMsg = 'Request Placed Successfully';
         this.router.navigate(['customer-home/customer-home/my-booking']);
       }).catch((err) => {
-        this.openToast(err);
-        console.log('Error' + err.error);
-        this.errorMsg = 'Error' + err;
+        this.userService.openToast(err.error);
       });
     }).catch((err) => {
       console.log('Your Cart Is Empty' + err);
@@ -112,6 +101,38 @@ export class MyAddrPage implements OnInit {
 
   plus() {
     this.router.navigate(['customer-home/customer-home/scrap-items']);
+  }
+
+  addAddr() {
+    this.router.navigate(['add-address', {'schedule_date': this.dateTime}]);
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      this.getAddress();
+    }, 2000);
+  }
+
+  editAddr(addr_id){
+    alert(addr_id);
+   this.router.navigate(['add-address',{'addr_id':addr_id}])
+
+  }
+  delAddr(addr_id){
+    alert(addr_id);
+    const formData = new FormData();
+formData.append('id',addr_id);
+     this.userService.delAddressById(formData).toPromise().then((res) => {
+     console.log(res);
+   //  this.router.navigate(['add-address'])
+    }).catch((err) => {
+      console.log('Error' + err);
+    });
+
   }
 }
 

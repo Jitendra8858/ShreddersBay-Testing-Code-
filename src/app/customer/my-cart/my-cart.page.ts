@@ -44,19 +44,12 @@ export class MyCartPage implements OnInit {
    this.getCartById();
   }
 
-  async openToast(message) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 2000,
-      cssClass: 'toast-custom-class',
-    });
-    toast.present();
-  }
+
 
   removeCart(cart_id) {
     this.userService.deleteItem(cart_id).toPromise().then((res) => {
       this.message = res;
-      this.openToast(this.message.message);
+      this.userService.openToast(this.message.message);
       location.reload();
 
     }).catch((err) => {
@@ -86,6 +79,16 @@ export class MyCartPage implements OnInit {
 
   plus(){
     this.router.navigate(['customer-home/customer-home/scrap-items']);
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      this.getCartById();
+    }, 2000);
   }
 
 

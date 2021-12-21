@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-change-pass',
   templateUrl: './change-pass.page.html',
@@ -12,7 +11,6 @@ export class ChangePassPage implements OnInit {
   id: any;
   pass: any;
   userData: any;  constructor(
-    private apiService: APIService,
     private router: Router,
     public fb: FormBuilder,
     private activateRoute: ActivatedRoute

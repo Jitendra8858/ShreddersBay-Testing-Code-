@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
-import { APIService } from 'src/app/services/api.service';
 import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({
@@ -22,7 +21,6 @@ export class BookingDetailsPage implements OnInit {
   confirm: any;
   constructor(
     private userService: UserApiService,
-    private apiService: APIService,
     public fb: FormBuilder,
     private activateRouter: ActivatedRoute,
     private router: Router,
@@ -64,7 +62,7 @@ export class BookingDetailsPage implements OnInit {
   }
 
   getCancelOrders() {
-    this.apiService.getCancelOrders(this.bId).toPromise().then((res) => {
+    this.userService.getCancelOrders(this.bId).toPromise().then((res) => {
       this.data = res;
       console.log(this.data);
     }).catch((err) => {

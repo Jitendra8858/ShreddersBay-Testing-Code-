@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { APIService } from 'src/app/services/api.service';
 import { UserApiService } from 'src/app/services/user-api.service';
 
 @Component({

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.page.html',
@@ -13,7 +12,6 @@ export class MyAccountPage implements OnInit {
   email: any;
   filename: any;
   constructor(
-    private apiService: APIService,
     private router: Router,
     private activateRoute: ActivatedRoute
   ) { }

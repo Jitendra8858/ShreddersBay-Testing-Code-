@@ -31,7 +31,6 @@ export class AppComponent {
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('userDetails'));
-    this.user_id = this.userData[0].id;
     this.name = this.userData[0].name;
     this.email = this.userData[0].email;
     this.profile = this.userData[0].profile;

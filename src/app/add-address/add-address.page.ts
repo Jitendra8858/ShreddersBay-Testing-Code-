@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { UserApiService } from '../services/user-api.service';
 
@@ -23,17 +23,27 @@ export class AddAddressPage implements OnInit {
   area_id: any;
   successMsg: string;
   errorMsg: string;
+  dateTime: any;
+  data: any;
+  addr_id: any;
+  address: any;
+  landmark: any;
+  pin_code: any;
   constructor(
     private userService: UserApiService,
     public fb: FormBuilder,
     private router: Router,
-    private menu: MenuController) { }
+    private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     if(this.userDetails ==null){
       this.router.navigate(['frontend']);
     }
+    this.addrs_id = this.activateRoute.snapshot.params.addr_id;
+    alert(this.addrs_id);
+    this.dateTime = this.activateRoute.snapshot.params.schedule_date;
     this.userId = this.userDetails[0].id;
     this.submitForm = this.fb.group({
       country_id: [''],
@@ -45,10 +55,10 @@ export class AddAddressPage implements OnInit {
       pincode: [''],
     });
     this.getCountry();
+    this.get_add();
   }
 
-  getCountry()
-  {
+  getCountry(){
     this.userService.getCountry().toPromise().then((res) => {
       this.country = res;
       console.log(res);
@@ -57,8 +67,7 @@ export class AddAddressPage implements OnInit {
     });
   }
 
-  getState($event)
-  {
+  getState($event){
     this.country_id=$event.detail.value;
     this.userService.getState(this.country_id).toPromise().then((res) => {
       this.state = res;
@@ -67,8 +76,8 @@ export class AddAddressPage implements OnInit {
       console.log('Error' + err);
     });
   }
-  getCity($event)
-  {
+
+  getCity($event){
     this.state_id=$event.detail.value;
     this.userService.getCity(this.state_id).toPromise().then((res) => {
       this.city = res;
@@ -77,8 +86,8 @@ export class AddAddressPage implements OnInit {
       console.log('Error' + err);
     });
   }
-  getArea($event)
-  {
+
+  getArea($event){
     this.city_id=$event.detail.value;
     this.userService.getArea(this.city_id).toPromise().then((res) => {
       this.area = res;
@@ -107,20 +116,47 @@ export class AddAddressPage implements OnInit {
       myFormData.append('address', this.submitForm.value.address);
       myFormData.append('landmark', this.submitForm.value.landmark);
       myFormData.append('pincode', this.submitForm.value.pincode);
-      alert(this.country_id);
+      //alert(this.country_id);
      // console.log(myFormData);
       this.userService.addAddress(myFormData).toPromise().then((res) => {
-        alert(res);
+       // alert(res);
         this.successMsg = 'Address Added Successfully';
-       // this.router.navigate(['customer-home/customer-home/my-cart']);
+        this.userService.openToast(this.successMsg);
+        if(this.dateTime){
+          this.router.navigate(['my-addr', {'schedule_date': this.dateTime}]);
+        }
+        else{
+        this.router.navigate(['my-addr']);
+        }
       }).catch((err) => {
-        alert('Error' + err);
+        alert('Error' + err.Error);
         console.log('Error' + err);
-        this.errorMsg = 'Error' + err;
       });
     }
 
   }
 
 
+
+  get_add(){
+    this.userService.getAddressById(this.addrs_id).toPromise().then((res) => {
+      console.log(res);
+      this.data = res;
+  this.addr_id = this.data[0].addr_id;
+  this.address = this.data[0].address;
+  this.country_id = this.data[0].country_id;
+  this.state_id = this.data[0].state_id;
+  this.area_id = this.data[0].area_id;
+  this.city_id = this.data[0].city_id;
+  this.landmark = this.data[0].landmark;
+  this.pin_code = this.data[0].pin_code;
+
+    }).catch((err) => {
+      console.log('Error' + err);
+    });
+
+  }
+  addrs_id(addrs_id: any) {
+    throw new Error('Method not implemented.');
+  }
 }

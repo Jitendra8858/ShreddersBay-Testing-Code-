@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from '../services/api.service';
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.page.html',
@@ -11,7 +10,6 @@ export class ContactUsPage implements OnInit {
   id: any;
 
   constructor(
-    public apiService: APIService,
     private router: Router,
     private activateRoute: ActivatedRoute,
   ) { }

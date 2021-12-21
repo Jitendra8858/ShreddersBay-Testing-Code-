@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { APIService } from 'src/app/services/api.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
