@@ -60,12 +60,14 @@ export class LoginPage implements OnInit {
         }else{
           if (this.role == 1 && this.data[0].user_role == 1) {
             this.loginForm.reset();
+            localStorage.setItem('userDetails', JSON.stringify(this.data));
             this.router.navigate(['dealer-home']);
             this.message='Login Successfully...';
             this.userService.openToast(this.message);
           }
           if (this.role == 0 && this.data[0].user_role == 0) {
             this.loginForm.reset();
+            localStorage.setItem('userDetails', JSON.stringify(this.data));
             this.router.navigate(['customer-home/customer-home/customer']);
             this.message='Login Successfully...';
             this.userService.openToast(this.message);
@@ -81,5 +83,9 @@ export class LoginPage implements OnInit {
       });
     }
   }
-}
+  forgetPassword(){
+//alert(this.role);
+this.router.navigate(['forget-password', {'role':this.role}]);
+  }
 
+}

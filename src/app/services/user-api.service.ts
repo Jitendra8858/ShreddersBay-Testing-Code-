@@ -2,17 +2,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { map } from "rxjs/operators";
-const userURL = 'https://infodeltasys.com/shreddersbayapi/API/user_api.php?action=';
-const prodURL = 'https://infodeltasys.com/shreddersbayapi/API/product_api.php?action=';
-const cartURL = 'https://infodeltasys.com/shreddersbayapi/API/cart_api.php?action=';
-const orderURL = 'https://infodeltasys.com/shreddersbayapi/API/orders_api.php?action=';
-const addrURL = 'https://infodeltasys.com/shreddersbayapi/API/address_api.php?action=';
-const countryURL = 'https://infodeltasys.com/shreddersbayapi/API/country_api.php?action=';
-const stateURL = 'https://infodeltasys.com/shreddersbayapi/API/state_api.php?action=';
-const cityURL = 'https://infodeltasys.com/shreddersbayapi/API/city_api.php?action=';
-const areaURL = 'https://infodeltasys.com/shreddersbayapi/API/area_api.php?action=';
-const addressURL = 'https://infodeltasys.com/shreddersbayapi/API/address_api.php?action=';
+const userURL = 'http://shreddersbay.com/shreddersbayapi/API/user_api.php?action=';
+const prodURL = 'http://shreddersbay.com/shreddersbayapi/API/product_api.php?action=';
+const cartURL = 'http://shreddersbay.com/shreddersbayapi/API/cart_api.php?action=';
+const orderURL = 'http://shreddersbay.com/shreddersbayapi/API/orders_api.php?action=';
+const addrURL = 'http://shreddersbay.com/shreddersbayapi/API/address_api.php?action=';
+const countryURL = 'http://shreddersbay.com/shreddersbayapi/API/country_api.php?action=';
+const stateURL = 'http://shreddersbay.com/shreddersbayapi/API/state_api.php?action=';
+const cityURL = 'http://shreddersbay.com/shreddersbayapi/API/city_api.php?action=';
+const areaURL = 'http://shreddersbay.com/shreddersbayapi/API/area_api.php?action=';
+const addressURL = 'http://shreddersbay.com/shreddersbayapi/API/address_api.php?action=';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +31,10 @@ export class UserApiService {
   //insert user
   create(myFormData): Observable<any> {
     return this.http.post(`${userURL}insert`, myFormData)
+  }
+  //select user
+  forgetPassword(myFormData): Observable<any> {
+    return this.http.post(`${userURL}forget_pass`, myFormData)
   }
  //select single user by id
  getUserById(id: number): Observable<any> {
