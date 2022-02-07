@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserApiService } from '../services/user-api.service';
+
+
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.page.html',
@@ -14,7 +17,9 @@ export class MyProfilePage implements OnInit {
   constructor(
     private router: Router,
     public fb: FormBuilder,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private userService: UserApiService,
+
   ) { }
 
   ngOnInit() {
@@ -43,11 +48,11 @@ export class MyProfilePage implements OnInit {
       } else {
         var myFormData = new FormData();
         //Begin assigning parameters
-        myFormData.append('id', this.id);
+        myFormData.append('user_id', this.id);
         myFormData.append('name', this.profileForm.value.name);
         myFormData.append('email', this.profileForm.value.email);
         myFormData.append('mobile', this.profileForm.value.mobile);
-        this.userService.create(myFormData).toPromise().then((res) => {
+        this.userService.updateProfile(myFormData).toPromise().then((res) => {
           this.successMsg = 'Profile Updated Successfully';
            this.userService.getUserById(this.id).toPromise().then((response) => {
              this.myUserData=(response);

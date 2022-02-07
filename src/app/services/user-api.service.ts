@@ -2,16 +2,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
-const userURL = 'http://shreddersbay.com/shreddersbayapi/API/user_api.php?action=';
-const prodURL = 'http://shreddersbay.com/shreddersbayapi/API/product_api.php?action=';
-const cartURL = 'http://shreddersbay.com/shreddersbayapi/API/cart_api.php?action=';
-const orderURL = 'http://shreddersbay.com/shreddersbayapi/API/orders_api.php?action=';
-const addrURL = 'http://shreddersbay.com/shreddersbayapi/API/address_api.php?action=';
-const countryURL = 'http://shreddersbay.com/shreddersbayapi/API/country_api.php?action=';
-const stateURL = 'http://shreddersbay.com/shreddersbayapi/API/state_api.php?action=';
-const cityURL = 'http://shreddersbay.com/shreddersbayapi/API/city_api.php?action=';
-const areaURL = 'http://shreddersbay.com/shreddersbayapi/API/area_api.php?action=';
-const addressURL = 'http://shreddersbay.com/shreddersbayapi/API/address_api.php?action=';
+const userURL = 'http://shreddersbay.com/API/user_api.php?action=';
+const prodURL = 'http://shreddersbay.com/API/product_api.php?action=';
+const cartURL = 'http://shreddersbay.com/API/cart_api.php?action=';
+const orderURL = 'http://shreddersbay.com/API/orders_api.php?action=';
+const addrURL = 'http://shreddersbay.com/API/address_api.php?action=';
+const countryURL = 'http://shreddersbay.com/API/country_api.php?action=';
+const stateURL = 'http://shreddersbay.com/API/state_api.php?action=';
+const cityURL = 'http://shreddersbay.com/API/city_api.php?action=';
+const areaURL = 'http://shreddersbay.com/API/area_api.php?action=';
+const addressURL = 'http://shreddersbay.com/API/address_api.php?action=';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,12 @@ export class UserApiService {
   create(myFormData): Observable<any> {
     return this.http.post(`${userURL}insert`, myFormData)
   }
+
+  // update profile
+  updateProfile(myFormData): Observable<any> {
+    return this.http.post(`${userURL}edit`, myFormData)
+  }
+  
   //select user
   forgetPassword(myFormData): Observable<any> {
     return this.http.post(`${userURL}forget_pass`, myFormData)
@@ -59,8 +65,8 @@ export class UserApiService {
     return this.http.get(`${prodURL}select`);
   }
   //select user
-  getProdById(id: number): Observable<any> {
-    return this.http.get(`${prodURL}select_id&p_id=${id}`)
+  getProdById(formData): Observable<any> {
+    return this.http.post(`${prodURL}select_id`,formData)
   }
 
   createCart(myFormData){

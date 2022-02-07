@@ -16,6 +16,8 @@ export class SignupPage implements OnInit {
   isSubmitted: boolean;
   message: string;
   data: any;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
 
 
 
@@ -96,5 +98,9 @@ export class SignupPage implements OnInit {
       console.log(err.message);
     });
   }
-
+ 
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+}
 }

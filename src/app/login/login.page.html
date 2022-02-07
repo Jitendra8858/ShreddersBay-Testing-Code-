@@ -101,7 +101,9 @@
           <ion-label floating>
             <ion-icon name="key" class="text-primary"></ion-icon>
           </ion-label>
-          <ion-input type="password" placeholder="Enter Your Password.." formControlName="password" required></ion-input>
+          <!-- <ion-input type="password" placeholder="Enter Your Password.." formControlName="password" required></ion-input> -->
+          <ion-input formControlName="password" [type]="passwordType" clearOnEdit="false"></ion-input>
+          <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
         </ion-item>
         <label class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
           Password is required.

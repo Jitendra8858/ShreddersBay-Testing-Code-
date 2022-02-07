@@ -89,7 +89,9 @@ export class ScrapItemsPage implements OnInit {
   checkValue(value) {
     console.log(value.detail.value);
     this.id = value.detail.value;
-    this.userService.getProdById(this.id).toPromise().then((res) => {
+    const formData = new FormData();
+    formData.append('p_id',this.id);
+    this.userService.getProdById(formData).toPromise().then((res) => {
       this.list = res;
       console.log(this.list[0]);
       this.prod_id = this.list[0].p_id;

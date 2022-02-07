@@ -17,6 +17,8 @@ export class LoginPage implements OnInit {
   successMsg: string;
   isSubmitted: boolean;
   message: string;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
 
   constructor(
     private userService: UserApiService,
@@ -55,7 +57,10 @@ export class LoginPage implements OnInit {
       this.userService.getByUserInfo(myFormData).toPromise().then((res) => {
         this.data = res;
         console.log(this.data[0]);
-        if (this.data.message) {
+        if (this.data.message=='User Already Exist') {
+          this.userService.openToast(this.data.message);
+        }
+        if (this.data.message=='Incorrect Password') {
           this.userService.openToast(this.data.message);
         }else{
           if (this.role == 1 && this.data[0].user_role == 1) {
@@ -87,5 +92,9 @@ export class LoginPage implements OnInit {
 //alert(this.role);
 this.router.navigate(['forget-password', {'role':this.role}]);
   }
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+}
 
 }

@@ -30,6 +30,7 @@
     "@ionic-native/google-plus": "^5.36.0",
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^3.0.6",
+    "android": "^0.0.8",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cordova": "^11.0.0",
@@ -41,6 +42,7 @@
     "mysql2": "^2.3.0",
     "ng-recaptcha": "^8.0.1",
     "nodemon": "^2.0.15",
+    "run": "^1.4.0",
     "rxjs": "~6.6.0",
     "sequelize": "^6.6.5",
     "to": "^0.2.9",
@@ -101,7 +103,8 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "133914420678-e618lfmvdtv5m8bh7ucomoafggejden7.apps.googleusercontent.com"
+        "REVERSED_CLIENT_ID": "133914420678-e618lfmvdtv5m8bh7ucomoafggejden7.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "15.0.1"
       },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
