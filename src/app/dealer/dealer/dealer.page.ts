@@ -66,7 +66,11 @@ export class DealerPage implements OnInit {
     //   console.log('Error' + err);
     // });
   }
-
+  singleOrderDetail(book_id){
+   
+     this.router.navigate(['single-order-detail',{book_id}]);
+  
+  }
   accept(book_id){
     // Initialize Params Object
  var myFormData = new FormData();

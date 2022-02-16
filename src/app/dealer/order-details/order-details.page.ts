@@ -35,7 +35,9 @@ export class OrderDetailsPage implements OnInit {
   }
 
   getOrdersById() {
-    this.userService.getOrdersById(this.bId).toPromise().then((res) => {
+    const formdata =new FormData();
+    formdata.append('booking_id',this.bId);
+    this.userService.getOrdersById(formdata).toPromise().then((res) => {
       this.data = res;
       console.log(this.data);
     }).catch((err) => {
@@ -45,7 +47,9 @@ export class OrderDetailsPage implements OnInit {
 
 
   getCancelOrders() {
-    this.userService.getCanOrders(this.bId).toPromise().then((res) => {
+    const formdata =new FormData();
+    formdata.append('booking_id',this.bId);
+    this.userService.getCanOrders(formdata).toPromise().then((res) => {
       this.data = res;
       console.log(this.data);
     }).catch((err) => {

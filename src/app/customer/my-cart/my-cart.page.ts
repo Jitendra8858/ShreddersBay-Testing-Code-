@@ -50,7 +50,7 @@ export class MyCartPage implements OnInit {
     this.userService.deleteItem(cart_id).toPromise().then((res) => {
       this.message = res;
       this.userService.openToast(this.message.message);
-      location.reload();
+      this.getCartById();
 
     }).catch((err) => {
       console.log('Error' + err);
@@ -65,7 +65,8 @@ export class MyCartPage implements OnInit {
         this.prodId = value.prod_id;
         this.weight = value.total_weight;
         this.cartId = value.cart_id;
-        this.filename = value.file;
+        this.filename = value.filename;
+      
       });
     }).catch((err) => {
       console.log('Your Cart Is Empty'+err);

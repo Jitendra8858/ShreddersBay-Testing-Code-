@@ -28,6 +28,9 @@
 
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'Current'">
+      <ion-item *ngIf="currentOrder==''">
+        No Record Found 
+         </ion-item>
       <ion-card *ngFor="let item of currentOrder" (click)="showBookingDetails(item.booking_id)">
         <ion-item>
           <ion-buttons *ngIf="item.dealer_id>0" slot="end">
@@ -47,7 +50,10 @@
     </div>
 
     <div *ngSwitchCase="'Complete'">
-      <ion-card *ngFor="let item of currentOrder" (click)="showBookingDetails(item.booking_id)">
+      <ion-item *ngIf="compOrder==''">
+        No Record Found 
+         </ion-item>
+      <ion-card *ngFor="let item of compOrder" (click)="showBookingDetails(item.booking_id)">
         <ion-item>
           <ion-label>
             <h2><b>Booking Id: {{item.booking_id}}</b></h2>
@@ -64,6 +70,9 @@
     </div>
 
     <div *ngSwitchCase="'Cancel'">
+      <ion-item *ngIf="cancelOrder==''">
+        No Record Found 
+         </ion-item>
       <ion-card *ngFor="let item of cancelOrder">
         <ion-item>
           <ion-label>

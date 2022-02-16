@@ -12,10 +12,13 @@
 
 <ion-content class="ion-padding">
   <h3>Scrap Items</h3>
+  <ion-item *ngIf="data==''">
+    No Record Found 
+     </ion-item>
   <ion-card *ngFor="let item of data">
     <ion-item>
       <ion-thumbnail slot="start">
-        <img src="http://localhost:8000/ShreddersBay%20Project/admin/upload/{{item.filename}}">
+        <img src="http://shreddersbay.com/API/uploads/{{item.filename}}">
       </ion-thumbnail>
      <ion-grid>
           <ion-row>
@@ -38,7 +41,7 @@
     <ion-title color="success" align="right">Accepted</ion-title>
     <ion-item *ngFor="let record of dealer_record">
       <ion-thumbnail slot="start">
-        <img src="https://infodeltasys.com/shreddersbay/admin/upload/IMG_20191219_142502.jpg">
+        <img src="https://shreddersbay.com/API/admin/uploads/IMG_20191219_142502.jpg">
       </ion-thumbnail>
       <ion-label>
         <ion-title >{{ record.name }}</ion-title>

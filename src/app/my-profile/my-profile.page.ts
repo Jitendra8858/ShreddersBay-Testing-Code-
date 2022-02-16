@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserApiService } from '../services/user-api.service';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { UserApiService } from 'src/app/services/user-api.service';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -14,15 +18,32 @@ export class MyProfilePage implements OnInit {
   profileForm: FormGroup;
   id: any;
   userData: any;
+  clickedImage: string;
+  isSubmitted: boolean;
+  image;
+  imageData;
+  filename: string;
+
+  options: CameraOptions = {
+    quality: 30,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
   constructor(
     private router: Router,
     public fb: FormBuilder,
     private activateRoute: ActivatedRoute,
     private userService: UserApiService,
+    private camera: Camera,
+    private http: HttpClient,
+    private toastCtrl: ToastController
+    
 
   ) { }
 
   ngOnInit() {
+    this.isSubmitted = false;
     this.userData=JSON.parse(localStorage.getItem('userDetails'));
     if(this.userData ==null){
       this.router.navigate(['frontend']);
@@ -33,15 +54,58 @@ export class MyProfilePage implements OnInit {
     this.email=this.userData[0].email;
     //alert(this.userData);
     this.profileForm = this.fb.group({
-      name: [this.name],
-      mobile: [''],
-      email: ['']
+      name: [this.name,[Validators.required]],
+      mobile: ['',[Validators.required]],
+      email: ['',[Validators.required]],
     });
   }
 
+  get errorControl() {
+    return this.profileForm.controls;
+  }
 
+  async openToast(message) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      cssClass: 'toast-custom-class',
+    });
+    toast.present();
+  }
+  
+  fileChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (value) => {
+        this.img1 = value.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);  // to trigger onload
+    }
+    const fileList: FileList = event.target.files;
+    this.filename = fileList[0].name;
+
+     this.file = fileList[0];
+    console.log(this.file);
+
+  }
+
+
+  captureImage() {
+    this.camera.getPicture(this.options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      //alert(imageData);
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.clickedImage = base64Image;
+     // alert(this.clickedImage);
+    }, (err) => {
+      console.log(err);
+      // Handle error
+    });
+  }
 
   submitForm() {
+    this.isSubmitted = true;
     //  console.log(this.profileForm.value);
       if (!this.profileForm.valid) {
         return false;

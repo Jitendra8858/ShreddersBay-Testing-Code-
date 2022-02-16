@@ -121,7 +121,11 @@ const routes: Routes = [
 {
   path: 'forget-password',
   loadChildren: () => import('./forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
-},
+},  {
+    path: 'single-order-detail',
+    loadChildren: () => import('./dealer/single-order-detail/single-order-detail.module').then( m => m.SingleOrderDetailPageModule)
+  },
+
 
 
 ];

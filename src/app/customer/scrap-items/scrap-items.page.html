@@ -40,7 +40,11 @@
       </ion-radio-group>
       <ion-item lines="full">
         <ion-input type="number" formControlName="weight" placeholder="Enter Weight In Kg" required></ion-input>
+       
       </ion-item>
+      <label class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required" style="color: red;">
+        Weight is required.
+       </label>
       <ion-label>Price: {{price}} per Kg</ion-label>
       <ion-item lines="full">
         <ion-label position="fix">Upload File</ion-label>
@@ -51,11 +55,13 @@
         ></ion-input>
       </ion-item>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="openCamera()">
+        <ion-fab-button (click)="captureImage()">
           <ion-icon md="camera"></ion-icon>
         </ion-fab-button>
       </ion-fab>
       <img *ngIf="img1" [src]="img1" />
+     <img [src]="clickedImage" />
+      
     </ion-list>
     <ion-row>
       <ion-col>

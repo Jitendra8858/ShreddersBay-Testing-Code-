@@ -85,7 +85,7 @@ export class SignupPage implements OnInit {
       if(this.data.message){
         this.userService.openToast(this.data.message);
       }
-      alert(this.data.message);
+     // alert(this.data.message);
       this.router.navigate(['login', {role: this.role}]);
     });
     }

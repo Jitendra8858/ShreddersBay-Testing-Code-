@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
     private router: Router,
     private activateRoute: ActivatedRoute,
     private facebook: Facebook,
-    private googleplus: GooglePlus,
+    private googlePlus: GooglePlus,
     private userService: UserApiService
 
     ) {
@@ -62,19 +62,20 @@ export class HomePage implements OnInit {
 }
 
 fbLogin() {
+  alert("This Feature Will Comming Soon");
   this.facebook.login(['public_profile', 'user_friends', 'email'])
   .then((res: FacebookLoginResponse) => alert('Logged into Facebook!=='+ JSON.stringify(res)))
   .catch(e => console.log('Error logging into Facebook', e));
-  // this.facebook.login(['public_profile', 'user_friends', 'email'])
-  //   .then(res => {
-  //     if (res.status === 'connected') {
-  //       this.isLoggedIn = true;
-  //       this.getUserDetail(res.authResponse.userID);
-  //     } else {
-  //       this.isLoggedIn = false;
-  //     }
-  //   })
-  //   .catch(e => console.log('Error logging into Facebook', e));
+  this.facebook.login(['public_profile', 'user_friends', 'email'])
+    .then(res => {
+      if (res.status === 'connected') {
+        this.isLoggedIn = true;
+        this.getUserDetail(res.authResponse.userID);
+      } else {
+        this.isLoggedIn = false;
+      }
+    })
+    .catch(e => console.log('Error logging into Facebook', e));
 }
 
 getUserDetail(userid: any) {
@@ -108,11 +109,17 @@ getUserDetail(userid: any) {
 
 
 googleSignIn() {
-  this.googleplus.login({}).then(res => {
+
+  // this.googlePlus.login({})
+  // .then(res => alert(JSON.stringify(res)))
+  // .catch(err => alert(JSON.stringify(err)));
+  
+  this.googlePlus.login({}).then(res => {
     this.users=res;
       this.name = this.users.displayName;
       this.email = this.users.email;
-      //this.givenName = this.users.givenName;
+     // alert(this.name);
+      this.givenName = this.users.givenName;
       this.id = this.users.userId;
       this.picture = this.users.imageUrl;
       this.token = this.users.accessToken;
@@ -126,7 +133,11 @@ googleSignIn() {
       formData.append('token',this.token);
       this.userService.create(formData).toPromise().then((response)=>{
         this.data=response;
+        //alert(JSON.stringify(this.data));
         if(response){
+          localStorage.setItem('userDetails', JSON.stringify(this.data));
+          this.router.navigate(['dealer-home']);
+          this.userService.openToast('Login Successfully...');
           if (this.role == 1) {
             localStorage.setItem('userDetails', JSON.stringify(this.data));
             this.router.navigate(['dealer-home']);
@@ -140,10 +151,11 @@ googleSignIn() {
           }
         }
       }).catch((err)=>{
-        alert(JSON.stringify(err));
+       // alert(JSON.stringify(err));
       });
     })
     .catch(e => alert('Error logging into Google'+ e));
-}
+ }
 
 }
+

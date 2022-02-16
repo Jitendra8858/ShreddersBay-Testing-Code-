@@ -21,14 +21,25 @@
       <ion-label position="floating">Old Password</ion-label>
       <ion-input type="password" formControlName="oldPass" required></ion-input>
     </ion-item>
+    <label class="error ion-padding" *ngIf="isSubmitted && errorControl.oldPass.errors?.required">
+      Old Password is required.
+     </label>
     <ion-item lines="full">
       <ion-label position="floating">New Password</ion-label>
-      <ion-input type="password" formControlName="password" required></ion-input>
+      <!-- <ion-input type="password" formControlName="password" required></ion-input> -->
+      <ion-input formControlName="password" [type]="passwordType" clearOnEdit="false"></ion-input>
+      <ion-icon  [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()' slot="end"></ion-icon>
     </ion-item>
+    <label class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+     New Password is required.
+    </label>
     <ion-item lines="full">
       <ion-label position="floating">Confirm Password</ion-label>
       <ion-input type="password" formControlName="confPass" required></ion-input>
     </ion-item>
+    <label class="error ion-padding" *ngIf="isSubmitted && errorControl.confPass.errors?.required">
+      Confirm Password is required.
+     </label>
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="primary" expand="block">Submit</ion-button>

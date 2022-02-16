@@ -37,6 +37,10 @@ export class UserApiService {
   updateProfile(myFormData): Observable<any> {
     return this.http.post(`${userURL}edit`, myFormData)
   }
+  // update password
+  updatePassword(myFormData): Observable<any> {
+    return this.http.post(`${userURL}reset_pass`, myFormData)
+  }
   
   //select user
   forgetPassword(myFormData): Observable<any> {
@@ -83,16 +87,16 @@ export class UserApiService {
     return this.http.post(`${orderURL}insert`, myFormData)
   }
 
-  getCurOrders(id: number): Observable<any> {
-    return this.http.get(`${orderURL}select_current&user_id=${id}`)
+  getCurOrders(formdata): Observable<any> {
+    return this.http.post(`${orderURL}select_current`,formdata)
   }
 
-  getCanOrders(id: number): Observable<any> {
-    return this.http.get(`${orderURL}select_cancel&user_id=${id}`)
+  getCanOrders(formdata): Observable<any> {
+    return this.http.post(`${orderURL}select_cancel`,formdata)
   }
 
-  getCompOrders(id: number): Observable<any> {
-    return this.http.get(`${orderURL}select_complete&user_id=${id}`)
+  getCompOrders(formdata): Observable<any> {
+    return this.http.post(`${orderURL}select_complete`,formdata)
   }
 
   getCurrentOrders(id: number): Observable<any> {
@@ -103,12 +107,12 @@ export class UserApiService {
     return this.http.get(`${orderURL}selectCustomerComplete&user_id=${id}`)
   }
 
-  getCancelOrders(id: number): Observable<any> {
+  getCancelOrders(id): Observable<any> {
     return this.http.get(`${orderURL}selectCustomerCancel&user_id=${id}`)
   }
 
-  getOrdersById(id: number): Observable<any> {
-    return this.http.get(`${orderURL}select_id&book_id=${id}`)
+  getOrdersById(formdata): Observable<any> {
+    return this.http.post(`${orderURL}select_id`,formdata)
   }
 
   updateStatus(myFormData): Observable<any> {

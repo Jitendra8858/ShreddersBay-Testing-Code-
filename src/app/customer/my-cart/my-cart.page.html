@@ -25,7 +25,7 @@
       <ion-item>
         <ion-icon name="close" slot="end" (click)="removeCart(item.cart_id)" color="danger"></ion-icon>
         <ion-thumbnail slot="start">
-          <img src="https://infodeltasys.com/shreddersbay/admin/upload/{{item.filename}}">
+          <img src="http://shreddersbay.com/API/uploads/{{item.filename}}">
         </ion-thumbnail>
         <ion-label>
           {{item.p_name}} &nbsp;&nbsp;&nbsp;<span slot="end" style="font-size: 18px;"><b>{{item.total_price | currency:'INR':true}}</b></span><br/>

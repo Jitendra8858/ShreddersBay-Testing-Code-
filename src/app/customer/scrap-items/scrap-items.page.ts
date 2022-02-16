@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Observable } from 'rxjs';
@@ -14,6 +14,16 @@ import { ToastController } from '@ionic/angular';
   providers: [Camera]
 })
 export class ScrapItemsPage implements OnInit {
+  clickedImage: string;
+  isSubmitted: boolean;
+
+  options: CameraOptions = {
+    quality: 30,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
+
   data: any;
   list: any;
   id: any;
@@ -45,6 +55,8 @@ export class ScrapItemsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isSubmitted = false;
+
     this.prod_id = '';
     this.file = '';
     this.price = '';
@@ -58,12 +70,15 @@ export class ScrapItemsPage implements OnInit {
     this.submitForm = this.fb.group({
       user_id: [this.userId],
       prod_id: [this.prod_id],
-      weight: [''],
+      weight: ['',[Validators.required]],
       price: [''],
       file: [''],
     });
 
     this.getProducts();
+  }
+  get errorControl() {
+    return this.submitForm.controls;
   }
 
   getProducts() {
@@ -119,7 +134,25 @@ export class ScrapItemsPage implements OnInit {
 
   }
 
+
+  captureImage() {
+    this.camera.getPicture(this.options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      //alert(imageData);
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.clickedImage = base64Image;
+     // alert(this.clickedImage);
+    }, (err) => {
+      console.log(err);
+      // Handle error
+    });
+  }
+
   submitForms() {
+  //  alert();
+    this.isSubmitted = true;
+
     if (!this.submitForm.valid) {
       return false;
     } else {
@@ -128,17 +161,25 @@ export class ScrapItemsPage implements OnInit {
       // Begin assigning parameters
       myFormData.append('user_id', this.userId);
       myFormData.append('prod_id', this.prod_id);
-      myFormData.append('file', this.file, this.filename);
       myFormData.append('price', this.price);
       myFormData.append('weight', this.submitForm.value.weight);
+      if(this.file){
+        myFormData.append('file', this.file, this.filename);
+
+      }
+      if(this.clickedImage){
+        myFormData.append('file', this.clickedImage, this.clickedImage);
+      }
 
       console.log(myFormData);
       this.userService.createCart(myFormData).toPromise().then((res) => {
-        this.successMsg = 'Item Added Successfully';
+      //  alert(res);
         this.router.navigate(['customer-home/customer-home/my-cart']);
+        this.submitForm.reset();
+        this.successMsg = 'Item Added Successfully';
         this.openToast(this.successMsg);
       }).catch((err) => {
-        alert('Error' + err);
+     //  alert(err);
         console.log('Error' + err);
         this.errorMsg = 'Error' + err;
       });
@@ -146,41 +187,45 @@ export class ScrapItemsPage implements OnInit {
 
   }
 
-  openCamera() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-    };
+  
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.imageData = imageData;
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      this.image = (<any>window).Ionic.WebView.convertFileSrc(imageData);
-    }, (err) => {
-      // Handle error
-      alert('error ' + JSON.stringify(err));
-    });
-  }
-  upload() {
-    const url = 'your REST API url';
-    const date = new Date().valueOf();
 
-    // Replace extension according to your media type
-    const imageName = date + '.jpeg';
-    // call method that creates a blob from dataUri
-    const imageBlob = this.dataURItoBlob(this.imageData);
-    const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
 
-    const postData = new FormData();
-    postData.append('file', imageFile);
+  // openCamera() {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //   };
 
-    const data: Observable<any> = this.http.post(url, postData);
-    data.subscribe((result) => {
-      console.log(result);
-    });
-  }
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     this.imageData = imageData;
+  //     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  //     this.image = (<any>window).Ionic.WebView.convertFileSrc(imageData);
+  //   }, (err) => {
+  //     // Handle error
+  //     alert('error ' + JSON.stringify(err));
+  //   });
+  // }
+  // upload() {
+  //   const url = 'your REST API url';
+  //   const date = new Date().valueOf();
+
+  //   // Replace extension according to your media type
+  //   const imageName = date + '.jpeg';
+  //   // call method that creates a blob from dataUri
+  //   const imageBlob = this.dataURItoBlob(this.imageData);
+  //   const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
+
+  //   const postData = new FormData();
+  //   postData.append('file', imageFile);
+
+  //   const data: Observable<any> = this.http.post(url, postData);
+  //   data.subscribe((result) => {
+  //     console.log(result);
+  //   });
+  // }
 
   dataURItoBlob(dataURI) {
     const byteString = window.atob(dataURI);

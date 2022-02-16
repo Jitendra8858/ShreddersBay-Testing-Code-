@@ -31,7 +31,9 @@ export class DealerBookingPage implements OnInit {
     this.getCurrentOrders();
   }
   getCurrentOrders() {
-    this.userService.getCurOrders(this.userId).toPromise().then((res) => {
+    const formdata =new FormData();
+    formdata.append('user_id',this.userId);
+    this.userService.getCurOrders(formdata).toPromise().then((res) => {
       this.currentOrder = res;
       //console.log(this.data);
     }).catch((err) => {
@@ -40,7 +42,9 @@ export class DealerBookingPage implements OnInit {
   }
 
   getCancelOrders() {
-    this.userService.getCanOrders(this.userId).toPromise().then((res) => {
+    const formdata =new FormData();
+    formdata.append('user_id',this.userId);
+    this.userService.getCanOrders(formdata).toPromise().then((res) => {
       this.cancelOrder = res;
       //console.log(this.data);
     }).catch((err) => {
@@ -49,7 +53,9 @@ export class DealerBookingPage implements OnInit {
   }
 
   getCompOrders() {
-    this.userService.getCompOrders(this.userId).toPromise().then((res) => {
+    const formdata =new FormData();
+    formdata.append('user_id',this.userId);
+    this.userService.getCompOrders(formdata).toPromise().then((res) => {
       this.compOrder = res;
       //console.log(this.data);
     }).catch((err) => {

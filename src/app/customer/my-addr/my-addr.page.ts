@@ -73,7 +73,7 @@ export class MyAddrPage implements OnInit {
         this.prodId = value.prod_id;
         this.weight = value.total_weight;
         this.cartId = value.cart_id;
-        this.filename = value.file;
+        this.filename = value.filename;
       });
 
       // Begin assigning parameters
@@ -118,16 +118,16 @@ export class MyAddrPage implements OnInit {
   }
 
   editAddr(addr_id){
-    alert(addr_id);
+  //  alert(addr_id);
    this.router.navigate(['add-address',{'addr_id':addr_id}])
 
   }
   delAddr(addr_id){
-    alert(addr_id);
+ //   alert(addr_id);
     const formData = new FormData();
-formData.append('id',addr_id);
-     this.userService.delAddressById(formData).toPromise().then((res) => {
-     console.log(res);
+    formData.append('id',addr_id);
+    this.userService.delAddressById(formData).toPromise().then((res) => {
+    this.getAddress();
    //  this.router.navigate(['add-address'])
     }).catch((err) => {
       console.log('Error' + err);

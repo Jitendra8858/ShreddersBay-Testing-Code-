@@ -59,5 +59,10 @@ export class AvailableBookingPage implements OnInit {
       console.log('Error' + err);
     });
   }
+  singleOrderDetail(book_id){
+ 
+      this.router.navigate(['single-order-detail',{book_id}]);
+    
+   }
 
 }

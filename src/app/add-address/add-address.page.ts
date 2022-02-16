@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { UserApiService } from '../services/user-api.service';
@@ -14,6 +14,7 @@ export class AddAddressPage implements OnInit {
   userId: any;
   country: any;
   submitForm: FormGroup;
+  isSubmitted: boolean; 
   country_id: any;
   state: any;
   state_id: any;
@@ -36,13 +37,13 @@ export class AddAddressPage implements OnInit {
     private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
+    this.isSubmitted = false;
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     if(this.userDetails ==null){
       this.router.navigate(['frontend']);
     }
     this.addrs_id = this.activateRoute.snapshot.params.addr_id;
-    alert(this.addrs_id);
+    //alert(this.addrs_id);
     this.dateTime = this.activateRoute.snapshot.params.schedule_date;
     this.userId = this.userDetails[0].id;
     this.submitForm = this.fb.group({
@@ -50,14 +51,16 @@ export class AddAddressPage implements OnInit {
       state_id: [''],
       city_id: [''],
       area_id: [''],
-      address: [''],
-      landmark: [''],
-      pincode: [''],
+      address: ['',[Validators.required]],
+      landmark: ['',[Validators.required]],
+      pincode: ['',[Validators.required]],
     });
     this.getCountry();
     this.get_add();
   }
-
+  get errorControl() {
+    return this.submitForm.controls;
+  }
   getCountry(){
     this.userService.getCountry().toPromise().then((res) => {
       this.country = res;
@@ -100,8 +103,10 @@ export class AddAddressPage implements OnInit {
   valueChange($event){
     this.area_id=$event.detail.value;
   }
+ 
 
   submitForms() {
+    this.isSubmitted = true;
     if (!this.submitForm.valid) {
       return false;
     } else {

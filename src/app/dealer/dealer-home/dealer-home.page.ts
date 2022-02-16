@@ -30,9 +30,9 @@ export class DealerHomePage implements OnInit {
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.name=this.userDetails[0].name;
-    if(this.userDetails ==null){
-      this.router.navigate(['frontend']);
-    }
+    // if(this.userDetails ==null){
+    //   this.router.navigate(['frontend']);
+    // }
     this.userId = this.userDetails[0].id;
   }
 

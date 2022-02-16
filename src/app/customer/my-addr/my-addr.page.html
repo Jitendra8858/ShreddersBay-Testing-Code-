@@ -10,7 +10,6 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
 
 
@@ -29,6 +28,9 @@
 
   <ion-list>
     <ion-radio-group (ionChange)="address($event)">
+      <ion-item *ngIf="data==''">
+       No Record Found Please Add Your Address
+        </ion-item>
       <ion-item *ngFor="let item of data">
         <ion-label>HOME<br />{{ name }} <br />
           {{ item.address }}

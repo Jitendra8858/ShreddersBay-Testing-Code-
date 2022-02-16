@@ -37,11 +37,12 @@ export class BookingDetailsPage implements OnInit {
     this.bId = this.activateRouter.snapshot.params.bookingId;
     this.getOrdersById();
   }
-  getOrdersById() {
-    this.userService.getOrdersById(this.bId).toPromise().then((res) => {
+  getOrdersById(){
+    const formdata=new FormData();
+    formdata.append('booking_id', this.bId);
+    this.userService.getOrdersById(formdata).toPromise().then((res) => {
       this.data = res;
       this.dealer_id=this.data[0].dealer_id;
-     //alert(this.dealer_id);
       this.getUserById(this.dealer_id);
       console.log(this.data);
     }).catch((err) => {
@@ -81,7 +82,7 @@ export class BookingDetailsPage implements OnInit {
             // console.log(this.data);
             this.router.navigate(['customer-home/customer-home/my-booking']);
           }).catch((err) => {
-            console.log('Error' + err.error);
+            console.log(err.error);
           });
         }
     }).catch((err)=>

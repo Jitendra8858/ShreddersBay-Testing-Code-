@@ -11,20 +11,41 @@
 </ion-header>
 <ion-content>
   <div class="ion-text-center"><img alt="logo" height="150" style="margin-top: 2%;" src="../../assets/img/logo.webp">
+  
   </div>
   <!-- <br/><br/><ion-title class="ion-text-center">SignUp</ion-title> -->
 
   <form [formGroup]="profileForm" (ngSubmit)="submitForm()">
-
+      <ion-item lines="full">
+        <ion-label position="fix">Upload Profile</ion-label>
+        <ion-input
+          type="file"
+          required
+          (change)="fileChange($event)" accept="image/*"
+        ></ion-input>
+      </ion-item>
+      <!-- <ion-fab horizontal="end" slot="fixed" vertical="top">
+        <ion-fab-button (click)="captureImage()">
+          <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
+      <img *ngIf="img1" [src]="img1" />
+     <!-- <img [src]="clickedImage" /> -->
+      
     <ion-item lines="full">
       <ion-label position="fix">Name</ion-label>
       <ion-input type="text" formControlName="name" required></ion-input>
     </ion-item>
-
+    <label class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required" style="color: red;">
+      Name is required.
+     </label>
     <ion-item lines="full">
       <ion-label position="fix">Mobile</ion-label>
       <ion-input type="number" formControlName="mobile" placeholder="{{mobile}}" required></ion-input>
     </ion-item>
+    <label class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.required" style="color: red;">
+      Mobile is required.
+     </label>
 
     <ion-item lines="full">
       <ion-label position="fix">
@@ -32,6 +53,9 @@
       </ion-label>
       <ion-input type="text" formControlName="email" placeholder="{{email}}" required></ion-input>
     </ion-item>
+    <label class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required" style="color: red;">
+      Email is required.
+     </label>
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="primary" expand="block">Submit</ion-button>

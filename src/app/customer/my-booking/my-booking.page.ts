@@ -19,6 +19,7 @@ export class MyBookingPage implements OnInit {
   segment: any;
   currentOrder: any;
   cancelOrder: any;
+  compOrder: any;
   constructor(
     private userService: UserApiService,
     public fb: FormBuilder,
@@ -45,7 +46,7 @@ export class MyBookingPage implements OnInit {
 
   getCompleteOrders() {
     this.userService.getCompleteOrders(this.userId).toPromise().then((res) => {
-      this.currentOrder = res;
+      this.compOrder = res;
     }).catch((err) => {
       console.log('Error' + err);
     });

@@ -27,7 +27,9 @@
     <h6 [routerLink]="['/dealer-home/dealer-home/available-booking']">View All</h6>
 
   </ion-buttons>
-
+  <ion-item *ngIf="orders==''">
+    No Record Found
+     </ion-item>
   <ion-card *ngFor="let order of orders">
     <p>Booking Id : {{order.booking_id}}</p>
     <ion-item>
@@ -36,7 +38,9 @@
       </ion-avatar>
       <ion-label>
         <h2>{{order.name}}</h2>
-        <ion-icon name="pin"></ion-icon><span style="color: grey">{{order.address}}</span>
+        <span>Product Name: {{order.p_name}}</span><br>
+        <span>Booking Date: {{order.booking_date}}</span><br>
+        <ion-icon name="pin"></ion-icon><span style="color: grey">{{order.address}} {{order.landmark}}</span>
       </ion-label>
     </ion-item>
       <ion-row>
@@ -46,6 +50,11 @@
       <ion-title class="ion-no-padding">Ignore</ion-title>
       </ion-buttons>
     </ion-col>
+    <ion-col>
+      <ion-buttons class="ion-padding" color="light" (click)="singleOrderDetail(order.booking_id)">
+        <ion-title class="ion-no-padding">Details</ion-title>
+        </ion-buttons>
+      </ion-col>
     <ion-col>
     <ion-buttons class="ion-padding"  color="light" (click)="accept(order.booking_id)">
       <ion-icon name="checkmark-circle-outline" color="success" size="large" ></ion-icon>

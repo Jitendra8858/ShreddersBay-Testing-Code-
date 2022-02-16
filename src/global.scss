@@ -76,3 +76,10 @@ h1,h2,h3,h4,h5,h6 {
   font-size: 16px;
  --background:rgba(2, 67, 85, 0.877);
 }
+
+
+[aria-checked=true].sc-ion-alert-md .alert-radio-inner.sc-ion-alert-md {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  background: rgba(2, 67, 85, 0.877);
+}
