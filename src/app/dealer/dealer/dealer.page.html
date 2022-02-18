@@ -13,7 +13,7 @@
 <ion-content>
   <ion-slides [options]="slideOptsOne">
     <ion-slide *ngFor="let item of data"
-      style="height: 200px; width: 100%; background-image: url('../../../assets/img/{{item.file}}');">
+      style="height: 200px; width: 100%; background-image: url('http://shreddersbay.com/API/uploads/{{item.file}}');">
       <div style="text-transform: uppercase; background-color: rgba(0, 94, 120, 0.568); height: 200px; width: 100%;">
         <h1 style="color: white;"><b>{{item.p_name}}</b></h1>
         <h3 style="color: white;">{{item.sub_name}}</h3>

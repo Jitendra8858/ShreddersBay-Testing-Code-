@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class CustomerHomePage implements OnInit {
  public tabs = [
     { title: 'Home', url: 'customer', icon: 'home' },
-    { title: 'Scrap Items', url: 'scrap-items', icon: 'mail' },
+    { title: 'Create Order', url: 'scrap-items', icon: 'mail' },
     { title: 'My Cart', url: 'my-cart', icon: 'cart' },
     { title: 'My Bookings', url: 'my-booking', icon: 'book' },
     { title: 'My Account', url: 'my-account', icon: 'person' },

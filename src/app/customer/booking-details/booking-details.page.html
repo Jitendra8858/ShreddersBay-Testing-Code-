@@ -41,8 +41,15 @@
     <ion-title color="success" align="right">Accepted</ion-title>
     <ion-item *ngFor="let record of dealer_record">
       <ion-thumbnail slot="start">
-        <img src="https://shreddersbay.com/API/admin/uploads/IMG_20191219_142502.jpg">
+        <img *ngIf="!record.profile" alt="logo" height="150" style="margin-top: 2%;border-radius: 50%;"
+        src="../../assets/img/my-account.jpg" >
+  
+        <img *ngIf="record.profile"  height="150" style="margin-top: 2%;border-radius: 50%;"
+        src="{{filename}}" >
+      
+        <!-- <img src="../../../assests/IMG_20191219_142502.jpg"> -->
       </ion-thumbnail>
+     
       <ion-label>
         <ion-title >{{ record.name }}</ion-title>
         <ion-title >{{ record.mobile }}</ion-title>

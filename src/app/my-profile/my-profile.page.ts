@@ -22,14 +22,13 @@ export class MyProfilePage implements OnInit {
   isSubmitted: boolean;
   image;
   imageData;
-  filename: string;
-
-  options: CameraOptions = {
-    quality: 30,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
-  }
+  // filename: string;
+  // options: CameraOptions = {
+  //   quality: 30,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   mediaType: this.camera.MediaType.PICTURE
+  // }
   constructor(
     private router: Router,
     public fb: FormBuilder,
@@ -73,36 +72,36 @@ export class MyProfilePage implements OnInit {
     toast.present();
   }
   
-  fileChange(event) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (value) => {
-        this.img1 = value.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);  // to trigger onload
-    }
-    const fileList: FileList = event.target.files;
-    this.filename = fileList[0].name;
+  // fileChange(event) {
+  //   if (event.target.files && event.target.files[0]) {
+  //     const reader = new FileReader();
+  //     reader.onload = (value) => {
+  //       this.img1 = value.target.result;
+  //     };
+  //     reader.readAsDataURL(event.target.files[0]);  // to trigger onload
+  //   }
+  //   const fileList: FileList = event.target.files;
+  //   this.filename = fileList[0].name;
 
-     this.file = fileList[0];
-    console.log(this.file);
+  //    this.file = fileList[0];
+  //   console.log(this.file);
 
-  }
+  // }
 
 
-  captureImage() {
-    this.camera.getPicture(this.options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      //alert(imageData);
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.clickedImage = base64Image;
-     // alert(this.clickedImage);
-    }, (err) => {
-      console.log(err);
-      // Handle error
-    });
-  }
+  // captureImage() {
+  //   this.camera.getPicture(this.options).then((imageData) => {
+  //     // imageData is either a base64 encoded string or a file URI
+  //     // If it's base64 (DATA_URL):
+  //     //alert(imageData);
+  //     let base64Image = 'data:image/jpeg;base64,' + imageData;
+  //     this.clickedImage = base64Image;
+  //    // alert(this.clickedImage);
+  //   }, (err) => {
+  //     console.log(err);
+  //     // Handle error
+  //   });
+  // }
 
   submitForm() {
     this.isSubmitted = true;

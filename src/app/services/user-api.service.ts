@@ -6,6 +6,7 @@ const userURL = 'http://shreddersbay.com/API/user_api.php?action=';
 const prodURL = 'http://shreddersbay.com/API/product_api.php?action=';
 const cartURL = 'http://shreddersbay.com/API/cart_api.php?action=';
 const orderURL = 'http://shreddersbay.com/API/orders_api.php?action=';
+const auctionURL = 'http://shreddersbay.com/API/auction_api.php?action=';
 const addrURL = 'http://shreddersbay.com/API/address_api.php?action=';
 const countryURL = 'http://shreddersbay.com/API/country_api.php?action=';
 const stateURL = 'http://shreddersbay.com/API/state_api.php?action=';
@@ -76,7 +77,9 @@ export class UserApiService {
   createCart(myFormData){
     return this.http.post(`${cartURL}insert`, myFormData)
   }
-
+  createAuction(myFormData){
+    return this.http.post(`${auctionURL}insert`, myFormData)
+  }
   getCartById(id: number): Observable<any> {
     return this.http.get(`${cartURL}select_id&user_id=${id}`)
   }

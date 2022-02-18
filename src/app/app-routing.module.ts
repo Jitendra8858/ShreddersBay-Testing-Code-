@@ -125,6 +125,10 @@ const routes: Routes = [
     path: 'single-order-detail',
     loadChildren: () => import('./dealer/single-order-detail/single-order-detail.module').then( m => m.SingleOrderDetailPageModule)
   },
+  {
+    path: 'auction',
+    loadChildren: () => import('./customer/auction/auction.module').then( m => m.AuctionPageModule)
+  },
 
 
 
