@@ -27,10 +27,9 @@
     </ion-item>
     <ion-list>
       <ion-radio-group>
-
         <ion-item *ngIf="!subProduct">
           <ion-label>Weight</ion-label>
-          <ion-radio slot="start" value="female"></ion-radio>
+          <ion-radio slot="start" value="female" ></ion-radio>
         </ion-item>
 
         <ion-item *ngIf="subProduct">
@@ -38,10 +37,21 @@
           <ion-radio slot="start" value="female" class="radio-checked"></ion-radio>
         </ion-item>
       </ion-radio-group>
+      <ion-item lines="full">
+        <ion-input type="number" formControlName="weight" placeholder="Enter Weight In Kg" required></ion-input>
+       
+      </ion-item>
+      <label class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required" style="color: red;">
+        Weight is required.
+       </label>
       <ion-label>Price: {{price}} per Kg</ion-label>
       <ion-item lines="full">
         <ion-label position="fix">Upload File</ion-label>
-        <ion-input type="file" required (change)="fileChange($event)" accept="image/*"></ion-input>
+        <ion-input
+          type="file"
+          required
+          (change)="fileChange($event)" accept="image/*"
+        ></ion-input>
       </ion-item>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="captureImage()">
@@ -49,8 +59,8 @@
         </ion-fab-button>
       </ion-fab>
       <img *ngIf="img1" [src]="img1" />
-      <img [src]="clickedImage" />
-
+     <img [src]="clickedImage" />
+      
     </ion-list>
     <ion-row>
       <ion-col>

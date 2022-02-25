@@ -129,6 +129,22 @@ const routes: Routes = [
     path: 'auction',
     loadChildren: () => import('./customer/auction/auction.module').then( m => m.AuctionPageModule)
   },
+  {
+    path: 'current-auction',
+    loadChildren: () => import('./customer/current-auction/current-auction.module').then( m => m.CurrentAuctionPageModule)
+  },
+  {
+    path: 'auction-details',
+    loadChildren: () => import('./customer/auction-details/auction-details.module').then( m => m.AuctionDetailsPageModule)
+  },
+  {
+    path: 'available-auction',
+    loadChildren: () => import('./available-auction/available-auction.module').then( m => m.AvailableAuctionPageModule)
+  },
+  {
+    path: 'single-auction-detail',
+    loadChildren: () => import('./single-auction-detail/single-auction-detail.module').then( m => m.SingleAuctionDetailPageModule)
+  },
 
 
 

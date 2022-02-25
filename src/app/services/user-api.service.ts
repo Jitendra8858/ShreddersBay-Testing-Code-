@@ -69,7 +69,7 @@ export class UserApiService {
   getProducts(): Observable<any> {
     return this.http.get(`${prodURL}select`);
   }
-  //select user
+  //select product
   getProdById(formData): Observable<any> {
     return this.http.post(`${prodURL}select_id`,formData)
   }
@@ -77,9 +77,49 @@ export class UserApiService {
   createCart(myFormData){
     return this.http.post(`${cartURL}insert`, myFormData)
   }
+  // create aution
   createAuction(myFormData){
     return this.http.post(`${auctionURL}insert`, myFormData)
   }
+  
+   //select auction by id
+   getAuctionById(formData): Observable<any> {
+    return this.http.post(`${auctionURL}select_id`,formData)
+  }
+
+  // get auction
+  getAuction(): Observable<any> {
+    return this.http.get(`${auctionURL}select`);
+  }
+  //current auction 
+  getCurrentAuctions(id: number): Observable<any> {
+    return this.http.get(`${auctionURL}selectCustomerCurrent&user_id=${id}`)
+  }
+  //get auction page's product by id 
+getAucProdById(formData): Observable<any> {
+  return this.http.post(`${auctionURL}select_prod_id`,formData)
+}
+//update auction status
+
+updateAuctionStatus(myFormData): Observable<any> {
+  return this.http.post(`${auctionURL}accept`,myFormData)
+}
+
+  //GET COMPLETE AUCTION
+  
+  getCompleteAuctions(id: number): Observable<any> {
+    return this.http.get(`${auctionURL}selectCustomerComplete&user_id=${id}`)
+  }
+// get cancel auction
+getCancelAuctions(id): Observable<any> {
+  return this.http.get(`${auctionURL}selectCustomerCancel&user_id=${id}`)
+}
+// cancel aution
+
+cancelAuction(formData): Observable<any> {
+  return this.http.post(`${auctionURL}customer_cancel`,formData)
+}
+
   getCartById(id: number): Observable<any> {
     return this.http.get(`${cartURL}select_id&user_id=${id}`)
   }

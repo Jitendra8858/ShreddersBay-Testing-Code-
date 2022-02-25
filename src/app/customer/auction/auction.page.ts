@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserApiService } from 'src/app/services/user-api.service';
 import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-auction',
   templateUrl: './auction.page.html',
@@ -42,6 +43,12 @@ export class AuctionPage implements OnInit {
   image;
   imageData;
   filename: string;
+  booking_id: any;
+  dealer_id: any;
+  addr_id: any;
+  total_wieght: any;
+  total_price: any;
+  t_price: any;
  
 
   constructor(
@@ -66,7 +73,7 @@ export class AuctionPage implements OnInit {
     }
     this.userId = this.userDetails[0].id;
 
-    // console.log(this.userDetails[0]);
+     console.log(this.userDetails[0]);
     this.submitForm = this.fb.group({
       user_id: [this.userId],
       prod_id: [this.prod_id],
@@ -82,8 +89,8 @@ export class AuctionPage implements OnInit {
   }
 
   getProducts() {
-    this.userService.getProducts().toPromise().then((res) => {
-      //console.log(res);
+    this.userService.getAuction().toPromise().then((res) => {
+      console.log(res);
       this.data = res;
     }).catch((err) => {
       console.log('Error' + err);
@@ -106,12 +113,17 @@ export class AuctionPage implements OnInit {
     this.id = value.detail.value;
     const formData = new FormData();
     formData.append('p_id',this.id);
-    this.userService.getProdById(formData).toPromise().then((res) => {
+    this.userService.getAucProdById(formData).toPromise().then((res) => {
       this.list = res;
-      console.log(this.list[0]);
+     console.log(this.list[0]);
       this.prod_id = this.list[0].p_id;
       this.subProduct = this.list[0].sub_name;
       this.weight = this.list[0].weight;
+      this.booking_id = this.list[0].booking_id;
+      this.dealer_id = this.list[0].dealer_id;
+      this.addr_id = this.list[0].addr_id;
+      this.total_wieght = this.list[0].total_wieght;
+      this.total_price = this.list[0].total_price;
       this.price = this.list[0].price;
     }).catch((err) => {
       console.log('Error' + err);
@@ -150,17 +162,21 @@ export class AuctionPage implements OnInit {
   }
 
   submitForms() {
-   alert();
+  
     this.isSubmitted = true;
 
     if (!this.submitForm.valid) {
       return false;
     } else {
+     this.t_price = this.price*this.total_wieght;
       // Initialize Params Object
       var myFormData = new FormData();
       // Begin assigning parameters
       myFormData.append('user_id', this.userId);
       myFormData.append('prod_id', this.prod_id);
+      myFormData.append('addr_id', this.addr_id);
+      myFormData.append('approx_weight', this.total_wieght);
+      myFormData.append('approx_price', this.t_price);
       myFormData.append('price', this.price);
       myFormData.append('weight', this.submitForm.value.weight);
       if(this.file){
@@ -173,9 +189,8 @@ export class AuctionPage implements OnInit {
 
       console.log(myFormData);
       this.userService.createAuction(myFormData).toPromise().then((res) => {
-        alert(res);
-        this.router.navigate(['customer-home/customer-home/my-cart']);
-        this.submitForm.reset();
+      //  this.router.navigate(['current-auction']);
+      // this.submitForm.reset();
         this.successMsg = 'Item Added Successfully';
         this.openToast(this.successMsg);
       }).catch((err) => {
