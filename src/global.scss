@@ -1,0 +1,85 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+// // style for ion-icon
+// ion-icon {
+//   color: #06f8e4a6;
+//   pointer-events: none;
+// }
+ion-header {
+  &.no-shadow::after {
+    background-image: none;
+  }
+}
+
+ion-item {
+  background: none;
+  padding: 0;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:after {
+    display: none;
+  }
+
+  ion-label {
+    font-size: 1em;
+    color: primary;
+  }
+
+  ion-input {
+    color:primary;
+  }
+}
+
+ion-toolbar{
+    box-shadow: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 700;
+  color: rgba(0,94,120,1);
+  margin-bottom: 5%;
+}
+
+.toast-custom-class {
+  --color:#ffffff;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+ --background:rgba(2, 67, 85, 0.877);
+}
+
+
+[aria-checked=true].sc-ion-alert-md .alert-radio-inner.sc-ion-alert-md {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  background: rgba(2, 67, 85, 0.877);
+}
