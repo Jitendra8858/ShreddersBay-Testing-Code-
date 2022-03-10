@@ -59,10 +59,10 @@
         <ion-icon  [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()' slot="end"></ion-icon>
       </ion-item>
       <ion-label  class="error ion-padding"  *ngIf="isSubmitted && errorControl.password.errors?.required">
-        Password is required.
+        Password is required. 
       </ion-label >
       <ion-label  class="error ion-padding"  *ngIf="isSubmitted && errorControl.password.errors?.pattern">
-        Please provide valid password.
+        Please make sure password is longer than 8 characters, it includes capital letter, small letter, number and speacial character.
       </ion-label ><br/>
       <ion-label  class="error ion-padding"  *ngIf="isSubmitted && errorControl.password.errors?.minlength">
         Password should be min 8 chars long.

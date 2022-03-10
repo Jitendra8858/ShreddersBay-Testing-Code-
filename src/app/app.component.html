@@ -5,14 +5,16 @@
   <ion-menu contentId="content" type="overlay">
     <ion-content>
       <ion-list id="inbox-list" style="padding: 0px;">
-        <ion-list-header>
-          <ion-avatar>
-            <img *ngIf="!profile" src="../assets/img/a.png">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img *ngIf="profile==''" src="../assets/img/a.png">
             <img *ngIf="profile" src="{{profile}}">
           </ion-avatar>
-          <ion-title>{{name}}</ion-title>
+          <ion-label>
+          <h3>{{ name }}</h3>
           <p>{{email}}</p>
-        </ion-list-header>
+         </ion-label>
+        </ion-item>
         <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
           <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
             routerLinkActive="selected">

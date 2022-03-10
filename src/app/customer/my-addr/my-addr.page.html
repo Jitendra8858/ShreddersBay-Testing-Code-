@@ -33,6 +33,8 @@
         </ion-item>
       <ion-item *ngFor="let item of data">
         <ion-label>HOME<br />{{ name }} <br />
+        Country:-  {{ item.country_name }} <br/>State:- {{ item.state_name }} <br/>City:-{{ item.city_name }} <br/>
+        Landmark:- {{ item.landmark }} &nbsp;&nbsp; {{ item.pin_code }}<br />
           {{ item.address }}
         </ion-label>
         <ion-radio *ngIf="dateTime" value="{{item.addr_id}}"></ion-radio>
